@@ -31,7 +31,7 @@ end
 
 
 function CSV_Init_file ()
-	local CSV_entetes = {"Name", "Lat", "Long", "Category", "Nb parking", "Nb Runway", "Runway 1 lenght", "Runway 2 lenght", "Runway 3 lenght", "Runway 4 lenght", "Runway 5 lenght", "Runway 6 lenght", "Runway 7 lenght", "Runway 8 lenght", "Runway 9 lenght", "Runway 10 lenght"}
+	local CSV_entetes = {"Name","ID", "Lat", "Long", "Category", "Nb parking", "Nb Runway", "Runway 1 Lenght", "Runway 1 Heading", "Runway 2 Lenght", "Runway 2 Heading", "Runway 3 Lenght", "Runway 3 Heading", "Runway 4 Lenght", "Runway 4 Heading"}
 	table.insert(TABLE_CSV_Airbase, CSV_entetes)
 	CSVwrite(CSV_Airbase_fdir_file, TABLE_CSV_Airbase)
 	
@@ -46,6 +46,7 @@ function FNC_CSV_AirbaseSet( Airbase )
 
 	Airbase = Airbase -- Wrapper.Airbase#AIRBASE
 	local CSV_Airbase_Name	 		= Airbase:GetName() 				-- return "string"
+	local CSV_Airbase_ID	 		= Airbase:GetID() 					-- return number
 	local CSV_Airbase_Coalition		= Airbase:GetCoalitionName() 		-- return "string"
 	local CSV_Airbase_Category 		= Airbase:GetCategoryName() 		-- return "string"
 	local CSV_Airbase_RunwayData	= Airbase:GetRunwayData(nil,false) 	-- return #table
@@ -58,33 +59,59 @@ function FNC_CSV_AirbaseSet( Airbase )
     
 	if CSV_Airbase_Category == "Airplane" then
 	
-	if CSV_AirbaseNB_Runway > 0 then CSV_AirbaseRunway_1_Length	= CSV_Airbase_RunwayData[1].length	else CSV_AirbaseRunway_1_Length		= 0 	end
-	if CSV_AirbaseNB_Runway > 1 then CSV_AirbaseRunway_2_Length	= CSV_Airbase_RunwayData[2].length	else CSV_AirbaseRunway_2_Length		= 0 	end
-	if CSV_AirbaseNB_Runway > 2 then CSV_AirbaseRunway_3_Length	= CSV_Airbase_RunwayData[3].length	else CSV_AirbaseRunway_3_Length		= 0 	end
-	if CSV_AirbaseNB_Runway > 3 then CSV_AirbaseRunway_4_Length	= CSV_Airbase_RunwayData[4].length	else CSV_AirbaseRunway_4_Length		= 0 	end
-	if CSV_AirbaseNB_Runway > 4 then CSV_AirbaseRunway_5_Length	= CSV_Airbase_RunwayData[5].length	else CSV_AirbaseRunway_5_Length		= 0 	end
-	if CSV_AirbaseNB_Runway > 5 then CSV_AirbaseRunway_6_Length	= CSV_Airbase_RunwayData[6].length	else CSV_AirbaseRunway_6_Length		= 0 	end
-	if CSV_AirbaseNB_Runway > 6 then CSV_AirbaseRunway_7_Length	= CSV_Airbase_RunwayData[7].length	else CSV_AirbaseRunway_7_Length		= 0 	end
-	if CSV_AirbaseNB_Runway > 7 then CSV_AirbaseRunway_8_Length	= CSV_Airbase_RunwayData[8].length	else CSV_AirbaseRunway_8_Length		= 0 	end
-	if CSV_AirbaseNB_Runway > 8 then CSV_AirbaseRunway_9_Length	= CSV_Airbase_RunwayData[9].length	else CSV_AirbaseRunway_9_Length		= 0 	end
-	if CSV_AirbaseNB_Runway > 9 then CSV_AirbaseRunway_10_Length	= CSV_Airbase_RunwayData[10].length	else CSV_AirbaseRunway_10_Length	= 0 	end
+	if CSV_AirbaseNB_Runway > 0 then 
+			CSV_AirbaseRunway_1_Length	= CSV_Airbase_RunwayData[1].length	
+			CSV_AirbaseRunway_1_heading	= CSV_Airbase_RunwayData[1].heading	
+			CSV_AirbaseRunway_2_heading	= CSV_Airbase_RunwayData[2].heading	
+		else 
+			CSV_AirbaseRunway_1_Length		= 0
+			CSV_AirbaseRunway_1_heading		= 0
+			CSV_AirbaseRunway_2_heading		= 0
+	end
+	if CSV_AirbaseNB_Runway > 2 then 
+			CSV_AirbaseRunway_3_Length	= CSV_Airbase_RunwayData[3].length	
+			CSV_AirbaseRunway_3_heading	= CSV_Airbase_RunwayData[3].heading	
+			CSV_AirbaseRunway_4_heading	= CSV_Airbase_RunwayData[4].heading	
+		else 
+			CSV_AirbaseRunway_3_Length		= 0
+			CSV_AirbaseRunway_3_heading		= 0
+			CSV_AirbaseRunway_4_heading		= 0
+	end
+	if CSV_AirbaseNB_Runway > 4 then 
+			CSV_AirbaseRunway_5_Length	= CSV_Airbase_RunwayData[5].length	
+			CSV_AirbaseRunway_5_heading	= CSV_Airbase_RunwayData[5].heading	
+			CSV_AirbaseRunway_6_heading	= CSV_Airbase_RunwayData[6].heading	
+		else 
+			CSV_AirbaseRunway_5_Length		= 0
+			CSV_AirbaseRunway_5_heading		= 0
+			CSV_AirbaseRunway_6_heading		= 0
+	end
+	if CSV_AirbaseNB_Runway > 6 then 
+			CSV_AirbaseRunway_7_Length	= CSV_Airbase_RunwayData[7].length	
+			CSV_AirbaseRunway_7_heading	= CSV_Airbase_RunwayData[7].heading	
+			CSV_AirbaseRunway_8_heading	= CSV_Airbase_RunwayData[8].heading	
+		else 
+			CSV_AirbaseRunway_7_Length		= 0
+			CSV_AirbaseRunway_7_heading		= 0
+			CSV_AirbaseRunway_8_heading		= 0
+	end
 	
+		
 	table.insert(TABLE_CSV_Airbase, {	CSV_Airbase_Name,
+										CSV_Airbase_ID,
 										CSV_Airbase_lat,
 										CSV_Airbase_long,
 										CSV_Airbase_Category,
 										CSV_AirbaseNB_Parking,
 										CSV_AirbaseNB_Runway,
 										math.floor(CSV_AirbaseRunway_1_Length),
-										math.floor(CSV_AirbaseRunway_2_Length),
+										math.floor(CSV_AirbaseRunway_1_heading).." | "..math.floor(CSV_AirbaseRunway_2_heading),
 										math.floor(CSV_AirbaseRunway_3_Length),
-										math.floor(CSV_AirbaseRunway_4_Length),
+										math.floor(CSV_AirbaseRunway_3_heading).." | "..math.floor(CSV_AirbaseRunway_4_heading),
 										math.floor(CSV_AirbaseRunway_5_Length),
-										math.floor(CSV_AirbaseRunway_6_Length),
+										math.floor(CSV_AirbaseRunway_5_heading).." | "..math.floor(CSV_AirbaseRunway_6_heading),
 										math.floor(CSV_AirbaseRunway_7_Length),
-										math.floor(CSV_AirbaseRunway_8_Length),	
-										math.floor(CSV_AirbaseRunway_9_Length),
-										math.floor(CSV_AirbaseRunway_10_Length)
+										math.floor(CSV_AirbaseRunway_7_heading).." | "..math.floor(CSV_AirbaseRunway_8_heading)
 									})
 	  	  
 	end
