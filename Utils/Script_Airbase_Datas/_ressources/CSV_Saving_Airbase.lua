@@ -103,7 +103,7 @@ function FNC_CSV_AirbaseSet( Airbase )
 										CSV_Airbase_long,
 										CSV_Airbase_Category,
 										CSV_AirbaseNB_Parking,
-										CSV_AirbaseNB_Runway,
+										CSV_AirbaseNB_Runway /2,
 										math.floor(CSV_AirbaseRunway_1_Length),
 										math.floor(CSV_AirbaseRunway_1_heading).." | "..math.floor(CSV_AirbaseRunway_2_heading),
 										math.floor(CSV_AirbaseRunway_3_Length),
