@@ -1,13 +1,13 @@
-MISSION DCSGW - GLOBAL WAR - SCRIPT
+# MISSION DCSGW - GLOBAL WAR - SCRIPT
 
 -----------------------------------------------------------------------------------
-Description : 
+### Description : 
 
-
+blabla
+blabla
 
 -----------------------------------------------------------------------------------
-
-Mise en place : 
+### Mise en place : 
 	Dans le fichier de mission *.miz créé avec l'éditeur de mission. 
 		=> Créez les éléments nécessaires :
 			- Porte avion, CVN7x / ... (Utilisation du script Airboss possible)
@@ -17,3 +17,4 @@ Mise en place :
 		 2 - 
 		 3 - 
 		 
+-----------------------------------------------------------------------------------
