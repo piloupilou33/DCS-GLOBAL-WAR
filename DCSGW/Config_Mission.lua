@@ -5,11 +5,18 @@ env.info( "-------------------------------------------------------------" )
 -- PARAMETERS MISSION --
 --================================================================================= 
 
-DCSGW_Saving_Folder = path_scripts.."Saves\\"
+DCSGW_Saving_Folder_Global		= path_scripts.."Saves\\"
+DCSGW_Saving_Folder_Airboss	 	= path_scripts.."Saves\\AirbossData\\"
+DCSGW_Saving_Folder_Ground	 	= path_scripts.."Saves\\GroundSave\\"
+DCSGW_Saving_Folder_Static	 	= path_scripts.."Saves\\StaticSave\\"
+DCSGW_Saving_Folder_Player	 	= path_scripts.."Saves\\PlayerSave\\"
 
 -- ACTIVITY
 --================================================================================= 
+Airboss_Activity 		= true
+ATIS_Activity 			= true
 
+AutoSaving_Activity 	= true
 
 -- MAIN AIRBASE
 --================================================================================= 
