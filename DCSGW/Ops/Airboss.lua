@@ -1,5 +1,5 @@
 --=================================================================================
--- SCRIPT AIRBOSS for Sandbox CAUCASUS 
+-- SCRIPT AIRBOSS
 --
 --	Author = Kinder
 --	Date = 26/02/2021
@@ -10,9 +10,6 @@
 
 -- No MOOSE settings menu. Comment out this line if required.
 	_SETTINGS:SetPlayerMenuOff()
-
-
-
 
 
 --=================================================================================
@@ -41,7 +38,7 @@
 	awacs:__Start(1)
 
 -- RescueHelo spawning on CVN71.
-	Rescuehelo_CVN71 = RESCUEHELO:New(UNIT:FindByName("CVN-71"), "RescueHelo_CVN71")
+	local Rescuehelo_CVN71 = RESCUEHELO:New(UNIT:FindByName("CVN-71"), "RescueHelo_CVN71")
 	Rescuehelo_CVN71:SetHomeBase(AIRBASE:FindByName("Ticonderoga_(CVN-71)"))
 	Rescuehelo_CVN71:SetTakeoffHot()
 	Rescuehelo_CVN71:SetRescueStopBoatOff()
@@ -133,7 +130,7 @@ end
 	awacs:__Start(1)
 
 -- RescueHelo spawning on CVN73.
-	Rescuehelo_CVN73 = RESCUEHELO:New(UNIT:FindByName("CVN-73"), "RescueHelo_CVN73")
+	local Rescuehelo_CVN73 = RESCUEHELO:New(UNIT:FindByName("CVN-73"), "RescueHelo_CVN73")
 	Rescuehelo_CVN73:SetHomeBase(AIRBASE:FindByName("Ticonderoga_(CVN-73)"))
 	Rescuehelo_CVN73:SetTakeoffHot()
 	Rescuehelo_CVN73:SetRescueStopBoatOff()

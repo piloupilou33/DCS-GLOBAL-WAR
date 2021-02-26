@@ -1,5 +1,5 @@
-## TODO
+## --- DCS GLOBAL WAR LUA SCRIPTING ---
 
- * EveryThing
- * user manual for those scripts
+ * ...
+ * ...
  

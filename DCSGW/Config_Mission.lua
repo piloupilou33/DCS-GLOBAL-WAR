@@ -1,10 +1,23 @@
+--=================================================================================
+-- CONFIG MISSION DCS Global War
+--
+--  Author = Kinder
+--  Date = 26/02/2021
+--
+--  Requirements : 
+--
+--=================================================================================
+
 env.info( "-------------------------------------------------------------" )
-env.info( "[[[[   INFOS SERVEUR   ]]]] START - CONFIG_MISSION.LUA --" )
+env.info( "[[[[   INFOS SERVEUR   ]]]] START - CONFIG_MISSION.LUA ------" )
 env.info( "-------------------------------------------------------------" )
+
 --=================================================================================
 -- PARAMETERS MISSION --
 --================================================================================= 
-
+ 
+  [-- required : variable path_scripts defined in *.miz --]
+  
 DCSGW_Saving_Folder_Global		= path_scripts.."Saves\\"
 DCSGW_Saving_Folder_Airboss	 	= path_scripts.."Saves\\AirbossData\\"
 DCSGW_Saving_Folder_Ground	 	= path_scripts.."Saves\\GroundSave\\"
@@ -86,6 +99,7 @@ STOCK_RED_Ship                    = { }
 STOCK_RED_Ressources              = { }
 
 --================================================================================= 
+
 env.info( "-------------------------------------------------------------" )
-env.info( "[[[[   INFOS SERVEUR   ]]]] END - CONFIG_MISSION.LUA ----" )
+env.info( "[[[[   INFOS SERVEUR   ]]]] END - CONFIG_MISSION.LUA --------" )
 env.info( "-------------------------------------------------------------" )
