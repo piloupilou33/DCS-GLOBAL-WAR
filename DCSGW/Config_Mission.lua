@@ -16,7 +16,7 @@ env.info( "-------------------------------------------------------------" )
 -- PARAMETERS MISSION --
 --================================================================================= 
  
-  [-- required : variable path_scripts defined in *.miz --]
+  --[ required : variable path_scripts defined in *.miz ]
   
 DCSGW_Saving_Folder_Global		= path_scripts.."Saves\\"
 DCSGW_Saving_Folder_Airboss	 	= path_scripts.."Saves\\AirbossData\\"
@@ -59,7 +59,7 @@ POINTS_Solde_RED      = 100000
 -- INDEX Radios / TACAN
 --================================================================================= 
  -- radios 
-  DCSGW_Index_radio_ATIS          = 100
+  DCSGW_Index_radio_ATIS          = 140
   DCSGW_Index_radio_TANKER        = 200
   DCSGW_Index_radio_AWACS         = 250
   DCSGW_Index_radio_CARRIER_TWR   = 120
@@ -75,7 +75,7 @@ POINTS_Solde_RED      = 100000
 -- STOCK WAREHOUSES
 --================================================================================= 
  
-  [-- Parameters => {{ Type (string) , Quantity (nb) , Cost (nb) , Lift (bool) }} --] 
+ --[ Parameters => {{ Type (string) , Quantity (nb) , Cost (nb) , Lift (bool) }} ] 
  
  -- BLUE side
   STOCK_BLUE_Vehicle_Armor_Light    = { }
