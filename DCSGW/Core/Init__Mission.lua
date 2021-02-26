@@ -13,7 +13,7 @@ File_Mission_Running = path_scripts.."Mission_Running.lua"
 THEATRE = env.mission.theatre
 
 	if file_exists( File_Mission_Running ) then
-		assert(loadfile( File_Mission_Running ))(
+		assert(loadfile( File_Mission_Running ))()
 	else 
 		assert(loadfile( path_scripts .. "Config_Mission.lua" ))()
 	end
