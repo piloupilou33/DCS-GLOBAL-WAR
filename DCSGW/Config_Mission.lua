@@ -13,10 +13,11 @@ DCSGW_Saving_Folder_Player	 	= path_scripts.."Saves\\PlayerSave\\"
 
 -- ACTIVITY
 --================================================================================= 
-Airboss_Activity 		= true
-ATIS_Activity 			= true
+DCSGW_SSB_Activity				= true
+DCSGW_Airboss_Activity 			= true
+DCSGW_ATIS_Activity 			= true
 
-AutoSaving_Activity 	= true
+DCSGW_AutoSaving_Activity 		= true
 
 -- MAIN AIRBASE
 --================================================================================= 
