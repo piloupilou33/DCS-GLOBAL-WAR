@@ -38,16 +38,16 @@ POINTS_Solde_RED			= 100000
 --================================================================================= 
 ------ Parameters => {{ Type (string) , Quantity (nb) , Cost (nb) , Lift (bool) }}  
 
-STOCK_BLUE_Vehicle_Armor_Light			 = { }
-STOCK_BLUE_Vehicle_Armor_Medium			 = { }
-STOCK_BLUE_Vehicle_Armor_Heavy 			 = { }
-STOCK_BLUE_Vehicle_Arty		 			     = { }
-STOCK_BLUE_Vehicle_AAA					     = { }
-STOCK_BLUE_Vehicle_SAM_Light			   = { }
-STOCK_BLUE_Vehicle_SAM_Medium			   = { }
-STOCK_BLUE_Vehicle_SAM_Heavy			   = { }
-STOCK_BLUE_Vehicle_Infantery 		     = { }
-STOCK_BLUE_Vehicle_Logistic				   = { }
+STOCK_BLUE_Vehicle_Armor_Light    = { }
+STOCK_BLUE_Vehicle_Armor_Medium   = { }
+STOCK_BLUE_Vehicle_Armor_Heavy    = { }
+STOCK_BLUE_Vehicle_Arty           = { }
+STOCK_BLUE_Vehicle_AAA            = { }
+STOCK_BLUE_Vehicle_SAM_Light      = { }
+STOCK_BLUE_Vehicle_SAM_Medium     = { }
+STOCK_BLUE_Vehicle_SAM_Heavy      = { }
+STOCK_BLUE_Vehicle_Infantery      = { }
+STOCK_BLUE_Vehicle_Logistic       = { }
 
 STOCK_BLUE_Airplane_Transport	 		   = { }
 STOCK_BLUE_Airplane_Bombard		 		   = { }
