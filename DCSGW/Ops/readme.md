@@ -17,7 +17,11 @@ accordingly.
 
 ## ATIS 
 
+
 ATIS v0.7.0 (requires new sound files!)
+
+==> Folder : ATIS Soundfiles
+
 - Added dew point (approximate, as there is no relative humidity in DCS yet).
 - Added event "Report" that provides the ATIS info as string.
 - Changed end of information message based on RL pilot (HILOK) feedback.
