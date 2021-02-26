@@ -55,7 +55,7 @@ function CSVwrite(path, data, sep)
 end
 
 function CSV_Init_file ()
-  local CSV_entetes = {"Marker text", "Marker coalition", "Coordinate X", "Coordinate Y", "Coordinate Z", "Coordinate MGRS", "Coordinate LLDMS", "Coordinate LLDDM"}
+  local CSV_entetes = {"Marker text", "Marker coalition", "Coordinate X", "Coordinate Y", "Coordinate Z", "Coordinate MGRS"}
   table.insert(TABLE_Coordinates, CSV_entetes)
   CSVwrite( fichier_sauvegarde_Coords, TABLE_Coordinates )
 end
@@ -81,7 +81,7 @@ function COORDINATES_MARKER_DISPLAY(text, coord, coalition)
 --			table.insert ( TABLE_Coordinates , { ["name"] = text, ["coalition"] = coalition, ["X"] = coord.x,["Y"] = coord.y, ["Z"] = coord.z } )
 --			
 --			table.save(	TABLE_Coordinates	, fichier_sauvegarde_Coords )
-      table.insert(TABLE_Coordinates, {text, coalition, coord.x, coord.y, coord.z, coord_MARKER_MGRS, coord_MARKER_LLDMS, coord_MARKER_LLDDM})
+      table.insert(TABLE_Coordinates, {text, coalition, coord.x, coord.y, coord.z, coord_MARKER_MGRS})
       CSVwrite( fichier_sauvegarde_Coords, TABLE_Coordinates )
 
 end
