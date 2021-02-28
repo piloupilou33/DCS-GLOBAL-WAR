@@ -20,7 +20,7 @@ blabla
 -----------------------------------------------------------------------------------
 
 Ligne de code pour Init mission dans le .miz
-- Definition du dossier de mission / script
+- Definition du dossier de mission / script : 
 path_scripts = "C:\\Scripts\\SandBox_Syria\\"
-- Lancement fichier init
+- Lancement fichier init : 
 assert(loadfile(path_scripts .. "File_initialisation_mission.lua"))()
