@@ -9,20 +9,20 @@ DCSGW_Interval_Ground_Saving_time   = 5   -- in seconds : Le Saving des units se
 DCSGW_File_Saving_Ground_BLUE   = path_scripts.."__Testing\\Saves\\Ground_Blue.lua"
 DCSGW_File_Saving_Ground_RED    = path_scripts.."__Testing\\Saves\\Ground_Red.lua"
 
--- Don't touch
 DCSGW_TABLE_BLUE_Ground   = {}  -- empty table (Script)
 DCSGW_TABLE_RED_Ground    = {}  -- empty table (Script)
 
 DCSGW_TABLE_BLUE_Name     = "GroundGroupsBlue"  -- Table BLUE du file de saving
 DCSGW_TABLE_RED_Name      = "GroundGroupsRed"   -- Table RED du file de saving
 
---DCSGW_SET_GROUND_UNITS_BLUE   = SET_GROUP:New():FilterCoalitions("blue"):FilterCategories("ground"):FilterStart()
---DCSGW_SET_GROUND_UNITS_RED    = SET_GROUP:New():FilterCoalitions("red"):FilterCategories("ground"):FilterStart()
+
+DCSGW_SET_GROUND_UNITS_BLUE   = SET_GROUP:New():FilterCoalitions("blue"):FilterCategories("ground"):FilterStart()
+DCSGW_SET_GROUND_UNITS_RED    = SET_GROUP:New():FilterCoalitions("red"):FilterCategories("ground"):FilterStart()
 DCSGW_SET_GROUND_UNITS        = SET_GROUP:New():FilterCategories("ground"):FilterStart()
 
 -- Registering des groupes au lancement mission (si pas d'existant)
 --------------------------------------------------------------------------------------------------------
-DCSGW_SET_GROUND_UNITS:ForEachGroup(
+DCSGW_SET_GROUND_UNITS_BLUE:ForEachGroup(
       function( GROUP )
 
         local GroupeName        = GROUP:GetName()             -- return string
@@ -50,32 +50,32 @@ DCSGW_SET_GROUND_UNITS:ForEachGroup(
         
         local GroupeUnits_Count = #GroupeUnits
         
-        TableGroundUnits[GroupeName] = {}
-        TableGroundUnits[GroupeName]["Name"]             = GroupeName
-        TableGroundUnits[GroupeName]["Coalition"]        = GroupeCoalition
-        TableGroundUnits[GroupeName]["Country"]          = GroupeCountry
-        TableGroundUnits[GroupeName]["Type"]             = GroupeTypeName
-        TableGroundUnits[GroupeName]["Position"]         = {}
-        TableGroundUnits[GroupeName]["Position"]["x"]    = GroupePosition.x                                                 
-        TableGroundUnits[GroupeName]["Position"]["y"]    = GroupePosition.y
-        TableGroundUnits[GroupeName]["Units"]            = {}
-        TableGroundUnits[GroupeName]["DCSGW_TASK"]       = {}
+        DCSGW_TABLE_BLUE_Ground[GroupeName] = {}
+        DCSGW_TABLE_BLUE_Ground[GroupeName]["Name"]             = GroupeName
+        DCSGW_TABLE_BLUE_Ground[GroupeName]["Coalition"]        = GroupeCoalition
+        DCSGW_TABLE_BLUE_Ground[GroupeName]["Country"]          = GroupeCountry
+        DCSGW_TABLE_BLUE_Ground[GroupeName]["Type"]             = GroupeTypeName
+        DCSGW_TABLE_BLUE_Ground[GroupeName]["Position"]         = {}
+        DCSGW_TABLE_BLUE_Ground[GroupeName]["Position"]["x"]    = GroupePosition.x                                                 
+        DCSGW_TABLE_BLUE_Ground[GroupeName]["Position"]["y"]    = GroupePosition.y
+        DCSGW_TABLE_BLUE_Ground[GroupeName]["Units"]            = {}
+        DCSGW_TABLE_BLUE_Ground[GroupeName]["DCSGW_TASK"]       = {}
           
         for i = 1, GroupeUnits_Count do
           local Unit          = GROUP:GetUnit( i )
           local UnitPosition  = Unit:GetVec2()
                     
-          TableGroundUnits[GroupeName]["Units"][i] = {}
-          TableGroundUnits[GroupeName]["Units"][i]["Name"]     = Unit:GetName()
-          TableGroundUnits[GroupeName]["Units"][i]["Type"]     = Unit:GetTypeName()
-          TableGroundUnits[GroupeName]["Units"][i]["x"]        = UnitPosition.x
-          TableGroundUnits[GroupeName]["Units"][i]["y"]        = UnitPosition.y
-          TableGroundUnits[GroupeName]["Units"][i]["Heading"]  = Unit:GetHeading()
-          TableGroundUnits[GroupeName]["Units"][i]["Life"]     = 1
+          DCSGW_TABLE_BLUE_Ground[GroupeName]["Units"][i] = {}
+          DCSGW_TABLE_BLUE_Ground[GroupeName]["Units"][i]["Name"]     = Unit:GetName()
+          DCSGW_TABLE_BLUE_Ground[GroupeName]["Units"][i]["Type"]     = Unit:GetTypeName()
+          DCSGW_TABLE_BLUE_Ground[GroupeName]["Units"][i]["x"]        = UnitPosition.x
+          DCSGW_TABLE_BLUE_Ground[GroupeName]["Units"][i]["y"]        = UnitPosition.y
+          DCSGW_TABLE_BLUE_Ground[GroupeName]["Units"][i]["Heading"]  = Unit:GetHeading()
+          DCSGW_TABLE_BLUE_Ground[GroupeName]["Units"][i]["Life"]     = 1
         end
 
-        Saving_Ground_Group = IntegratedserializeWithCycles( TableNameCoalition, TableGroundUnits )
-        writemission( Saving_Ground_Group, SaveFileCoalition )
+        Saving_Ground_Group = IntegratedserializeWithCycles( "GroundGroupsBlue", DCSGW_TABLE_BLUE_Ground )
+        writemission( Saving_Ground_Group, DCSGW_File_Saving_Ground_BLUE )
         
       end
       )
@@ -84,7 +84,7 @@ DCSGW_SET_GROUND_UNITS:ForEachGroup(
 --------------------------------------------------------------------------------------------------------
 SCHEDULER_countGroupsBlue = SCHEDULER:New( nil, 
   function ()      
-    DCSGW_SET_GROUND_UNITS:ForEachGroup(
+    DCSGW_SET_GROUND_UNITS_BLUE:ForEachGroup(
           function( GROUP )
           
           if GROUP:IsAlive() then 
@@ -111,30 +111,30 @@ SCHEDULER_countGroupsBlue = SCHEDULER:New( nil,
             end
             
             -- Si le groupe est vivant / existant, on update uniquement la positon groupe
-            TableGroundUnits[GroupeName]["Position"]["x"]    = GroupePosition.x                                                 
-            TableGroundUnits[GroupeName]["Position"]["y"]    = GroupePosition.y
+            DCSGW_TABLE_BLUE_Ground[GroupeName]["Position"]["x"]    = GroupePosition.x                                                 
+            DCSGW_TABLE_BLUE_Ground[GroupeName]["Position"]["y"]    = GroupePosition.y
           
             for i = 1, GroupeUnits_Count do
                 local Unit          = GROUP:GetUnit( i )
                 local UnitPosition  = Unit:GetVec2()
-                local UnitLife      = TableGroundUnits[GroupeName]["Units"][i]["Life"]
+                local UnitLife      = DCSGW_TABLE_BLUE_Ground[GroupeName]["Units"][i]["Life"]
                 
                 -- si l'unité est vivante, on update uniquement sa position et son heading
                 if UnitLife > 0 then
-                  TableGroundUnits[GroupeName]["Units"][i]["x"]        = UnitPosition.x
-                  TableGroundUnits[GroupeName]["Units"][i]["y"]        = UnitPosition.y
-                  TableGroundUnits[GroupeName]["Units"][i]["Heading"]  = Unit:GetHeading()
+                  DCSGW_TABLE_BLUE_Ground[GroupeName]["Units"][i]["x"]        = UnitPosition.x
+                  DCSGW_TABLE_BLUE_Ground[GroupeName]["Units"][i]["y"]        = UnitPosition.y
+                  DCSGW_TABLE_BLUE_Ground[GroupeName]["Units"][i]["Heading"]  = Unit:GetHeading()
                 end
             end
           
             -- On écrit le file concerné par l'unité
-            Saving_Ground_Group = IntegratedserializeWithCycles( TableNameCoalition, TableGroundUnits )
-            writemission( Saving_Ground_Group, SaveFileCoalition )
+            Saving_Ground_Group = IntegratedserializeWithCycles( "GroundGroupsBlue", DCSGW_TABLE_BLUE_Ground )
+            writemission( Saving_Ground_Group, DCSGW_File_Saving_Ground_BLUE )
           
-            env.info( "Group updated : "..GroupeName )
+            env.info( "Group BLUE updated : "..GroupeName )
            
           else
-            env.info( "Group : "..GROUP:GetName().." n'existe plus" )
+            env.info( "Group BLUE : "..GROUP:GetName().." n'existe plus" )
             
           end
           end
