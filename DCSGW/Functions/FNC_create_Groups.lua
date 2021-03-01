@@ -6,6 +6,7 @@
 		-- local TemplateSpawn	= SPAWN:NewWithAlias( GroupNameCreated , "Index name" )
 		-- local GroupName 		= TemplateSpawn:GetName()
 		
+-- lateActivation = true or false
 
 -- GROUP:NewTemplate(GroupTemplate, CoalitionSide, CategoryID, CountryID)
 	-- 0: neutral
@@ -28,16 +29,17 @@
 	-- 7: AGGRESSORS
 	-- 8: CANADA
 	
-function FNC_CreateGroupGround ( Table_Template, CoalitionSide, CategoryID, CountryID )
+function FNC_CreateGroupGround ( Table_Template, CoalitionSide, CategoryID, CountryID, lateActivation )
 
-local TEMPLATE_Selected 	= Table_Template
-local CoalitionSide 		= CoalitionSide
-local CategoryID 			= CategoryID
-local CountryID 			= CountryID
+local TEMPLATE_Selected   = Table_Template
+local CoalitionSide       = CoalitionSide
+local CategoryID          = CategoryID
+local CountryID           = CountryID
+local lateActivation      = lateActivation
 
 local GroupTableSingle = {
 							["visible"] = false,
-							["lateActivation"] = true,
+							["lateActivation"] = lateActivation,
 							["tasks"] = 
 							{
 							}, -- end of ["tasks"]
