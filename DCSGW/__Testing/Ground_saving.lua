@@ -1,25 +1,6 @@
 env.info( "DCSGW -- GROUND SAVING ---------------------------------- Loading..." )
 --------------------------------------------------------------------------------------------------------
 
--- Parameters and Define
---------------------------------------------------------------------------------------------------------
-DCSGW_Start_Ground_Saving_time      = 10  -- in seconds : Départ de la routine de saving après x secondes
-DCSGW_Interval_Ground_Saving_time   = 5   -- in seconds : Le Saving des units se fera toutes les x secondes
-
-DCSGW_File_Saving_Ground_BLUE   = path_scripts.."__Testing\\Saves\\Ground_Blue.lua"
-DCSGW_File_Saving_Ground_RED    = path_scripts.."__Testing\\Saves\\Ground_Red.lua"
-
--- Don't touch
-DCSGW_TABLE_BLUE_Ground   = {}  -- empty table (Script)
-DCSGW_TABLE_RED_Ground    = {}  -- empty table (Script)
-
-DCSGW_TABLE_BLUE_Name     = "GroundGroupsBlue"  -- Table BLUE du file de saving
-DCSGW_TABLE_RED_Name      = "GroundGroupsRed"   -- Table RED du file de saving
-
---DCSGW_SET_GROUND_UNITS_BLUE   = SET_GROUP:New():FilterCoalitions("blue"):FilterCategories("ground"):FilterStart()
---DCSGW_SET_GROUND_UNITS_RED    = SET_GROUP:New():FilterCoalitions("red"):FilterCategories("ground"):FilterStart()
-DCSGW_SET_GROUND_UNITS        = SET_GROUP:New():FilterCategories("ground"):FilterStart()
-
 -- Registering des groupes au lancement mission (si pas d'existant)
 --------------------------------------------------------------------------------------------------------
 DCSGW_SET_GROUND_UNITS:ForEachGroup(

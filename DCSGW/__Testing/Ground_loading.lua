@@ -13,6 +13,8 @@ env.info( "DCSGW -- GROUND LOADING ---------------------------------- Loading...
 
 -- Parameters dans Defines
 --------------------------------------------------------------------------------------------------------
+DCSGW_Start_Ground_Saving_time        = 10  -- in seconds : Départ de la routine de saving après x secondes
+DCSGW_Interval_Ground_Saving_time     = 5   -- in seconds : Le Saving des units se fera toutes les x secondes
 
 DCSGW_File_Saving_Ground_BLUE         = path_scripts.."__Testing\\Saves\\Ground_Blue.lua"
 DCSGW_File_Saving_Ground_RED          = path_scripts.."__Testing\\Saves\\Ground_Red.lua"
@@ -25,6 +27,13 @@ DCSGW_TABLE_STATIC_Ground_destroyed   = {}  -- empty table
 DCSGW_TABLE_BLUE_Name                 = "GroundGroupsBlue"        -- Table BLUE du file de saving
 DCSGW_TABLE_RED_Name                  = "GroundGroupsRed"         -- Table RED du file de saving
 DCSGW_TABLE_Destroyed_Name            = "GroundGroupsDestroyed"   -- Table DESTROYED du file de saving
+
+DCSGW_SET_GROUND_UNITS        = SET_GROUP:New():FilterCategories("ground"):FilterStart()
+
+
+function DCSGW_SET_GROUND_UNITS:OnAfterAdded(From, Event, To, ObjectName, Object)
+  env.info("Name ADDED : "..ObjectName)
+end
 
 -- Register Function SPAWN GROUP
 --------------------------------------------------------------------------------------------------------
@@ -166,7 +175,6 @@ function DCSGW_FNC_SPAWN_Ground_Groups ( DCSGW_File_Saving_Ground )
   end
 end
 
-
 -- Run Spawning units registered in file
 --------------------------------------------------------------------------------------------------------
   
@@ -212,8 +220,6 @@ end
   else 
     env.info( "Le fichier de sauvegarde DESTROYED Ground Units : "..DCSGW_File_Saving_Ground_Destroyed.." n'éxiste pas, un nouveau sera créé lors de l'apparition de nouvelles unités ground détruites sur carte" )
   end
-
-
 
 --------------------------------------------------------------------------------------------------------
 env.info( "DCSGW -- GROUND LOADING ---------------------------------- Loaded ---" )
