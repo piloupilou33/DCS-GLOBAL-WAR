@@ -9,6 +9,9 @@ __pycache__/
 #fichiers de test
 output.json
 
+#fichier de conf
+config.ini
+
 # Distribution / packaging
 .Python
 build/
