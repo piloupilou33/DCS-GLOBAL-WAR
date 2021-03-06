@@ -11,9 +11,20 @@ CSV_fileName 	= "SitesSAM_Datas"
 CSV_fdir_file 	= "Save_"..THEATRE.."_"..CSV_fileName ..".csv"
 CSV_entetes 	= {}
 
+CSV_Prefixe				= "SAMSITE"
+CSV_Reduction_string 	= "SAMSITE-"
 
 -- FUNCTIONS 
 --------------------------------------------
+function Split(s, delimiter)
+    result = {};
+    for match in (s..delimiter):gmatch("(.-)"..delimiter) do
+        table.insert(result, match);
+    end
+    return result;
+end
+
+
 function CSVwrite(path, data, sep)
     sep = sep or ','
     local file,err = assert(io.open(path, "w"))
@@ -29,7 +40,7 @@ function CSVwrite(path, data, sep)
 end
 
 function CSV_Init_file ()
-	local CSV_entetes = {"Name", "Lat", "Long", "Radius", "Coalition"}
+	local CSV_entetes = {"Name", "Name short", "Lat", "Long", "Radius", "Coalition"}
 	table.insert(TABLE_CSV, CSV_entetes)
 	CSVwrite(CSV_fdir_file, TABLE_CSV)
 	
@@ -42,12 +53,13 @@ end
 function FNC_CSV_SITESAM ( ZONE )
 
 		local CSV_Zone_Name			= ZONE:GetName()
+		local CSV_Zone_Name_Short	= Split(CSV_Zone_Name, "-")
 		env.info("Registering ZoneName "..CSV_Zone_Name)
 		local CSV_Zone_Radius		= ZONE:GetRadius()
 		local CSV_Zone_Coordinate 	= ZONE:GetCoordinate()
 		local CSV_Zone_lat,CSV_Zone_long = CSV_Zone_Coordinate:GetLLDDM()
 		
-			table.insert ( TABLE_CSV , { CSV_Zone_Name, CSV_Zone_lat, CSV_Zone_long, math.floor(CSV_Zone_Radius), "Neutral" })
+			table.insert ( TABLE_CSV , { CSV_Zone_Name, CSV_Zone_Name_Short[2], CSV_Zone_lat, CSV_Zone_long, math.floor(CSV_Zone_Radius), "Neutral" })
 		
 		SAVE_CSV ()
 		return TABLE_CSV
@@ -58,5 +70,5 @@ function FNC_CSV_SITESAM ( ZONE )
 --------------------------------------------
 CSV_Init_file ()
 
-LIST_SITESAM 	= SET_ZONE:New():FilterPrefixes("SAMSITE"):FilterStart()
+LIST_SITESAM 	= SET_ZONE:New():FilterPrefixes(CSV_Prefixe):FilterStart()
 LIST_SITESAM:ForEachZone( FNC_CSV_SITESAM )
