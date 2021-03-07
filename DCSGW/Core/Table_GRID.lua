@@ -171,23 +171,22 @@ function DCSGW_FNC_Detection_GRID_units ()
 				local unit_Pos_MGRS		= Unit:GetCoordinate():ToStringMGRS(1)
 				local dataParse 		= Split( unit_Pos_MGRS, " ")
 				local dataReturn		= nil -- initatialitation variable	
+					
+					-- ACCURACY MGRS
+					----------------------------
 					-- 	MGRS 37S BU 35787 78220
 					--	  1	  2	  3	  4	    5
 					-- 	MGRS 37S BU 3 7
 					--	  1	  2	  3	4 5
-					
-					-- for i,j in ipairs( dataParse ) do
-						-- print( i,j )
-					-- end
+					----------------------------
+	
 				dataReturn = string.format("%s %s %s", dataParse[3], dataParse[4], dataParse[5]) -- dataParse 4 et 5 non utilisés pour l'instant
 				-- dataReturn = dataParse[3] .. dataParse[4] .. dataParse[5]
 				
 				if unit_Coalition == 1 then 
 					GRID_Coalition_RED[dataParse[3]] 		= GRID_Coalition_RED[dataParse[3]] + 1 -- ajout de l'unité dans la table correspondante
-					-- DCSGW_FNC_Update_GRID_State ( dataParse[3], GRID_Coalition_RED[dataParse[3]] ) -- Update de la GRID State ? 
 				elseif unit_Coalition == 2 then
 					GRID_Coalition_BLUE[dataParse[3]] 	= GRID_Coalition_BLUE[dataParse[3]] + 1 -- ajout de l'unité dans la table correspondante
-					-- DCSGW_FNC_Update_GRID_State ( dataParse[3], GRID_Coalition_BLUE[dataParse[3]] ) -- Update de la GRID State ? 
 				end
 			
 			end
