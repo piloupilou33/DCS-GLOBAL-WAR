@@ -1,3 +1,7 @@
+-------------------------------------------------------------------------------------------
+-- A SUPPRIMER ----------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+
 function COORDINATE:ToStringMGRS( Settings ) --R2.1 Fixes issue #424.
 	local MGRS_Accuracy = Settings and Settings.MGRS_Accuracy or _SETTINGS.MGRS_Accuracy
 	local lat, lon = coord.LOtoLL( self:GetVec3() )
@@ -33,6 +37,11 @@ UTILS.tostringMGRS = function(MGRS, acc) --R2.1
   
 end
 
+-------------------------------------------------------------------------------------------
+
+-- Functions UTILS
+-------------------------------------------------------------------------------------------
+
 function Split(str,sep)
 if sep == nil then
     words = {}
@@ -49,11 +58,9 @@ end
     -- end
     -- return result;
 -- end
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+-- TABLES
+-------------------------------------------------------------------------------------------
 GRID_SYRIA = { 	{"XG" , "YG" , "BB" , "CB", "DB", "EB"},
 				{"XF" , "YF" , "BA" , "CA", "DA", "EA"},
 				{"XE" , "YE" , "BV" , "CV", "DV", "EV"},
@@ -71,10 +78,27 @@ GRID_State = { 	["XG"] = 0 ,["YG"] = 0 ,["BB"] = 0 ,["CB"] = 0 ,["DB"] = 0 ,["EB
 				["XB"] = 0 ,["YB"] = 0 ,["BS"] = 0 ,["CS"] = 0 ,["DS"] = 0 ,["ES"] = 0 ,
 				["XA"] = 0 ,["YA"] = 0 ,["BR"] = 0 ,["CR"] = 0 ,["DR"] = 0 ,["ER"] = 0 ,
 			}
-			
-			
-			
 
+GRID_Coalition_BLUE = { 	["XG"] = 0 ,["YG"] = 0 ,["BB"] = 0 ,["CB"] = 0 ,["DB"] = 0 ,["EB"] = 0 ,
+							["XF"] = 0 ,["YF"] = 0 ,["BA"] = 0 ,["CA"] = 0 ,["DA"] = 0 ,["EA"] = 0 ,
+							["XE"] = 0 ,["YE"] = 0 ,["BV"] = 0 ,["CV"] = 0 ,["DV"] = 0 ,["EV"] = 0 ,
+							["XD"] = 0 ,["YD"] = 0 ,["BU"] = 0 ,["CU"] = 0 ,["DU"] = 0 ,["EU"] = 0 ,
+							["XC"] = 0 ,["YC"] = 0 ,["BT"] = 0 ,["CT"] = 0 ,["DT"] = 0 ,["ET"] = 0 ,
+							["XB"] = 0 ,["YB"] = 0 ,["BS"] = 0 ,["CS"] = 0 ,["DS"] = 0 ,["ES"] = 0 ,
+							["XA"] = 0 ,["YA"] = 0 ,["BR"] = 0 ,["CR"] = 0 ,["DR"] = 0 ,["ER"] = 0 ,
+						}			
+
+GRID_Coalition_RED 	= { 	["XG"] = 0 ,["YG"] = 0 ,["BB"] = 0 ,["CB"] = 0 ,["DB"] = 0 ,["EB"] = 0 ,
+							["XF"] = 0 ,["YF"] = 0 ,["BA"] = 0 ,["CA"] = 0 ,["DA"] = 0 ,["EA"] = 0 ,
+							["XE"] = 0 ,["YE"] = 0 ,["BV"] = 0 ,["CV"] = 0 ,["DV"] = 0 ,["EV"] = 0 ,
+							["XD"] = 0 ,["YD"] = 0 ,["BU"] = 0 ,["CU"] = 0 ,["DU"] = 0 ,["EU"] = 0 ,
+							["XC"] = 0 ,["YC"] = 0 ,["BT"] = 0 ,["CT"] = 0 ,["DT"] = 0 ,["ET"] = 0 ,
+							["XB"] = 0 ,["YB"] = 0 ,["BS"] = 0 ,["CS"] = 0 ,["DS"] = 0 ,["ES"] = 0 ,
+							["XA"] = 0 ,["YA"] = 0 ,["BR"] = 0 ,["CR"] = 0 ,["DR"] = 0 ,["ER"] = 0 ,
+						}			
+			
+-- Functions SCRIPT
+-------------------------------------------------------------------------------------------
 function DCSGW_FNC_Load_GRID_Status ()
 
 end
@@ -117,16 +141,16 @@ function DCSGW_FNC_Check_GRID_Status ( GRID_NB )
 	
 end 
 
-function DCSGW_FNC_Detection_GRID_units ( )
+function DCSGW_FNC_Detection_GRID_units ()
 
 	GRID_SET_UNITS = SET_UNIT:New():FilterStart()
 	
 	GRID_SET_UNITS:ForEachUnit(
 			function ( Unit )
-			
-				local unit_Pos_MGRS	= Unit:GetCoordinate():ToStringMGRS(1)
-				local extractdata = Split( unit_Pos_MGRS, " ")
-					
+				local unit_Coalition 	= Unit:GetCoalition()
+				local unit_Pos_MGRS		= Unit:GetCoordinate():ToStringMGRS(1)
+				local extractdata 		= Split( unit_Pos_MGRS, " ")
+				local dataReturn		= nil -- initatialitation variable	
 					-- 	MGRS 37S BU 35787 78220
 					--	  1	  2	  3	  4	    5
 					-- 	MGRS 37S BU 3 7
@@ -137,12 +161,59 @@ function DCSGW_FNC_Detection_GRID_units ( )
 					-- end
 				dataReturn = string.format("%s %s %s", extractdata[3], extractdata[4], extractdata[5])
 				-- dataReturn = extractdata[3] .. extractdata[4] .. extractdata[5]
-				 
+				
+				if unit_Coalition == 1 then 
+					GRID_Coalition_RED[extractdata[3]] 		= GRID_Coalition_RED[extractdata[3]] + 1 -- ajout de l'unité dans la table correspondante
+					-- DCSGW_FNC_Update_GRID_State ( extractdata[3], GRID_Coalition_RED[extractdata[3]] ) -- Update de la GRID State ? 
+				elseif unit_Coalition == 2 then
+					GRID_Coalition_BLUE[extractdata[3]] 	= GRID_Coalition_BLUE[extractdata[3]] + 1 -- ajout de l'unité dans la table correspondante
+					-- DCSGW_FNC_Update_GRID_State ( extractdata[3], GRID_Coalition_BLUE[extractdata[3]] ) -- Update de la GRID State ? 
+				end
+				
+	
+				
 			end
 	)
 
+	DCSGW_FNC_Update_GRID_State () -- Update de la GRID State
+
 end
 
+function DCSGW_FNC_Update_GRID_State ()
+-- STATES GRID VALUES
+----------------------------------------------------- 
+-- white 	= 0		[ Neutral 						]
+-- red 		= 1		[ Influence majoritaire RED 	] 
+-- blue 	= 2		[ Influence majoritaire BLUE 	]
+-- purple 	= 3		[ Front Global War			 	]
+-----------------------------------------------------	
+		
+	for i,j in ipairs( GRID_State ) do
+	
+		if GRID_Coalition_BLUE[j] == GRID_Coalition_RED[j] then 
+			env.info("GRID = Même nombre de RED et BLUE")
+			GRID_State[j] = 3
+		elseif GRID_Coalition_BLUE[j] < GRID_Coalition_RED[j] then 
+			env.info("GRID = RED majoritaires")
+			GRID_State[j] = 1
+		elseif GRID_Coalition_BLUE[j] > GRID_Coalition_RED[j] then 
+			env.info("GRID = BLUE majoritaires")
+			GRID_State[j] = 2
+		else 
+			env.info("GRID = Neutral")
+			GRID_State[j] = 0
+		end 
+		
+	end
+	
+
+		
+end
+
+-- RUN
+-------------------------------------------------------------------------------------------
 
 
 
+-- END
+-------------------------------------------------------------------------------------------
