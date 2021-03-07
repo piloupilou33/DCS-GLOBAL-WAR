@@ -1,5 +1,58 @@
+function COORDINATE:ToStringMGRS( Settings ) --R2.1 Fixes issue #424.
+	local MGRS_Accuracy = Settings and Settings.MGRS_Accuracy or _SETTINGS.MGRS_Accuracy
+	local lat, lon = coord.LOtoLL( self:GetVec3() )
+	local MGRS = coord.LLtoMGRS( lat, lon )
+	return "MGRS " .. UTILS.tostringMGRS( MGRS, MGRS_Accuracy )
+end
+-- acc- the accuracy of each easting/northing.  0, 1, 2, 3, 4, or 5.
+UTILS.tostringMGRS = function(MGRS, acc) --R2.1
 
+  if acc == 0 then
+    return MGRS.UTMZone .. ' ' .. MGRS.MGRSDigraph
+  else
 
+    -- Test if Easting/Northing have less than 4 digits.
+    --MGRS.Easting=123    -- should be 00123
+    --MGRS.Northing=5432  -- should be 05432
+    
+    -- Truncate rather than round MGRS grid!
+    local Easting=tostring(MGRS.Easting)
+    local Northing=tostring(MGRS.Northing)
+    
+    -- Count number of missing digits. Easting/Northing should have 5 digits. However, it is passed as a number. Therefore, any leading zeros would not be displayed by lua.
+    local nE=5-string.len(Easting) 
+    local nN=5-string.len(Northing)
+    
+    -- Get leading zeros (if any).
+    for i=1,nE do Easting="0"..Easting end
+    for i=1,nN do Northing="0"..Northing end
+    
+    -- Return MGRS string.
+    return string.format("%s %s %s %s", MGRS.UTMZone, MGRS.MGRSDigraph, string.sub(Easting, 1, acc), string.sub(Northing, 1, acc))
+  end
+  
+end
+
+function Split(str,sep)
+if sep == nil then
+    words = {}
+    for word in str:gmatch("%w+") do table.insert(words, word) end
+    return words
+end
+	return {str:match((str:gsub("[^"..sep.."]*"..sep, "([^"..sep.."]*)"..sep)))} -- BUG!! doesnt return last value
+end
+
+-- function Split(s, delimiter)
+    -- result = {};
+    -- for match in (s..delimiter):gmatch("(.-)"..delimiter) do
+        -- table.insert(result, match);
+    -- end
+    -- return result;
+-- end
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 GRID_SYRIA = { 	{"XG" , "YG" , "BB" , "CB", "DB", "EB"},
 				{"XF" , "YF" , "BA" , "CA", "DA", "EA"},
@@ -22,15 +75,15 @@ GRID_State = { 	["XG"] = 0 ,["YG"] = 0 ,["BB"] = 0 ,["CB"] = 0 ,["DB"] = 0 ,["EB
 			
 			
 
-function DCSGW_FNC_Load_Grid_Status ()
+function DCSGW_FNC_Load_GRID_Status ()
 
 end
 
-function DCSGW_FNC_Save_Grid_Status ()
+function DCSGW_FNC_Save_GRID_Status ()
 
 end
 
-function DCSGW_FNC_Check_Grid_Status ( GRID_NB )
+function DCSGW_FNC_Check_GRID_Status ( GRID_NB )
 
 	local States	=	{}
 	local grid		= GRID_NB
@@ -64,6 +117,31 @@ function DCSGW_FNC_Check_Grid_Status ( GRID_NB )
 	
 end 
 
+function DCSGW_FNC_Detection_GRID_units ( )
+
+	GRID_SET_UNITS = SET_UNIT:New():FilterStart()
+	
+	GRID_SET_UNITS:ForEachUnit(
+			function ( Unit )
+			
+				local unit_Pos_MGRS	= Unit:GetCoordinate():ToStringMGRS(1)
+				local extractdata = Split( unit_Pos_MGRS, " ")
+					
+					-- 	MGRS 37S BU 35787 78220
+					--	  1	  2	  3	  4	    5
+					-- 	MGRS 37S BU 3 7
+					--	  1	  2	  3	4 5
+					
+					-- for i,j in ipairs( extractdata ) do
+						-- print( i,j )
+					-- end
+				dataReturn = string.format("%s %s %s", extractdata[3], extractdata[4], extractdata[5])
+				-- dataReturn = extractdata[3] .. extractdata[4] .. extractdata[5]
+				 
+			end
+	)
+
+end
 
 
 
