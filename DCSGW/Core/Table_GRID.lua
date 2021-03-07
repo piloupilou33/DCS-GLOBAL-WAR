@@ -61,7 +61,7 @@ end
 
 -- TABLES
 -------------------------------------------------------------------------------------------
-function DCSGW_FNC_Registering_Tables_GRID ()
+function DCSGW_FNC_Registering_Tables_GRID_SYRIA_MAP ()
 
 GRID_SYRIA              = { {"XG" , "YG" , "BB" , "CB", "DB", "EB"},
                             {"XF" , "YF" , "BA" , "CA", "DA", "EA"},
@@ -119,6 +119,13 @@ GRID_Weight_RED         = { ["XG"] = 0 ,["YG"] = 0 ,["BB"] = 0 ,["CB"] = 0 ,["DB
 							
 end						
 			
+function DCSGW_FNC_Registering_Tables_GRID_CAUCASUS_MAP ()
+
+end
+
+function DCSGW_FNC_Registering_Tables_GRID_GULF_MAP ()
+
+end			
 -- Functions SCRIPT
 -------------------------------------------------------------------------------------------
 function DCSGW_FNC_Load_GRID_Status ()
