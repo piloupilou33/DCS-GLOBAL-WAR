@@ -1,5 +1,18 @@
 -------------------------------------------------------------------------------------------
-
+-- A supprimer
+function CSVwrite(path, data, sep)
+    sep = sep or ','
+    local file,err = assert(io.open(path, "w"))
+  if err then return err end
+    for i=1,#data do
+        for j=1,#data[i] do
+            if j>1 then file:write(sep) end
+            file:write(data[i][j])
+        end
+        file:write('\n')
+    end
+    file:close()
+end
 
 
 
@@ -24,6 +37,15 @@ end
     -- end
     -- return result;
 -- end
+
+-- DEFINES
+-------------------------------------------------------------------------------------------
+TABLE_CSV   = {}
+THEATRE     = env.mission.theatre
+
+CSV_fileName    = "GRID_Datas"  
+CSV_fdir_file   = path_scripts.."Save_"..THEATRE.."_"..CSV_fileName ..".csv"
+CSV_entetes     = {}
 
 -- TABLES
 -------------------------------------------------------------------------------------------
@@ -91,7 +113,9 @@ end
 
 function DCSGW_FNC_Registering_Tables_GRID_GULF_MAP ()
 
-end			
+end
+
+
 -- Functions SCRIPT
 -------------------------------------------------------------------------------------------
 function DCSGW_FNC_Load_GRID_Status ()
@@ -99,7 +123,8 @@ function DCSGW_FNC_Load_GRID_Status ()
 end
 
 function DCSGW_FNC_Save_GRID_Status ()
-
+  
+  
 end
 
 function DCSGW_FNC_Check_GRID_Status ( GRID_NB )
@@ -204,7 +229,9 @@ end
 -- RUN
 -------------------------------------------------------------------------------------------
 	DCSGW_FNC_Registering_Tables_GRID () -- inititalisation du registre des tables GRID
-
+   
+   table.insert ( TABLE_CSV , GRID_SYRIA }
+   CSVwrite( CSV_fdir_file, TABLE_CSV )
 
 -- END
 -------------------------------------------------------------------------------------------
