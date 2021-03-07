@@ -43,8 +43,10 @@ end
 TABLE_CSV   = {}
 THEATRE     = env.mission.theatre
 
+--path_scripts = "C:\\Scripts\\DCS-GLOBAL-WAR\\DCSGW\\__Testing\\" -- Path testing only
+
 CSV_fileName    = "GRID_Datas"  
-CSV_fdir_file   = path_scripts.."Save_"..THEATRE.."_"..CSV_fileName ..".csv"
+CSV_fdir_file   = path_scripts.."Saves\\Save_"..THEATRE.."_"..CSV_fileName ..".csv"
 CSV_entetes     = {}
 
 -- TABLES
