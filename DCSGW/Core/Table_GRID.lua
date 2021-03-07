@@ -169,25 +169,25 @@ function DCSGW_FNC_Detection_GRID_units ()
 			function ( Unit )
 				local unit_Coalition 	= Unit:GetCoalition()
 				local unit_Pos_MGRS		= Unit:GetCoordinate():ToStringMGRS(1)
-				local extractdata 		= Split( unit_Pos_MGRS, " ")
+				local dataParse 		= Split( unit_Pos_MGRS, " ")
 				local dataReturn		= nil -- initatialitation variable	
 					-- 	MGRS 37S BU 35787 78220
 					--	  1	  2	  3	  4	    5
 					-- 	MGRS 37S BU 3 7
 					--	  1	  2	  3	4 5
 					
-					-- for i,j in ipairs( extractdata ) do
+					-- for i,j in ipairs( dataParse ) do
 						-- print( i,j )
 					-- end
-				dataReturn = string.format("%s %s %s", extractdata[3], extractdata[4], extractdata[5])
-				-- dataReturn = extractdata[3] .. extractdata[4] .. extractdata[5]
+				dataReturn = string.format("%s %s %s", dataParse[3], dataParse[4], dataParse[5]) -- dataParse 4 et 5 non utilisés pour l'instant
+				-- dataReturn = dataParse[3] .. dataParse[4] .. dataParse[5]
 				
 				if unit_Coalition == 1 then 
-					GRID_Coalition_RED[extractdata[3]] 		= GRID_Coalition_RED[extractdata[3]] + 1 -- ajout de l'unité dans la table correspondante
-					-- DCSGW_FNC_Update_GRID_State ( extractdata[3], GRID_Coalition_RED[extractdata[3]] ) -- Update de la GRID State ? 
+					GRID_Coalition_RED[dataParse[3]] 		= GRID_Coalition_RED[dataParse[3]] + 1 -- ajout de l'unité dans la table correspondante
+					-- DCSGW_FNC_Update_GRID_State ( dataParse[3], GRID_Coalition_RED[dataParse[3]] ) -- Update de la GRID State ? 
 				elseif unit_Coalition == 2 then
-					GRID_Coalition_BLUE[extractdata[3]] 	= GRID_Coalition_BLUE[extractdata[3]] + 1 -- ajout de l'unité dans la table correspondante
-					-- DCSGW_FNC_Update_GRID_State ( extractdata[3], GRID_Coalition_BLUE[extractdata[3]] ) -- Update de la GRID State ? 
+					GRID_Coalition_BLUE[dataParse[3]] 	= GRID_Coalition_BLUE[dataParse[3]] + 1 -- ajout de l'unité dans la table correspondante
+					-- DCSGW_FNC_Update_GRID_State ( dataParse[3], GRID_Coalition_BLUE[dataParse[3]] ) -- Update de la GRID State ? 
 				end
 			
 			end
@@ -209,16 +209,16 @@ function DCSGW_FNC_Update_GRID_State ()
 	-- Boucle dans la GRID State pour update	
 	for i,j in ipairs( GRID_State ) do
 		if GRID_Coalition_BLUE[j] == GRID_Coalition_RED[j] then 
-			env.info("GRID = Même nombre de RED et BLUE")
+			env.info("GRID "..j.." = Même nombre de RED et BLUE")
 			GRID_State[j] = 3 -- Purple
 		elseif GRID_Coalition_BLUE[j] < GRID_Coalition_RED[j] then 
-			env.info("GRID = RED majoritaires")
+			env.info("GRID "..j.." = RED majoritaires")
 			GRID_State[j] = 1 -- Red
 		elseif GRID_Coalition_BLUE[j] > GRID_Coalition_RED[j] then 
-			env.info("GRID = BLUE majoritaires")
+			env.info("GRID "..j.." = BLUE majoritaires")
 			GRID_State[j] = 2 -- Blue
 		else 
-			env.info("GRID = Neutral")
+			env.info("GRID "..j.." = Neutral")
 			GRID_State[j] = 0 -- White
 		end 
 	end
