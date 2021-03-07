@@ -111,6 +111,9 @@ THEATRE     = env.mission.theatre
 
 --path_scripts = "C:\\Scripts\\DCS-GLOBAL-WAR\\DCSGW\\Testing\\GRID\\" -- Path testing only
 
+-- Load Moose
+assert(loadfile( "C:\\Scripts\\DCS-GLOBAL-WAR\\DCSGW\\Core\\Moose_2.5.3.lua" ))() -- For testing only
+
 CSV_fileName    = "GRID_Datas"  
 CSV_fdir_file   = path_scripts.."Saves\\Save_"..THEATRE.."_"..CSV_fileName ..".csv"
 CSV_entetes     = {}
@@ -194,11 +197,6 @@ function DCSGW_FNC_Load_GRID_Status ()
 end
 
 function DCSGW_FNC_Save_GRID_Status ()
-  
-  for i,j in ipairs( GRID_SYRIA ) do
-    table.insert ( TABLE_CSV , GRID_SYRIA[i] )
-  end 
-   CSVwrite( CSV_fdir_file, TABLE_CSV )
    
   REGISTERED_GRID_State = IntegratedserializeWithCycles("GRID_State", GRID_State)
   writemission(REGISTERED_GRID_State, fdir_file_GRID_State)  
@@ -209,6 +207,10 @@ function DCSGW_FNC_Save_GRID_Status ()
   REGISTERED_GRID_Coalition_RED = IntegratedserializeWithCycles("GRID_Coalition_RED", GRID_Coalition_RED)
   writemission(REGISTERED_GRID_Coalition_RED, fdir_file_GRID_Coalition_RED) 
   
+end
+
+function DCSGW_FNC_CSV_ArcgisMap ()
+
 end
 
 function DCSGW_FNC_Check_GRID_Status ( GRID_NB )
@@ -248,41 +250,74 @@ end
 function DCSGW_FNC_Detection_GRID_units ()
 	
 	-- Creation du SET_UNIT
-	GRID_SET_UNITS = SET_UNIT:New():FilterStart()
+	GRID_SET_UNITS = SET_UNIT:New():FilterOnce()
+	
+	-- Remise � Z�ro de la table
+  local Lign  = nil 
+  local Col   = nil	
+  
+	for Lign = 1 , #GRID_SYRIA do 
+    for Col = 1 , #GRID_SYRIA[Lign] do
+          local value_Grid = GRID_SYRIA[Lign][Col]
+          GRID_Coalition_RED[value_Grid]   = 0
+          GRID_Coalition_BLUE[value_Grid]  = 0
+    end
+  end
 	
 	-- Parcours du SET_UNIT
 	GRID_SET_UNITS:ForEachUnit(
 			function ( Unit )
 				local unit_Coalition 	= Unit:GetCoalition()
-				local unit_Pos_MGRS		= Unit:GetCoordinate():ToStringMGRS(1)
-				local dataParse 		= Split( unit_Pos_MGRS, " ")
-				local dataReturn		= nil -- initatialitation variable	
-					
-					-- ACCURACY MGRS
-					----------------------------
-					-- 	MGRS 37S BU 35787 78220
-					--	  1	  2	  3	  4	    5
-					-- 	MGRS 37S BU 3 7
-					--	  1	  2	  3	4 5
-					----------------------------
-	
-				dataReturn = string.format("%s %s %s", dataParse[3], dataParse[4], dataParse[5]) -- dataParse 4 et 5 non utilisés pour l'instant
-				-- dataReturn = dataParse[3] .. dataParse[4] .. dataParse[5]
+				local unit_Pos_MGRS   = Unit:GetCoordinate()
+				local dataReturn		  = nil -- initatialitation variable	
+        local value = 0
+        local MGRS_Value = nil
+
+        -- MGRS Translation
+    	  local lat, lon = coord.LOtoLL( unit_Pos_MGRS:GetVec3() )
+        local MGRS = coord.LLtoMGRS( lat, lon )    
+    	      
+        local Easting=tostring(MGRS.Easting)
+        local Northing=tostring(MGRS.Northing)
+        
+        local nE=5-string.len(Easting) 
+        local nN=5-string.len(Northing)
+
+        for i=1,nE do Easting="0"..Easting end
+        for i=1,nN do Northing="0"..Northing end
+	       
+		    dataReturn = string.format("%s%s%s", MGRS.MGRSDigraph, string.sub(Easting, 1, 1), string.sub(Northing, 1, 1))
+				MGRS_Value = tostring(MGRS.MGRSDigraph)
 				
+	     -- Prise de value des Tables GRID par Coalition
 				if unit_Coalition == 1 then 
-					GRID_Coalition_RED[dataParse[3]] 		= GRID_Coalition_RED[dataParse[3]] + 1 -- ajout de l'unité dans la table correspondante
+
+          value = GRID_Coalition_RED[MGRS_Value]
+					GRID_Coalition_RED[MGRS_Value]     = value + 1 -- ajout de l'unité dans la table correspondante
+
 				elseif unit_Coalition == 2 then
-					GRID_Coalition_BLUE[dataParse[3]] 	= GRID_Coalition_BLUE[dataParse[3]] + 1 -- ajout de l'unité dans la table correspondante
+
+					value = GRID_Coalition_BLUE[MGRS_Value]
+					GRID_Coalition_BLUE[MGRS_Value]  = value + 1 -- ajout de l'unité dans la table correspondante
+					
 				end
+				
+				env.info("Unit : "..Unit:GetTypeName().." | Coalition : "..unit_Coalition.." | Position : "..dataReturn.." | GRID : "..MGRS.MGRSDigraph.." | Value = "..value )
 			
 			end
 	)
+	
+	REGISTERED_GRID_State = IntegratedserializeWithCycles("GRID_State", GRID_State)
+  writemission(REGISTERED_GRID_State, fdir_file_GRID_State)  
 	-- Update de la GRID State = Launch function
 	DCSGW_FNC_Update_GRID_State ()
+
+--DCSGW_FNC_Check_GRID_Status ( dataReturn )
 
 end
 
 function DCSGW_FNC_Update_GRID_State ()
+-----------------------------------------------------
 -- STATES GRID VALUES
 ----------------------------------------------------- 
 -- White 	= 0		[ Neutral 						]
@@ -290,23 +325,52 @@ function DCSGW_FNC_Update_GRID_State ()
 -- Blue 	= 2		[ Influence majoritaire BLUE 	]
 -- Purple 	= 3		[ Front Global War			 	]
 -----------------------------------------------------
+	  local Lign  = nil 
+    local Col   = nil 
+    
+    for Lign = 1 , #GRID_SYRIA do 
+      for Col = 1 , #GRID_SYRIA[Lign] do
+        local value_Grid = GRID_SYRIA[Lign][Col]
+            
+        if GRID_Coalition_BLUE[value_Grid] == GRID_Coalition_RED[value_Grid] then 
+          env.info("GRID "..value_Grid.." = Même nombre de RED et BLUE")
+          GRID_State[value_Grid] = 3 -- Purple
+        elseif GRID_Coalition_BLUE[value_Grid] < GRID_Coalition_RED[value_Grid] then 
+          env.info("GRID "..value_Grid.." = RED majoritaires")
+          GRID_State[value_Grid] = 1 -- Red
+        elseif GRID_Coalition_BLUE[value_Grid] > GRID_Coalition_RED[value_Grid] then 
+          env.info("GRID "..value_Grid.." = BLUE majoritaires")
+          GRID_State[value_Grid] = 2 -- Blue
+        else 
+          env.info("GRID "..value_Grid.." = Neutral")
+          GRID_State[value_Grid] = 0 -- White
+        end
+      end 
+    end
+
+	
 	
 	-- Boucle dans la GRID State pour update	
-	for i,j in ipairs( GRID_State ) do
-		if GRID_Coalition_BLUE[j] == GRID_Coalition_RED[j] then 
-			env.info("GRID "..j.." = Même nombre de RED et BLUE")
-			GRID_State[j] = 3 -- Purple
-		elseif GRID_Coalition_BLUE[j] < GRID_Coalition_RED[j] then 
-			env.info("GRID "..j.." = RED majoritaires")
-			GRID_State[j] = 1 -- Red
-		elseif GRID_Coalition_BLUE[j] > GRID_Coalition_RED[j] then 
-			env.info("GRID "..j.." = BLUE majoritaires")
-			GRID_State[j] = 2 -- Blue
-		else 
-			env.info("GRID "..j.." = Neutral")
-			GRID_State[j] = 0 -- White
-		end 
-	end
+--	for i,j in ipairs( GRID_State ) do
+--	   env.info("Test J = "..j.."Test I = "..i)
+--	   
+--		if GRID_Coalition_BLUE[j] == GRID_Coalition_RED[j] then 
+--			env.info("GRID "..j.." = Même nombre de RED et BLUE")
+--			GRID_State[j] = 3 -- Purple
+--		elseif GRID_Coalition_BLUE[j] < GRID_Coalition_RED[j] then 
+--			env.info("GRID "..j.." = RED majoritaires")
+--			GRID_State[j] = 1 -- Red
+--		elseif GRID_Coalition_BLUE[j] > GRID_Coalition_RED[j] then 
+--			env.info("GRID "..j.." = BLUE majoritaires")
+--			GRID_State[j] = 2 -- Blue
+--		else 
+--			env.info("GRID "..j.." = Neutral")
+--			GRID_State[j] = 0 -- White
+--		end 
+--		
+--	end
+	
+--	DCSGW_FNC_Save_GRID_Status ()
 	
 end
 
@@ -314,7 +378,18 @@ end
 -------------------------------------------------------------------------------------------
 	DCSGW_FNC_Registering_Tables_GRID_SYRIA_MAP () -- inititalisation du registre des tables GRID
    
-  DCSGW_FNC_Save_GRID_Status ()
-   
+  for i,j in ipairs( GRID_SYRIA ) do
+    table.insert ( TABLE_CSV , GRID_SYRIA[i] )
+  end 
+  CSVwrite( CSV_fdir_file, TABLE_CSV ) 
+  
+  SCHEDULER_GRID_Status = SCHEDULER:New( nil,
+    function ()
+        DCSGW_FNC_Detection_GRID_units ()
+--        DCSGW_FNC_Save_GRID_Status ()
+    end
+   , {}, 1, 20 ) 
+ 
+  
 -- END
 -------------------------------------------------------------------------------------------
