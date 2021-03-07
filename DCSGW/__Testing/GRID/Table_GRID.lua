@@ -1,41 +1,7 @@
 -------------------------------------------------------------------------------------------
--- A SUPPRIMER ----------------------------------------------------------------------------
--------------------------------------------------------------------------------------------
 
-function COORDINATE:ToStringMGRS( Settings ) --R2.1 Fixes issue #424.
-	local MGRS_Accuracy = Settings and Settings.MGRS_Accuracy or _SETTINGS.MGRS_Accuracy
-	local lat, lon = coord.LOtoLL( self:GetVec3() )
-	local MGRS = coord.LLtoMGRS( lat, lon )
-	return "MGRS " .. UTILS.tostringMGRS( MGRS, MGRS_Accuracy )
-end
--- acc- the accuracy of each easting/northing.  0, 1, 2, 3, 4, or 5.
-UTILS.tostringMGRS = function(MGRS, acc) --R2.1
 
-  if acc == 0 then
-    return MGRS.UTMZone .. ' ' .. MGRS.MGRSDigraph
-  else
 
-    -- Test if Easting/Northing have less than 4 digits.
-    --MGRS.Easting=123    -- should be 00123
-    --MGRS.Northing=5432  -- should be 05432
-    
-    -- Truncate rather than round MGRS grid!
-    local Easting=tostring(MGRS.Easting)
-    local Northing=tostring(MGRS.Northing)
-    
-    -- Count number of missing digits. Easting/Northing should have 5 digits. However, it is passed as a number. Therefore, any leading zeros would not be displayed by lua.
-    local nE=5-string.len(Easting) 
-    local nN=5-string.len(Northing)
-    
-    -- Get leading zeros (if any).
-    for i=1,nE do Easting="0"..Easting end
-    for i=1,nN do Northing="0"..Northing end
-    
-    -- Return MGRS string.
-    return string.format("%s %s %s %s", MGRS.UTMZone, MGRS.MGRSDigraph, string.sub(Easting, 1, acc), string.sub(Northing, 1, acc))
-  end
-  
-end
 
 -------------------------------------------------------------------------------------------
 
