@@ -167,12 +167,7 @@ function round(num, numDecimalPlaces)
   return math.floor(num * mult + 0.5) / mult
 end
 
---// The Write in CSV File Function
-function writeCSV(data, file)
-  File = io.open(file, "a")
-  File:write(data)
-  File:close()
-end
+
 
 --=================================================================================
 --  OTHER SAVING SYSTEM FUNCTIONS
@@ -244,3 +239,113 @@ function writemission(data, file)--Function for saving to file (commonly found)
   File:write(data)
   File:close()
 end
+
+
+-----------------------------------------------------------------------------------------------
+-- Function CSVwrite 
+-----------------------------------------------------------------------------------------------
+-- path : Dossier save
+-- data : Table à enregistrer
+-- sep : optionnel, si besoin d'un autre séparateur : par défault = ","
+
+function CSVwrite(path, data, sep)
+    sep = sep or ','
+    local file,err = assert(io.open(path, "w"))
+  if err then return err end
+    for i=1,#data do
+        for j=1,#data[i] do
+            if j>1 then file:write(sep) end
+            file:write(data[i][j])
+        end
+        file:write('\n')
+    end
+    file:close()
+end
+
+--// The Write in CSV File Function
+function writeCSV(data, file) --old
+  File = io.open(file, "a")
+  File:write(data)
+  File:close()
+end
+
+
+-----------------------------------------------------------------------------------------------
+-- Function CSVread
+-----------------------------------------------------------------------------------------------
+-- path : Dossier save
+-- sep : optionnel, si besoin d'un autre séparateur : par défault = ","
+-- tonum : optionnel, si besoin de convertir une valeur en chiffre : par défault = true
+-- null : optionnel, si besoin d'une valeur dans un champ null : par défault = ''
+-----------
+-- Return : Data dans Tabel : csvFile {}
+
+function CSVread(path, sep, tonum, null)
+    tonum = tonum or true
+    sep = sep or ','
+    null = null or ''
+    local csvFile = {}
+    local file,err = assert(io.open(path, "r"))
+  if err then return _,err end
+    for line in file:lines() do
+        fields = line:split(sep)
+        if tonum then -- convert numeric fields to numbers
+            for i=1,#fields do
+                local field = fields[i]
+                if field == '' then
+                    field = null
+                end
+                fields[i] = tonumber(field) or field
+            end
+        end
+        table.insert(csvFile, fields)
+    end
+    file:close()
+    return csvFile
+end
+
+-----------------------------------------------------------------------------------------------
+-- Function string:split --- Support aux function write / read
+-----------------------------------------------------------------------------------------------
+-- path : Dossier save
+
+function string:split(sSeparator, nMax, bRegexp)
+    if sSeparator == '' then
+        sSeparator = ','
+    end
+
+    if nMax and nMax < 1 then
+        nMax = nil
+    end
+
+    local aRecord = {}
+
+    if self:len() > 0 then
+        local bPlain = not bRegexp
+        nMax = nMax or -1
+
+        local nField, nStart = 1, 1
+        local nFirst,nLast = self:find(sSeparator, nStart, bPlain)
+        while nFirst and nMax ~= 0 do
+            aRecord[nField] = self:sub(nStart, nFirst-1)
+            nField = nField+1
+            nStart = nLast+1
+            nFirst,nLast = self:find(sSeparator, nStart, bPlain)
+            nMax = nMax-1
+        end
+        aRecord[nField] = self:sub(nStart)
+    end
+
+    return aRecord
+end
+
+-----------------------------------------------------------------------------------------------
+-- Function ClearCSV --- Restaure Zero fichier CSV
+-----------------------------------------------------------------------------------------------
+-- path : Dossier save
+function ClearCSV (filename) 
+  io.open(filename,"w"):close()
+end
+
+-----------------------------------------------------------------------------------------------
+-- end Functions CSV

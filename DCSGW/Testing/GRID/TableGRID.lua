@@ -14,6 +14,60 @@ function CSVwrite(path, data, sep)
     file:close()
 end
 
+function CSVread(path, sep, tonum, null)
+    tonum = tonum or true
+    sep = sep or ','
+    null = null or ''
+    local csvFile = {}
+    local file,err = assert(io.open(path, "r"))
+  if err then return _,err end
+    for line in file:lines() do
+        fields = line:split(sep)
+        if tonum then -- convert numeric fields to numbers
+            for i=1,#fields do
+                local field = fields[i]
+                if field == '' then
+                    field = null
+                end
+                fields[i] = tonumber(field) or field
+            end
+        end
+        table.insert(csvFile, fields)
+    end
+    file:close()
+    return csvFile
+end
+
+function string:split(sSeparator, nMax, bRegexp)
+    if sSeparator == '' then
+        sSeparator = ','
+    end
+
+    if nMax and nMax < 1 then
+        nMax = nil
+    end
+
+    local aRecord = {}
+
+    if self:len() > 0 then
+        local bPlain = not bRegexp
+        nMax = nMax or -1
+
+        local nField, nStart = 1, 1
+        local nFirst,nLast = self:find(sSeparator, nStart, bPlain)
+        while nFirst and nMax ~= 0 do
+            aRecord[nField] = self:sub(nStart, nFirst-1)
+            nField = nField+1
+            nStart = nLast+1
+            nFirst,nLast = self:find(sSeparator, nStart, bPlain)
+            nMax = nMax-1
+        end
+        aRecord[nField] = self:sub(nStart)
+    end
+
+    return aRecord
+end
+
 function IntegratedbasicSerialize(s)
     if s == nil then
       return "\"\""
@@ -76,39 +130,19 @@ function writemission(data, file)--Function for saving to file (commonly found)
 end
 
 
-
-
 -------------------------------------------------------------------------------------------
 
 -- Functions UTILS
 -------------------------------------------------------------------------------------------
 
-function Split(str,sep)
-if sep == nil then
-    words = {}
-    for word in str:gmatch("%w+") do table.insert(words, word) end
-    return words
-end
-	return {str:match((str:gsub("[^"..sep.."]*"..sep, "([^"..sep.."]*)"..sep)))} -- BUG!! doesnt return last value
-end
-
-
-
-
-
--- function Split(s, delimiter)
-    -- result = {};
-    -- for match in (s..delimiter):gmatch("(.-)"..delimiter) do
-        -- table.insert(result, match);
-    -- end
-    -- return result;
--- end
 
 -- DEFINES
 -------------------------------------------------------------------------------------------
 TABLE_CSV   = {}
 THEATRE     = env.mission.theatre
 
+path = lfs.currentdir()
+env.info("Current path to save = "..path)
 --path_scripts = "C:\\Scripts\\DCS-GLOBAL-WAR\\DCSGW\\Testing\\GRID\\" -- Path testing only
 
 -- Load Moose
@@ -117,6 +151,14 @@ assert(loadfile( "C:\\Scripts\\DCS-GLOBAL-WAR\\DCSGW\\Core\\Moose_2.5.3.lua" ))(
 CSV_fileName    = "GRID_Datas"  
 CSV_fdir_file   = path_scripts.."Saves\\Save_"..THEATRE.."_"..CSV_fileName ..".csv"
 CSV_entetes     = {}
+
+CSV_Cost_Units = "SGW_db_units_prices"
+CSV_Cost_Units_fdir_file   = path_scripts.."Saves\\"..CSV_Cost_Units ..".csv"
+
+CSV_Cost_Airbase = "SGW_db_airports_prices"
+CSV_Cost_Airbase_fdir_file  = path_scripts.."Saves\\"..CSV_Cost_Airbase ..".csv"
+
+fdir_file_Units_Cost = path_scripts.."Saves\\Save_"..THEATRE.."_Units_Cost.lua"
 
 fdir_file_GRID_State   = path_scripts.."Saves\\Save_"..THEATRE.."_GRID_State.lua"
 fdir_file_GRID_Coalition_BLUE = path_scripts.."Saves\\Save_"..THEATRE.."_GRID_Coalition_BLUE.lua"
@@ -266,6 +308,12 @@ function DCSGW_FNC_Check_GRID_Status ( GRID_NB )
 end 
 
 function DCSGW_FNC_Detection_GRID_units ()
+	
+	
+	local Table_CSV_unit_cost = CSVread( CSV_Cost_Units_fdir_file, "," )
+	 
+	REGISTERED_Units_cost = IntegratedserializeWithCycles("units_Cost", Table_CSV_unit_cost)
+  writemission(REGISTERED_Units_cost, fdir_file_Units_Cost)
 	
 	-- Creation du SET_UNIT
 	GRID_SET_UNITS = SET_UNIT:New():FilterOnce()
