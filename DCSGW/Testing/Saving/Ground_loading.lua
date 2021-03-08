@@ -16,9 +16,9 @@ env.info( "DCSGW -- GROUND LOADING ---------------------------------- Loading...
 DCSGW_Start_Ground_Saving_time        = 10  -- in seconds : Départ de la routine de saving après x secondes
 DCSGW_Interval_Ground_Saving_time     = 5   -- in seconds : Le Saving des units se fera toutes les x secondes
 
-DCSGW_File_Saving_Ground_BLUE         = path_scripts.."__Testing\\Saves\\Ground_Blue.lua"
-DCSGW_File_Saving_Ground_RED          = path_scripts.."__Testing\\Saves\\Ground_Red.lua"
-DCSGW_File_Saving_Ground_Destroyed    = path_scripts.."__Testing\\Saves\\Ground_Destroyed.lua"
+DCSGW_File_Saving_Ground_BLUE         = path_scripts.."Testing\\Saving\\Saves\\Ground_Blue.lua"
+DCSGW_File_Saving_Ground_RED          = path_scripts.."Testing\\Saving\\Saves\\Ground_Red.lua"
+DCSGW_File_Saving_Ground_Destroyed    = path_scripts.."Testing\\Saving\\Saves\\Ground_Destroyed.lua"
 
 DCSGW_TABLE_BLUE_Ground               = {}  -- empty table
 DCSGW_TABLE_RED_Ground                = {}  -- empty table
