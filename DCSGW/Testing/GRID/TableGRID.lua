@@ -143,14 +143,23 @@ GRID_State              = { ["XG"] = 0 ,["YG"] = 0 ,["BB"] = 0 ,["CB"] = 0 ,["DB
                             ["XA"] = 0 ,["YA"] = 0 ,["BR"] = 0 ,["CR"] = 0 ,["DR"] = 0 ,["ER"] = 0 ,
                         }
 
-GRID_Coalition_BLUE     = { ["XG"] = 0 ,["YG"] = 0 ,["BB"] = 0 ,["CB"] = 0 ,["DB"] = 0 ,["EB"] = 0 ,
-                            ["XF"] = 0 ,["YF"] = 0 ,["BA"] = 0 ,["CA"] = 0 ,["DA"] = 0 ,["EA"] = 0 ,
-                            ["XE"] = 0 ,["YE"] = 0 ,["BV"] = 0 ,["CV"] = 0 ,["DV"] = 0 ,["EV"] = 0 ,
-                            ["XD"] = 0 ,["YD"] = 0 ,["BU"] = 0 ,["CU"] = 0 ,["DU"] = 0 ,["EU"] = 0 ,
-                            ["XC"] = 0 ,["YC"] = 0 ,["BT"] = 0 ,["CT"] = 0 ,["DT"] = 0 ,["ET"] = 0 ,
-                            ["XB"] = 0 ,["YB"] = 0 ,["BS"] = 0 ,["CS"] = 0 ,["DS"] = 0 ,["ES"] = 0 ,
-                            ["XA"] = 0 ,["YA"] = 0 ,["BR"] = 0 ,["CR"] = 0 ,["DR"] = 0 ,["ER"] = 0 ,
-                        }
+--GRID_Coalition_BLUE     = { ["XG"] = 0 ,["YG"] = 0 ,["BB"] = 0 ,["CB"] = 0 ,["DB"] = 0 ,["EB"] = 0 ,
+--                            ["XF"] = 0 ,["YF"] = 0 ,["BA"] = 0 ,["CA"] = 0 ,["DA"] = 0 ,["EA"] = 0 ,
+--                            ["XE"] = 0 ,["YE"] = 0 ,["BV"] = 0 ,["CV"] = 0 ,["DV"] = 0 ,["EV"] = 0 ,
+--                            ["XD"] = 0 ,["YD"] = 0 ,["BU"] = 0 ,["CU"] = 0 ,["DU"] = 0 ,["EU"] = 0 ,
+--                            ["XC"] = 0 ,["YC"] = 0 ,["BT"] = 0 ,["CT"] = 0 ,["DT"] = 0 ,["ET"] = 0 ,
+--                            ["XB"] = 0 ,["YB"] = 0 ,["BS"] = 0 ,["CS"] = 0 ,["DS"] = 0 ,["ES"] = 0 ,
+--                            ["XA"] = 0 ,["YA"] = 0 ,["BR"] = 0 ,["CR"] = 0 ,["DR"] = 0 ,["ER"] = 0 ,
+--                        }
+                        
+GRID_Coalition_BLUE     = { ["XG"] = {} ,["YG"] = {} ,["BB"] = {} ,["CB"] = {} ,["DB"] = {} ,["EB"] = {} ,
+                            ["XF"] = {} ,["YF"] = {} ,["BA"] = {} ,["CA"] = {} ,["DA"] = {} ,["EA"] = {} ,
+                            ["XE"] = {} ,["YE"] = {} ,["BV"] = {} ,["CV"] = {} ,["DV"] = {} ,["EV"] = {} ,
+                            ["XD"] = {} ,["YD"] = {} ,["BU"] = {} ,["CU"] = {} ,["DU"] = {} ,["EU"] = {} ,
+                            ["XC"] = {} ,["YC"] = {} ,["BT"] = {} ,["CT"] = {} ,["DT"] = {} ,["ET"] = {} ,
+                            ["XB"] = {} ,["YB"] = {} ,["BS"] = {} ,["CS"] = {} ,["DS"] = {} ,["ES"] = {} ,
+                            ["XA"] = {} ,["YA"] = {} ,["BR"] = {} ,["CR"] = {} ,["DR"] = {} ,["ER"] = {} ,
+                        }                        
 
 GRID_Weight_BLUE        = { ["XG"] = 0 ,["YG"] = 0 ,["BB"] = 0 ,["CB"] = 0 ,["DB"] = 0 ,["EB"] = 0 ,
                             ["XF"] = 0 ,["YF"] = 0 ,["BA"] = 0 ,["CA"] = 0 ,["DA"] = 0 ,["EA"] = 0 ,
@@ -161,14 +170,23 @@ GRID_Weight_BLUE        = { ["XG"] = 0 ,["YG"] = 0 ,["BB"] = 0 ,["CB"] = 0 ,["DB
                             ["XA"] = 0 ,["YA"] = 0 ,["BR"] = 0 ,["CR"] = 0 ,["DR"] = 0 ,["ER"] = 0 ,
                         }						
 
-GRID_Coalition_RED      = { ["XG"] = 0 ,["YG"] = 0 ,["BB"] = 0 ,["CB"] = 0 ,["DB"] = 0 ,["EB"] = 0 ,
-                            ["XF"] = 0 ,["YF"] = 0 ,["BA"] = 0 ,["CA"] = 0 ,["DA"] = 0 ,["EA"] = 0 ,
-                            ["XE"] = 0 ,["YE"] = 0 ,["BV"] = 0 ,["CV"] = 0 ,["DV"] = 0 ,["EV"] = 0 ,
-                            ["XD"] = 0 ,["YD"] = 0 ,["BU"] = 0 ,["CU"] = 0 ,["DU"] = 0 ,["EU"] = 0 ,
-                            ["XC"] = 0 ,["YC"] = 0 ,["BT"] = 0 ,["CT"] = 0 ,["DT"] = 0 ,["ET"] = 0 ,
-                            ["XB"] = 0 ,["YB"] = 0 ,["BS"] = 0 ,["CS"] = 0 ,["DS"] = 0 ,["ES"] = 0 ,
-                            ["XA"] = 0 ,["YA"] = 0 ,["BR"] = 0 ,["CR"] = 0 ,["DR"] = 0 ,["ER"] = 0 ,
-                        }	
+--GRID_Coalition_RED      = { ["XG"] = 0 ,["YG"] = 0 ,["BB"] = 0 ,["CB"] = 0 ,["DB"] = 0 ,["EB"] = 0 ,
+--                            ["XF"] = 0 ,["YF"] = 0 ,["BA"] = 0 ,["CA"] = 0 ,["DA"] = 0 ,["EA"] = 0 ,
+--                            ["XE"] = 0 ,["YE"] = 0 ,["BV"] = 0 ,["CV"] = 0 ,["DV"] = 0 ,["EV"] = 0 ,
+--                            ["XD"] = 0 ,["YD"] = 0 ,["BU"] = 0 ,["CU"] = 0 ,["DU"] = 0 ,["EU"] = 0 ,
+--                            ["XC"] = 0 ,["YC"] = 0 ,["BT"] = 0 ,["CT"] = 0 ,["DT"] = 0 ,["ET"] = 0 ,
+--                            ["XB"] = 0 ,["YB"] = 0 ,["BS"] = 0 ,["CS"] = 0 ,["DS"] = 0 ,["ES"] = 0 ,
+--                            ["XA"] = 0 ,["YA"] = 0 ,["BR"] = 0 ,["CR"] = 0 ,["DR"] = 0 ,["ER"] = 0 ,
+--                        }	
+
+GRID_Coalition_RED      = { ["XG"] = {} ,["YG"] = {} ,["BB"] = {} ,["CB"] = {} ,["DB"] = {} ,["EB"] = {} ,
+                            ["XF"] = {} ,["YF"] = {} ,["BA"] = {} ,["CA"] = {} ,["DA"] = {} ,["EA"] = {} ,
+                            ["XE"] = {} ,["YE"] = {} ,["BV"] = {} ,["CV"] = {} ,["DV"] = {} ,["EV"] = {} ,
+                            ["XD"] = {} ,["YD"] = {} ,["BU"] = {} ,["CU"] = {} ,["DU"] = {} ,["EU"] = {} ,
+                            ["XC"] = {} ,["YC"] = {} ,["BT"] = {} ,["CT"] = {} ,["DT"] = {} ,["ET"] = {} ,
+                            ["XB"] = {} ,["YB"] = {} ,["BS"] = {} ,["CS"] = {} ,["DS"] = {} ,["ES"] = {} ,
+                            ["XA"] = {} ,["YA"] = {} ,["BR"] = {} ,["CR"] = {} ,["DR"] = {} ,["ER"] = {} ,
+                        }                         
 
 GRID_Weight_RED         = { ["XG"] = 0 ,["YG"] = 0 ,["BB"] = 0 ,["CB"] = 0 ,["DB"] = 0 ,["EB"] = 0 ,
                             ["XF"] = 0 ,["YF"] = 0 ,["BA"] = 0 ,["CA"] = 0 ,["DA"] = 0 ,["EA"] = 0 ,
@@ -256,22 +274,58 @@ function DCSGW_FNC_Detection_GRID_units ()
   local Lign  = nil 
   local Col   = nil	
   
-	for Lign = 1 , #GRID_SYRIA do 
-    for Col = 1 , #GRID_SYRIA[Lign] do
-          local value_Grid = GRID_SYRIA[Lign][Col]
-          GRID_Coalition_RED[value_Grid]   = 0
-          GRID_Coalition_BLUE[value_Grid]  = 0
+--	for Lign = 1 , #GRID_SYRIA do 
+--    for Col = 1 , #GRID_SYRIA[Lign] do
+--          local value_Grid = GRID_SYRIA[Lign][Col]
+--          
+--          GRID_Coalition_RED[value_Grid]   = 0
+--          GRID_Coalition_BLUE[value_Grid]  = 0
+--          
+--          GRID_Coalition_RED[value_Grid]["units"] = {}
+--          GRID_Coalition_RED[value_Grid]["cost"]  = 0
+--          
+--          GRID_Coalition_BLUE[value_Grid]["units"]  = {}
+--          GRID_Coalition_BLUE[value_Grid]["cost"]   = 0
+--          
+--    end
+--  end
+	
+	  for Lign = 1 , #GRID_SYRIA do 
+      for Col = 1 , #GRID_SYRIA[Lign] do
+            local value_Grid = GRID_SYRIA[Lign][Col]
+            local count = "count"
+            local units = "units"
+            local cost = "cost"
+            
+            GRID_Coalition_RED[value_Grid][units] = {}
+            GRID_Coalition_RED[value_Grid][count] = 0
+            GRID_Coalition_RED[value_Grid][cost] = 0
+            GRID_Coalition_BLUE[value_Grid][units] = {}
+            GRID_Coalition_BLUE[value_Grid][count] = 0
+            GRID_Coalition_BLUE[value_Grid][cost] = 0
+        
+--          GRID_Coalition_RED[value_Grid]["units"] = {}
+--          GRID_Coalition_RED[value_Grid]["cost_value"] = 0
+--          
+--          GRID_Coalition_BLUE[value_Grid]["units"]  = {}
+--          GRID_Coalition_BLUE[value_Grid]["cost_value"]  = 0
+
+      end
     end
-  end
+	
+	
+	
+	
 	
 	-- Parcours du SET_UNIT
 	GRID_SET_UNITS:ForEachUnit(
 			function ( Unit )
+			  local unit_Type     = Unit:GetTypeName()
 				local unit_Coalition 	= Unit:GetCoalition()
 				local unit_Pos_MGRS   = Unit:GetCoordinate()
 				local dataReturn		  = nil -- initatialitation variable	
         local value = 0
-        local MGRS_Value = nil
+        local value_Grid = nil
 
         -- MGRS Translation
     	  local lat, lon = coord.LOtoLL( unit_Pos_MGRS:GetVec3() )
@@ -287,19 +341,23 @@ function DCSGW_FNC_Detection_GRID_units ()
         for i=1,nN do Northing="0"..Northing end
 	       
 		    dataReturn = string.format("%s%s%s", MGRS.MGRSDigraph, string.sub(Easting, 1, 1), string.sub(Northing, 1, 1))
-				MGRS_Value = tostring(MGRS.MGRSDigraph)
+				value_Grid = tostring(MGRS.MGRSDigraph)
 				
 	     -- Prise de value des Tables GRID par Coalition
 				if unit_Coalition == 1 then 
-
-          value = GRID_Coalition_RED[MGRS_Value]
-					GRID_Coalition_RED[MGRS_Value]     = value + 1 -- ajout de l'unité dans la table correspondante
-
+--          value = GRID_Coalition_RED[value_Grid]
+          value = GRID_Coalition_RED[value_Grid]["count"]
+--					GRID_Coalition_RED[value_Grid]   = value + 1 -- ajout de l'unité dans la table correspondante
+					GRID_Coalition_RED[value_Grid]["count"]   = value + 1 -- ajout de l'unité dans la table correspondante
+					table.insert (GRID_Coalition_RED[value_Grid]["units"], unit_Type )
+					env.info("Unit : "..Unit:GetTypeName().." | ok RED ")
 				elseif unit_Coalition == 2 then
-
-					value = GRID_Coalition_BLUE[MGRS_Value]
-					GRID_Coalition_BLUE[MGRS_Value]  = value + 1 -- ajout de l'unité dans la table correspondante
-					
+--					value = GRID_Coalition_BLUE[value_Grid]
+					value = GRID_Coalition_BLUE[value_Grid]["count"]
+--					GRID_Coalition_BLUE[value_Grid]  = value + 1 -- ajout de l'unité dans la table correspondante
+					GRID_Coalition_BLUE[value_Grid]["count"]  = value + 1 -- ajout de l'unité dans la table correspondante
+					table.insert (GRID_Coalition_BLUE[value_Grid]["units"], unit_Type )
+					env.info("Unit : "..Unit:GetTypeName().." | ok BLUE ")
 				end
 				
 				env.info("Unit : "..Unit:GetTypeName().." | Coalition : "..unit_Coalition.." | Position : "..dataReturn.." | GRID : "..MGRS.MGRSDigraph.." | Value = "..value )
@@ -307,8 +365,13 @@ function DCSGW_FNC_Detection_GRID_units ()
 			end
 	)
 	
-	REGISTERED_GRID_State = IntegratedserializeWithCycles("GRID_State", GRID_State)
-  writemission(REGISTERED_GRID_State, fdir_file_GRID_State)  
+	REGISTERED_GRID_Coalition_BLUE = IntegratedserializeWithCycles("GRID_Coalition_BLUE", GRID_Coalition_BLUE)
+  writemission(REGISTERED_GRID_Coalition_BLUE, fdir_file_GRID_Coalition_BLUE)
+  
+  REGISTERED_GRID_Coalition_RED = IntegratedserializeWithCycles("GRID_Coalition_RED", GRID_Coalition_RED)
+  writemission(REGISTERED_GRID_Coalition_RED, fdir_file_GRID_Coalition_RED) 
+	
+ 
 	-- Update de la GRID State = Launch function
 	DCSGW_FNC_Update_GRID_State ()
 
@@ -325,30 +388,58 @@ function DCSGW_FNC_Update_GRID_State ()
 -- Blue 	= 2		[ Influence majoritaire BLUE 	]
 -- Purple 	= 3		[ Front Global War			 	]
 -----------------------------------------------------
-	  local Lign  = nil 
-    local Col   = nil 
-    
-    for Lign = 1 , #GRID_SYRIA do 
-      for Col = 1 , #GRID_SYRIA[Lign] do
-        local value_Grid = GRID_SYRIA[Lign][Col]
-            
-        if GRID_Coalition_BLUE[value_Grid] == GRID_Coalition_RED[value_Grid] then 
-          env.info("GRID "..value_Grid.." = Même nombre de RED et BLUE")
-          GRID_State[value_Grid] = 3 -- Purple
-        elseif GRID_Coalition_BLUE[value_Grid] < GRID_Coalition_RED[value_Grid] then 
-          env.info("GRID "..value_Grid.." = RED majoritaires")
-          GRID_State[value_Grid] = 1 -- Red
-        elseif GRID_Coalition_BLUE[value_Grid] > GRID_Coalition_RED[value_Grid] then 
-          env.info("GRID "..value_Grid.." = BLUE majoritaires")
-          GRID_State[value_Grid] = 2 -- Blue
-        else 
-          env.info("GRID "..value_Grid.." = Neutral")
-          GRID_State[value_Grid] = 0 -- White
-        end
-      end 
-    end
+  local Lign  = nil 
+  local Col   = nil 
+  
+--  for Lign = 1 , #GRID_SYRIA do 
+--    for Col = 1 , #GRID_SYRIA[Lign] do
+--      local value_Grid = GRID_SYRIA[Lign][Col]
+--          
+--      if GRID_Coalition_BLUE[value_Grid] > 0 and GRID_Coalition_RED[value_Grid] > 0 and GRID_Coalition_BLUE[value_Grid] == GRID_Coalition_RED[value_Grid] then 
+--        env.info("GRID "..value_Grid.." = Même nombre de RED et BLUE")
+--        GRID_State[value_Grid] = 3 -- Purple
+--      elseif GRID_Coalition_BLUE[value_Grid] < GRID_Coalition_RED[value_Grid] then 
+--        env.info("GRID "..value_Grid.." = RED majoritaires")
+--        GRID_State[value_Grid] = 1 -- Red
+--      elseif GRID_Coalition_BLUE[value_Grid] > GRID_Coalition_RED[value_Grid] then 
+--        env.info("GRID "..value_Grid.." = BLUE majoritaires")
+--        GRID_State[value_Grid] = 2 -- Blue
+--      elseif GRID_Coalition_BLUE[value_Grid] == 0 and GRID_Coalition_RED[value_Grid] == 0 then
+--        env.info("GRID "..value_Grid.." = Vide - neutral")
+--        GRID_State[value_Grid] = 0 -- White
+--      else 
+--        env.info("GRID "..value_Grid.." = Neutral")
+--        GRID_State[value_Grid] = 0 -- White
+--      end
+--    end 
+--  end
 
-	
+
+  for Lign = 1 , #GRID_SYRIA do 
+    for Col = 1 , #GRID_SYRIA[Lign] do
+      local value_Grid = GRID_SYRIA[Lign][Col]
+          
+      if GRID_Coalition_BLUE[value_Grid]["count"] > 0 and GRID_Coalition_RED[value_Grid]["count"] > 0 and GRID_Coalition_BLUE[value_Grid]["count"] == GRID_Coalition_RED[value_Grid]["count"] then 
+        env.info("GRID "..value_Grid.." = Même nombre de RED et BLUE")
+        GRID_State[value_Grid] = 3 -- Purple
+      elseif GRID_Coalition_BLUE[value_Grid]["count"] < GRID_Coalition_RED[value_Grid]["count"] then 
+        env.info("GRID "..value_Grid.." = RED majoritaires")
+        GRID_State[value_Grid] = 1 -- Red
+      elseif GRID_Coalition_BLUE[value_Grid]["count"] > GRID_Coalition_RED[value_Grid]["count"] then 
+        env.info("GRID "..value_Grid.." = BLUE majoritaires")
+        GRID_State[value_Grid] = 2 -- Blue
+      elseif GRID_Coalition_BLUE[value_Grid]["count"] == 0 and GRID_Coalition_RED[value_Grid]["count"] == 0 then
+        env.info("GRID "..value_Grid.." = Vide - neutral")
+        GRID_State[value_Grid] = 0 -- White
+      else 
+        env.info("GRID "..value_Grid.." = Neutral")
+        GRID_State[value_Grid] = 0 -- White
+      end
+    end 
+  end
+  
+	REGISTERED_GRID_State = IntegratedserializeWithCycles("GRID_State", GRID_State)
+  writemission(REGISTERED_GRID_State, fdir_file_GRID_State) 
 	
 	-- Boucle dans la GRID State pour update	
 --	for i,j in ipairs( GRID_State ) do
