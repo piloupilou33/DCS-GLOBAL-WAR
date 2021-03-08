@@ -1,14 +1,14 @@
 Type,Name,Category DCSGW,Category DCS Name,Category DCS ID,Coalition Name,Coalition ID,Purchase Cost,Maintenance Cost,Bonus Kill
-M-113,Ground-1-1,Category_DCSGW,Ground Unit,1,Blue,2,0,0,0
-M-60,Ground-6-1,Category_DCSGW,Ground Unit,1,Blue,2,0,0,0
-M2A1_halftrack,Ground-2-1,Category_DCSGW,Ground Unit,1,Blue,2,0,0,0
-T72M,Ground-11-1,Category_DCSGW,Ground Unit,1,Red,1,0,0,0
-T62,Ground-9-1,Category_DCSGW,Ground Unit,1,Red,1,0,0,0
-T-90,Ground-12-1,Category_DCSGW,Ground Unit,1,Red,1,0,0,0
-BRDM-2,Ground-7-1,Category_DCSGW,Ground Unit,1,Red,1,0,0,0
-M1045 HMMWV TOW,Ground-3-1,Category_DCSGW,Ground Unit,1,Blue,2,0,0,0
-PT76,Ground-8-1,Category_DCSGW,Ground Unit,1,Red,1,0,0,0
-M-1 Abrams,Ground-5-1,Category_DCSGW,Ground Unit,1,Blue,2,0,0,0
-M1134 Stryker ATGM,Ground-4-1,Category_DCSGW,Ground Unit,1,Blue,2,0,0,0
-T-80UD,Ground-13-1,Category_DCSGW,Ground Unit,1,Red,1,0,0,0
-T-55,Ground-10-1,Category_DCSGW,Ground Unit,1,Red,1,0,0,0
+M-113,Ground-1-1,Category_DCSGW,Ground Unit,1,Blue,2,USA,2,0,0,0
+M-60,Ground-6-1,Category_DCSGW,Ground Unit,1,Blue,2,USA,2,0,0,0
+M2A1_halftrack,Ground-2-1,Category_DCSGW,Ground Unit,1,Blue,2,USA,2,0,0,0
+T72M,Ground-11-1,Category_DCSGW,Ground Unit,1,Red,1,RUSSIA,0,0,0,0
+T62,Ground-9-1,Category_DCSGW,Ground Unit,1,Red,1,RUSSIA,0,0,0,0
+T-90,Ground-12-1,Category_DCSGW,Ground Unit,1,Red,1,RUSSIA,0,0,0,0
+BRDM-2,Ground-7-1,Category_DCSGW,Ground Unit,1,Red,1,RUSSIA,0,0,0,0
+M1045 HMMWV TOW,Ground-3-1,Category_DCSGW,Ground Unit,1,Blue,2,USA,2,0,0,0
+PT76,Ground-8-1,Category_DCSGW,Ground Unit,1,Red,1,RUSSIA,0,0,0,0
+M-1 Abrams,Ground-5-1,Category_DCSGW,Ground Unit,1,Blue,2,USA,2,0,0,0
+M1134 Stryker ATGM,Ground-4-1,Category_DCSGW,Ground Unit,1,Blue,2,USA,2,0,0,0
+T-80UD,Ground-13-1,Category_DCSGW,Ground Unit,1,Red,1,RUSSIA,0,0,0,0
+T-55,Ground-10-1,Category_DCSGW,Ground Unit,1,Red,1,RUSSIA,0,0,0,0

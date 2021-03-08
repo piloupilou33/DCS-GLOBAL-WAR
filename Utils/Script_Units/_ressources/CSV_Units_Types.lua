@@ -57,16 +57,21 @@ function FNC_CSV_CREATE ( UNIT )
 
     local CSV_UNIT_Name               = UNIT:GetName()
     local CSV_UNIT_Type               = UNIT:GetTypeName()
+    
     local CSV_UNIT_Category_DCSName   = UNIT:GetCategoryName()
     local CSV_UNIT_Category_DCSID     = UNIT:GetCategory()
-    local CSV_UNIT_Coalition_DCSID    = UNIT:GetCoalition()
+    
     local CSV_UNIT_Coalition_DCSNAME  = UNIT:GetCoalitionName()
+    local CSV_UNIT_Coalition_DCSID    = UNIT:GetCoalition()
+    
+    local CSV_UNIT_Country_DCSNAME    = UNIT:GetCountryName()
+    local CSV_UNIT_Country_DCSID    = UNIT:GetCountry()
     
     env.info("Registering UnitType "..CSV_UNIT_Name)
     
     
-    -- { "Type", "Name", "Category DCSGW", "Category DCS Name", "Category DCS ID", "Coalition Name", "Coalition ID", "Purchase Cost", "Maintenance Cost", "Bonus Kill" }
-    table.insert ( TABLE_CSV , { CSV_UNIT_Type, CSV_UNIT_Name , "Category_DCSGW", CSV_UNIT_Category_DCSName, CSV_UNIT_Category_DCSID, CSV_UNIT_Coalition_DCSNAME, CSV_UNIT_Coalition_DCSID, 0, 0, 0 })
+    -- { "Type", "Name", "Category DCSGW", "Category DCS Name", "Category DCS ID", "Coalition Name", "Coalition ID", "Country Name", "Country ID", "Purchase Cost", "Maintenance Cost", "Bonus Kill" }
+    table.insert ( TABLE_CSV , { CSV_UNIT_Type, CSV_UNIT_Name , "Category_DCSGW", CSV_UNIT_Category_DCSName, CSV_UNIT_Category_DCSID, CSV_UNIT_Coalition_DCSNAME, CSV_UNIT_Coalition_DCSID, CSV_UNIT_Country_DCSNAME, CSV_UNIT_Country_DCSID,  0, 0, 0 })
     
     SAVE_CSV ()
     return TABLE_CSV
