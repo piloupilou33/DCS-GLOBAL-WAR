@@ -1,4 +1,4 @@
-Type,Name,Category DCSGW,Category DCS Name,Category DCS ID,Coalition Name,Coalition ID,Purchase Cost,Maintenance Cost,Bonus Kill
+Type,Name,Category DCSGW,Category DCS Name,Category DCS ID,Coalition Name,Coalition ID,Country Name,Country ID,Purchase Cost,Maintenance Cost,Bonus Kill
 M-113,Ground-1-1,Category_DCSGW,Ground Unit,1,Blue,2,USA,2,0,0,0
 M-60,Ground-6-1,Category_DCSGW,Ground Unit,1,Blue,2,USA,2,0,0,0
 M2A1_halftrack,Ground-2-1,Category_DCSGW,Ground Unit,1,Blue,2,USA,2,0,0,0

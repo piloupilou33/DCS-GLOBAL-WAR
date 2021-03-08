@@ -13,7 +13,7 @@ env.info("Current path to save = "..path)
 CSV_fileName    = "UnitsTypes_Datas"  
 CSV_fdir_file   = path.."Save_"..THEATRE.."_"..CSV_fileName ..".csv"
 
-CSV_entetes = { "Type", "Name", "Category DCSGW", "Category DCS Name", "Category DCS ID", "Coalition Name", "Coalition ID", "Purchase Cost", "Maintenance Cost", "Bonus Kill" }
+CSV_entetes = { "Type", "Name", "Category DCSGW", "Category DCS Name", "Category DCS ID", "Coalition Name", "Coalition ID", "Country Name", "Country ID", "Purchase Cost", "Maintenance Cost", "Bonus Kill" }
 
 CSV_Prefixe           = ""
 CSV_Reduction_string  = ""
