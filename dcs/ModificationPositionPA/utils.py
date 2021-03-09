@@ -26,10 +26,10 @@ class Utils:
     
     def to_file(self,data,format="json"):
         if format=="json":
-            with open("output.json", "w") as json_file:
+            with open("output.json", "w", encoding="utf-8") as json_file:
                 json.dump(data,json_file, indent=4)
         if format=="lua":
-            with open("output_lua", "w") as lua_file:
+            with open("output_lua", "w", encoding="utf-8") as lua_file:
                 lua_file.write("mission = \n")
                 lua_file.write(data)
 

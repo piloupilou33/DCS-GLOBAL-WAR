@@ -18,8 +18,8 @@ while True:
         unit= blueTeam.search(line)
         #update
         updated_unit=unit
-        updated_unit["x"]=line[-2]
-        updated_unit["y"]=line[-1]
+        updated_unit["x"]=float(line[-2])
+        updated_unit["y"]=float(line[-1])
         #save
         json_dump = json.dumps(json_data)
         json_dump = json_dump.replace(json.dumps(unit), json.dumps(updated_unit))
