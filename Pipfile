@@ -4,8 +4,8 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-luaparser = "*"
 pytest = "*"
+SLPP = "*"
 
 [dev-packages]
 
