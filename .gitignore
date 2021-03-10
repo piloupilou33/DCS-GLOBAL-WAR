@@ -135,3 +135,6 @@ dmypy.json
 .pyre/
 Pipfile.lock
 dcs/ModificationPositionPA/output_lua
+dcs/ModificationPositionPA/mission.zip
+dcs/ModificationPositionPA/test/mission.zip
+dcs/ModificationPositionPA/test/mission
