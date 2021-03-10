@@ -35,7 +35,7 @@ class Utils:
 
     def parse_lua_to_json(self):
         """ retourne un parse json du fichier LUA donner en parametre """
-        with open(self.file_path, 'r', encoding="utf-8") as lua_file:
+        with open("mission", 'r', encoding="utf-8") as lua_file:
             code=lua_file.readlines()[1:]
         code="\n".join(code)
         return lua.decode(code)

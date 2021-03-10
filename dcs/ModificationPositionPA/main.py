@@ -3,7 +3,7 @@ import os
 import json
 from utils import Utils
 from search import Search
-
+from pathlib import Path
 
 
 #init
@@ -29,3 +29,4 @@ for line in lst_csv:
 parseur.zip()
 os.remove("mission")
 print("File Removed!")
+Path("mission.zip").rename("{}.zip".format(parseur.file_path))
