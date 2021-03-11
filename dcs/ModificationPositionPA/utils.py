@@ -3,6 +3,8 @@ import json
 import csv
 import configparser
 import os
+import zipfile
+from pathlib import Path
 from slpp import slpp as lua
 from zipfile import ZipFile 
 
@@ -24,18 +26,22 @@ class Utils:
         
             # extracting all the files 
             print('Extracting all the files now...') 
-            zip.extractall() 
+            zip.extractall("extract") 
             print('Done!')
-
-    def zip(self):
-        """ Zip le fichier dont le chemin est donne dans le fichier de conf """
-        with ZipFile("mission.zip",'w') as zip: 
-            zip.write("mission") 
-        print('All files zipped successfully!')   
+    
+    def zip_dir(self):
+        foldername=self.file_path.split("/")[-1]
+        target_dir="extract"
+        zipobj = zipfile.ZipFile(foldername + '.zip', 'w', zipfile.ZIP_DEFLATED)
+        rootlen = len(target_dir) + 1
+        for base, dirs, files in os.walk(target_dir):
+            for file in files:
+                fn = os.path.join(base, file)
+                zipobj.write(fn, fn[rootlen:])
 
     def parse_lua_to_json(self):
         """ retourne un parse json du fichier LUA donner en parametre """
-        with open("mission", 'r', encoding="utf-8") as lua_file:
+        with open("extract/mission", 'r', encoding="utf-8") as lua_file:
             code=lua_file.readlines()[1:]
         code="\n".join(code)
         return lua.decode(code)

@@ -1,5 +1,5 @@
 """ Classe re recherche """
-
+import json
 
 class Search:
     """ Permet de rechercher dans un JSON """
@@ -13,12 +13,16 @@ class Search:
         if key_list is None or len(key_list) == 2:
             return self.json_data
         else:
+            index=key_list[0]
             try:    
-                key_list[0]=int(key_list[0])
-            except Exception:
+                index=int(index)
+                self.json_data = self.json_data[index]
+            except Exception as e:
+                index=key_list[0]
+                self.json_data = self.json_data[index]
                 pass
-            self.json_data = self.json_data[key_list[0]]
             key_list = key_list[1:]
+            
             return self.search(key_list)
 
 

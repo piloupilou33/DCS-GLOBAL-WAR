@@ -1,6 +1,7 @@
 import time
 import os
 import json
+import shutil
 from utils import Utils
 from search import Search
 from pathlib import Path
@@ -26,7 +27,9 @@ for line in lst_csv:
     json_dump = json.dumps(json_data)
     json_dump = json_dump.replace(json.dumps(unit), json.dumps(updated_unit))
     parseur.to_file(parseur.parse_json_to_lua(json.loads(json_dump)),"lua")
-parseur.zip()
-os.remove("mission")
+Path("mission").rename("extract/mission")
+parseur.zip_dir()
 print("File Removed!")
-Path("mission.zip").rename("{}.zip".format(parseur.file_path))
+Path("{}.zip".format(parseur.file_path.split("/")[-1])).rename("{}.zip".format(parseur.file_path))
+shutil.rmtree(Path('extract'))
+os.mkdir("extract")
