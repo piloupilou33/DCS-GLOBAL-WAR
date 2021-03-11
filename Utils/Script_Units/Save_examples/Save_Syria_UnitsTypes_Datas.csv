@@ -1,14 +1,200 @@
 Type,Name,Category DCSGW,Category DCS Name,Category DCS ID,Coalition Name,Coalition ID,Country Name,Country ID,Purchase Cost,Maintenance Cost,Bonus Kill
-M-113,Ground-1-1,Category_DCSGW,Ground Unit,1,Blue,2,USA,2,0,0,0
-M-60,Ground-6-1,Category_DCSGW,Ground Unit,1,Blue,2,USA,2,0,0,0
-M2A1_halftrack,Ground-2-1,Category_DCSGW,Ground Unit,1,Blue,2,USA,2,0,0,0
-T72M,Ground-11-1,Category_DCSGW,Ground Unit,1,Red,1,RUSSIA,0,0,0,0
-T62,Ground-9-1,Category_DCSGW,Ground Unit,1,Red,1,RUSSIA,0,0,0,0
-T-90,Ground-12-1,Category_DCSGW,Ground Unit,1,Red,1,RUSSIA,0,0,0,0
-BRDM-2,Ground-7-1,Category_DCSGW,Ground Unit,1,Red,1,RUSSIA,0,0,0,0
-M1045 HMMWV TOW,Ground-3-1,Category_DCSGW,Ground Unit,1,Blue,2,USA,2,0,0,0
-PT76,Ground-8-1,Category_DCSGW,Ground Unit,1,Red,1,RUSSIA,0,0,0,0
-M-1 Abrams,Ground-5-1,Category_DCSGW,Ground Unit,1,Blue,2,USA,2,0,0,0
-M1134 Stryker ATGM,Ground-4-1,Category_DCSGW,Ground Unit,1,Blue,2,USA,2,0,0,0
-T-80UD,Ground-13-1,Category_DCSGW,Ground Unit,1,Red,1,RUSSIA,0,0,0,0
-T-55,Ground-10-1,Category_DCSGW,Ground Unit,1,Red,1,RUSSIA,0,0,0,0
+SAU 2-C9,Ground-40-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+Gepard,Ground-115-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+C-130,Aerial-65-1,Category_DCSGW,Airplane,1,Blue,2,CJTF_BLUE,80,0,0,0
+F-14A-135-GR,Aerial-31-1,Category_DCSGW,Airplane,1,Blue,2,CJTF_BLUE,80,0,0,0
+Su-17M4,Aerial-35-1,Category_DCSGW,Airplane,1,Red,1,CJTF_RED,81,0,0,0
+M1097 Avenger,Ground-72-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+M1128 Stryker MGS,Ground-25-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+Hawk cwar,Ground-74-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+MiG-29S,Aerial-5-1,Category_DCSGW,Airplane,1,Red,1,CJTF_RED,81,0,0,0
+M1126 Stryker ICV,Ground-24-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+Osa 9A33 ln,Ground-110-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+55G6 EWR,Ground-66-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+UH-1H,Rotary-6-1,Category_DCSGW,Helicopter,1,Blue,2,CJTF_BLUE,80,0,0,0
+An-30M,Aerial-55-1,Category_DCSGW,Airplane,1,Red,1,CJTF_RED,81,0,0,0
+F-5E-3,Aerial-15-1,Category_DCSGW,Airplane,1,Blue,2,CJTF_BLUE,80,0,0,0
+An-26B,Aerial-54-1,Category_DCSGW,Airplane,1,Red,1,CJTF_RED,81,0,0,0
+Hummer,Ground-54-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+J-11A,Aerial-11-1,Category_DCSGW,Airplane,1,Red,1,CJTF_RED,81,0,0,0
+Hawk pcp,Ground-76-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+5p73 s-125 ln,Ground-106-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+M-2000C,Aerial-24-1,Category_DCSGW,Airplane,1,Blue,2,CJTF_BLUE,80,0,0,0
+MiG-27K,Aerial-42-1,Category_DCSGW,Airplane,1,Red,1,CJTF_RED,81,0,0,0
+S-300PS 64H6E sr,Ground-92-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+BMP-1,Ground-13-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+MiG-25PD,Aerial-8-1,Category_DCSGW,Airplane,1,Red,1,CJTF_RED,81,0,0,0
+SA-11 Buk LN 9A310M1,Ground-95-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+Su-24M,Aerial-40-1,Category_DCSGW,Airplane,1,Red,1,CJTF_RED,81,0,0,0
+SAU Akatsia,Ground-42-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+MiG-15bis,Aerial-16-1,Category_DCSGW,Airplane,1,Red,1,CJTF_RED,81,0,0,0
+I-16,Aerial-14-1,Category_DCSGW,Airplane,1,Red,1,CJTF_RED,81,0,0,0
+Uragan_BM-27,Ground-45-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+Igla manpad INS,Ground-100-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+Kub 2P25 ln,Ground-108-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+UAZ-469,Ground-49-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+KC-135,Aerial-58-1,Category_DCSGW,Airplane,1,Blue,2,CJTF_BLUE,80,0,0,0
+Tornado GR4,Aerial-34-1,Category_DCSGW,Airplane,1,Blue,2,CJTF_BLUE,80,0,0,0
+M1134 Stryker ATGM,Ground-26-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+Tu-95MS,Aerial-52-1,Category_DCSGW,Airplane,1,Red,1,CJTF_RED,81,0,0,0
+A-50,Aerial-61-1,Category_DCSGW,Airplane,1,Red,1,CJTF_RED,81,0,0,0
+Patriot EPP,Ground-82-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+MiG-29S,Aerial-6-1,Category_DCSGW,Airplane,1,Red,1,CJTF_RED,81,0,0,0
+BMD-1,Ground-12-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+Grad-URAL,Ground-44-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+AV8BNA,Aerial-23-1,Category_DCSGW,Airplane,1,Blue,2,CJTF_BLUE,80,0,0,0
+MiG-29G,Aerial-7-1,Category_DCSGW,Airplane,1,Red,1,CJTF_RED,81,0,0,0
+KC135MPRS,Aerial-60-1,Category_DCSGW,Airplane,1,Blue,2,CJTF_BLUE,80,0,0,0
+Su-25,Aerial-36-1,Category_DCSGW,Airplane,1,Red,1,CJTF_RED,81,0,0,0
+SA-18 Igla comm,Ground-99-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+BRDM-2,Ground-3-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+C-17A,Aerial-66-1,Category_DCSGW,Airplane,1,Blue,2,CJTF_BLUE,80,0,0,0
+Soldier M4,Ground-52-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+SA342Minigun,Rotary-4-1,Category_DCSGW,Helicopter,1,Blue,2,CJTF_BLUE,80,0,0,0
+JF-17,Aerial-12-1,Category_DCSGW,Airplane,1,Blue,2,CJTF_BLUE,80,0,0,0
+Su-25T,Aerial-37-1,Category_DCSGW,Airplane,1,Red,1,CJTF_RED,81,0,0,0
+Ural-375 ZU-23,Ground-63-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+M-113,Ground-20-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+Patriot ln,Ground-84-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+ZBD04A,Ground-17-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+p-19 s-125 sr,Ground-112-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+AH-1W,Rotary-10-1,Category_DCSGW,Helicopter,1,Blue,2,CJTF_BLUE,80,0,0,0
+Cobra,Ground-19-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+SA342M,Rotary-2-1,Category_DCSGW,Helicopter,1,Blue,2,CJTF_BLUE,80,0,0,0
+M-109,Ground-39-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+M6 Linebacker,Ground-79-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+Grad_FDDM,Ground-2-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+F-16C bl.50,Aerial-29-1,Category_DCSGW,Airplane,1,Blue,2,CJTF_BLUE,80,0,0,0
+KC130,Aerial-59-1,Category_DCSGW,Airplane,1,Blue,2,CJTF_BLUE,80,0,0,0
+Ural-4320T,Ground-50-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+M48 Chaparral,Ground-73-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+Ka-50,Rotary-1-1,Category_DCSGW,Helicopter,1,Red,1,CJTF_RED,81,0,0,0
+BTR-80,Ground-5-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+ZTZ96B,Ground-18-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+ZU-23 Emplacement Closed,Ground-58-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+Patriot str,Ground-85-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+BMP-1,Ground-14-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+SKP-11,Ground-55-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+S-300PS 5P85C ln,Ground-89-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+SA-18 Igla-S comm,Ground-101-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+A-10A,Aerial-43-1,Category_DCSGW,Airplane,1,Blue,2,CJTF_BLUE,80,0,0,0
+Su-30,Aerial-13-1,Category_DCSGW,Airplane,1,Red,1,CJTF_RED,81,0,0,0
+S-3B Tanker,Aerial-56-1,Category_DCSGW,Airplane,1,Blue,2,CJTF_BLUE,80,0,0,0
+MiG-29A,Aerial-4-1,Category_DCSGW,Airplane,1,Red,1,CJTF_RED,81,0,0,0
+SA-11 Buk CC 9S470M1,Ground-94-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+T-72B3,Ground-9-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+T-55,Ground-7-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+Mi-28N,Rotary-9-1,Category_DCSGW,Helicopter,1,Red,1,CJTF_RED,81,0,0,0
+M-1 Abrams,Ground-28-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+M 818,Ground-56-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+Challenger2,Ground-34-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+MiG-23MLD,Aerial-1-1,Category_DCSGW,Airplane,1,Red,1,CJTF_RED,81,0,0,0
+Su-33,Aerial-3-1,Category_DCSGW,Airplane,1,Red,1,CJTF_RED,81,0,0,0
+B-52H,Aerial-47-1,Category_DCSGW,Airplane,1,Blue,2,CJTF_BLUE,80,0,0,0
+S-3B,Aerial-46-1,Category_DCSGW,Airplane,1,Blue,2,CJTF_BLUE,80,0,0,0
+WingLoong-I,Aerial-69-1,Category_DCSGW,Airplane,1,Red,1,CJTF_RED,81,0,0,0
+BMP-3,Ground-16-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+SA-11 Buk SR 9S18M1,Ground-96-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+S-300PS 40B6MD sr,Ground-91-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+Ural-375,Ground-51-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+Tu-22M3,Aerial-51-1,Category_DCSGW,Airplane,1,Red,1,CJTF_RED,81,0,0,0
+SA-18 Igla-S manpad,Ground-102-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+Tornado IDS,Aerial-33-1,Category_DCSGW,Airplane,1,Blue,2,CJTF_BLUE,80,0,0,0
+MTLB,Ground-1-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+IL-78M,Aerial-57-1,Category_DCSGW,Airplane,1,Red,1,CJTF_RED,81,0,0,0
+Tu-160,Aerial-50-1,Category_DCSGW,Airplane,1,Red,1,CJTF_RED,81,0,0,0
+Hawk tr,Ground-78-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+Mirage 2000-5,Aerial-25-1,Category_DCSGW,Airplane,1,Blue,2,CJTF_BLUE,80,0,0,0
+S_75M_Volhov,Ground-104-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+L-39ZA,Aerial-38-1,Category_DCSGW,Airplane,1,Blue,2,CJTF_BLUE,80,0,0,0
+MiG-21Bis,Aerial-19-1,Category_DCSGW,Airplane,1,Red,1,CJTF_RED,81,0,0,0
+Su-24MR,Aerial-41-1,Category_DCSGW,Airplane,1,Red,1,CJTF_RED,81,0,0,0
+SNR_75V,Ground-105-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+Kub 1S91 str,Ground-109-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+S-300PS 5P85D ln,Ground-90-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+MiG-31,Aerial-9-1,Category_DCSGW,Airplane,1,Red,1,CJTF_RED,81,0,0,0
+Leopard1A3,Ground-30-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+A-10C,Aerial-44-1,Category_DCSGW,Airplane,1,Blue,2,CJTF_BLUE,80,0,0,0
+BTR_D,Ground-4-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+Smerch,Ground-46-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+SpGH_Dana,Ground-48-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+S-300PS 54K6 cp,Ground-88-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+KJ-2000,Aerial-62-1,Category_DCSGW,Airplane,1,Red,1,CJTF_RED,81,0,0,0
+Leopard-2,Ground-31-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+snr s-125 tr,Ground-107-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+Stinger comm,Ground-113-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+Roland Radar,Ground-87-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+M-2 Bradley,Ground-23-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+Su-27,Aerial-2-1,Category_DCSGW,Airplane,1,Red,1,CJTF_RED,81,0,0,0
+C-101CC,Aerial-22-1,Category_DCSGW,Airplane,1,Blue,2,CJTF_BLUE,80,0,0,0
+ZU-23 Emplacement,Ground-59-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+SA342L,Rotary-3-1,Category_DCSGW,Helicopter,1,Blue,2,CJTF_BLUE,80,0,0,0
+SA342Mistral,Rotary-5-1,Category_DCSGW,Helicopter,1,Blue,2,CJTF_BLUE,80,0,0,0
+MCV-80,Ground-36-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+T-80UD,Ground-10-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+Mi-24V,Rotary-8-1,Category_DCSGW,Helicopter,1,Red,1,CJTF_RED,81,0,0,0
+Dog Ear radar,Ground-64-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+ZSU-23-4 Shilka,Ground-116-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+LAV-25,Ground-37-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+HQ-7_LN_SP,Ground-67-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+Merkava_Mk4,Ground-32-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+2B11 mortar,Ground-47-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+Strela-10M3,Ground-97-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+Ural-375 ZU-23 Insurgent,Ground-62-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+Vulcan,Ground-57-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+F-4E,Aerial-20-1,Category_DCSGW,Airplane,1,Blue,2,CJTF_BLUE,80,0,0,0
+SAU Msta,Ground-43-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+T-90,Ground-11-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+T-72B,Ground-8-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+Patriot cp,Ground-83-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+Patriot AMG,Ground-80-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+B-1B,Aerial-48-1,Category_DCSGW,Airplane,1,Blue,2,CJTF_BLUE,80,0,0,0
+F-86F Sabre,Aerial-18-1,Category_DCSGW,Airplane,1,Blue,2,CJTF_BLUE,80,0,0,0
+SH-60B,Rotary-14-1,Category_DCSGW,Helicopter,1,Blue,2,CJTF_BLUE,80,0,0,0
+Mi-8MT,Rotary-7-1,Category_DCSGW,Helicopter,1,Red,1,CJTF_RED,81,0,0,0
+1L13 EWR,Ground-65-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+2S6 Tunguska,Ground-103-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+Hawk sr,Ground-77-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+MiG-19P,Aerial-17-1,Category_DCSGW,Airplane,1,Red,1,CJTF_RED,81,0,0,0
+Hawk ln,Ground-75-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+Roland ADS,Ground-86-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+MiG-31,Aerial-10-1,Category_DCSGW,Airplane,1,Red,1,CJTF_RED,81,0,0,0
+Patriot ECS,Ground-81-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+F-15E,Aerial-28-1,Category_DCSGW,Airplane,1,Blue,2,CJTF_BLUE,80,0,0,0
+IL-76MD,Aerial-53-1,Category_DCSGW,Airplane,1,Red,1,CJTF_RED,81,0,0,0
+HQ-7_STR_SP,Ground-68-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+RQ-1A Predator,Aerial-68-1,Category_DCSGW,Airplane,1,Blue,2,CJTF_BLUE,80,0,0,0
+FA-18C_hornet,Aerial-26-1,Category_DCSGW,Airplane,1,Blue,2,CJTF_BLUE,80,0,0,0
+F-117A,Aerial-49-1,Category_DCSGW,Airplane,1,Blue,2,CJTF_BLUE,80,0,0,0
+rapier_fsa_blindfire_radar,Ground-69-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+BTR-82A,Ground-6-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+TPZ,Ground-33-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+OH-58D,Rotary-13-1,Category_DCSGW,Helicopter,1,Blue,2,CJTF_BLUE,80,0,0,0
+ZU-23 Closed Insurgent,Ground-61-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+F-16A,Aerial-30-1,Category_DCSGW,Airplane,1,Blue,2,CJTF_BLUE,80,0,0,0
+M1043 HMMWV Armament,Ground-21-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+Strela-1 9P31,Ground-111-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+AH-64A,Rotary-11-1,Category_DCSGW,Helicopter,1,Blue,2,CJTF_BLUE,80,0,0,0
+E-3A,Aerial-63-1,Category_DCSGW,Airplane,1,Blue,2,CJTF_BLUE,80,0,0,0
+Marder,Ground-35-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+M1045 HMMWV TOW,Ground-22-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+BMP-2,Ground-15-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+Stinger comm dsr,Ground-114-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+rapier_fsa_optical_tracker_unit,Ground-71-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+SAU Gvozdika,Ground-41-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+Leclerc_XXI,Ground-29-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+M-60,Ground-27-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+Soldier AK,Ground-53-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+AJS37,Aerial-21-1,Category_DCSGW,Airplane,1,Blue,2,CJTF_BLUE,80,0,0,0
+MLRS,Ground-38-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
+Su-34,Aerial-39-1,Category_DCSGW,Airplane,1,Red,1,CJTF_RED,81,0,0,0
+E-2C,Aerial-64-1,Category_DCSGW,Airplane,1,Blue,2,CJTF_BLUE,80,0,0,0
+A-10C_2,Aerial-45-1,Category_DCSGW,Airplane,1,Blue,2,CJTF_BLUE,80,0,0,0
+F-15C,Aerial-27-1,Category_DCSGW,Airplane,1,Blue,2,CJTF_BLUE,80,0,0,0
+Tor 9A331,Ground-98-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+F-14B,Aerial-32-1,Category_DCSGW,Airplane,1,Blue,2,CJTF_BLUE,80,0,0,0
+S-300PS 40B6M tr,Ground-93-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+AH-64D,Rotary-12-1,Category_DCSGW,Helicopter,1,Blue,2,CJTF_BLUE,80,0,0,0
+ZU-23 Insurgent,Ground-60-1,Category_DCSGW,Ground Unit,1,Red,1,CJTF_RED,81,0,0,0
+MQ-9 Reaper,Aerial-67-1,Category_DCSGW,Airplane,1,Blue,2,CJTF_BLUE,80,0,0,0
+rapier_fsa_launcher,Ground-70-1,Category_DCSGW,Ground Unit,1,Blue,2,CJTF_BLUE,80,0,0,0
