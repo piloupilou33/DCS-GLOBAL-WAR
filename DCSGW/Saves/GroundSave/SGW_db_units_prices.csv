@@ -1,0 +1,198 @@
+﻿Type;Name;Category DCSGW;Category DCS Name;Category DCS ID;Coalition Name;Coalition ID;Country Name;Country ID;Purchase Cost;Maintenance Cost;Bonus Kill
+B-1B;Aerial-48-1;Airplane_Bombard;Airplane;1;Blue;2;CJTF_BLUE;80;100000;800;50000
+B-52H;Aerial-47-1;Airplane_Bombard;Airplane;1;Blue;2;CJTF_BLUE;80;53000;424;26500
+F-117A;Aerial-49-1;Airplane_Bombard;Airplane;1;Blue;2;CJTF_BLUE;80;70000;560;35000
+Tu-160;Aerial-50-1;Airplane_Bombard;Airplane;1;Red;1;CJTF_RED;81;70000;560;35000
+Tu-22M3;Aerial-51-1;Airplane_Bombard;Airplane;1;Red;1;CJTF_RED;81;50000;400;25000
+Tu-95MS;Aerial-52-1;Airplane_Bombard;Airplane;1;Red;1;CJTF_RED;81;45000;360;22500
+A-10A;Aerial-43-1;Airplane_Combat;Airplane;1;Blue;2;CJTF_BLUE;80;16000;80;8000
+A-10C;Aerial-44-1;Airplane_Combat;Airplane;1;Blue;2;CJTF_BLUE;80;22000;110;11000
+A-10C_2;Aerial-45-1;Airplane_Combat;Airplane;1;Blue;2;CJTF_BLUE;80;24000;120;12000
+AJS37;Aerial-21-1;Airplane_Combat;Airplane;1;Blue;2;CJTF_BLUE;80;45000;450;22500
+AV8BNA;Aerial-23-1;Airplane_Combat;Airplane;1;Blue;2;CJTF_BLUE;80;25000;250;12500
+C-101CC;Aerial-22-1;Airplane_Combat;Airplane;1;Blue;2;CJTF_BLUE;80;6000;60;3000
+F-14A-135-GR;Aerial-31-1;Airplane_Combat;Airplane;1;Blue;2;CJTF_BLUE;80;29000;290;14500
+F-14B;Aerial-32-1;Airplane_Combat;Airplane;1;Blue;2;CJTF_BLUE;80;30000;300;15000
+F-15C;Aerial-27-1;Airplane_Combat;Airplane;1;Blue;2;CJTF_BLUE;80;22000;220;11000
+F-15E;Aerial-28-1;Airplane_Combat;Airplane;1;Blue;2;CJTF_BLUE;80;25000;250;12500
+F-16A;Aerial-30-1;Airplane_Combat;Airplane;1;Blue;2;CJTF_BLUE;80;25000;250;12500
+F-16C bl.50;Aerial-29-1;Airplane_Combat;Airplane;1;Blue;2;CJTF_BLUE;80;30000;300;15000
+F-4E;Aerial-20-1;Airplane_Combat;Airplane;1;Blue;2;CJTF_BLUE;80;10000;100;5000
+F-5E-3;Aerial-15-1;Airplane_Combat;Airplane;1;Blue;2;CJTF_BLUE;80;8000;80;4000
+F-86F Sabre;Aerial-18-1;Airplane_Combat;Airplane;1;Blue;2;CJTF_BLUE;80;4000;40;2000
+FA-18C_hornet;Aerial-26-1;Airplane_Combat;Airplane;1;Blue;2;CJTF_BLUE;80;29000;290;14500
+I-16;Aerial-14-1;Airplane_Combat;Airplane;1;Red;1;CJTF_RED;81;2000;20;1000
+J-11A;Aerial-11-1;Airplane_Combat;Airplane;1;Red;1;CJTF_RED;81;30000;300;15000
+JF-17;Aerial-12-1;Airplane_Combat;Airplane;1;Blue;2;CJTF_BLUE;80;30000;300;15000
+L-39ZA;Aerial-38-1;Airplane_Combat;Airplane;1;Blue;2;CJTF_BLUE;80;10000;50;5000
+M-2000C;Aerial-24-1;Airplane_Combat;Airplane;1;Blue;2;CJTF_BLUE;80;16000;160;8000
+MiG-15bis;Aerial-16-1;Airplane_Combat;Airplane;1;Red;1;CJTF_RED;81;4000;40;2000
+MiG-19P;Aerial-17-1;Airplane_Combat;Airplane;1;Red;1;CJTF_RED;81;6000;60;3000
+MiG-21Bis;Aerial-19-1;Airplane_Combat;Airplane;1;Red;1;CJTF_RED;81;8000;80;4000
+MiG-23MLD;Aerial-1-1;Airplane_Combat;Airplane;1;Red;1;CJTF_RED;81;10000;100;5000
+MiG-25PD;Aerial-8-1;Airplane_Combat;Airplane;1;Red;1;CJTF_RED;81;18000;180;9000
+MiG-27K;Aerial-42-1;Airplane_Combat;Airplane;1;Red;1;CJTF_RED;81;30000;150;15000
+MiG-29A;Aerial-4-1;Airplane_Combat;Airplane;1;Red;1;CJTF_RED;81;18000;180;9000
+MiG-29G;Aerial-7-1;Airplane_Combat;Airplane;1;Red;1;CJTF_RED;81;18000;180;9000
+MiG-29S;Aerial-5-1;Airplane_Combat;Airplane;1;Red;1;CJTF_RED;81;20000;200;10000
+MiG-31;Aerial-9-1;Airplane_Combat;Airplane;1;Red;1;CJTF_RED;81;33000;330;16500
+Mirage 2000-5;Aerial-25-1;Airplane_Combat;Airplane;1;Blue;2;CJTF_BLUE;80;23000;230;11500
+S-3B;Aerial-46-1;Airplane_Combat;Airplane;1;Blue;2;CJTF_BLUE;80;10000;50;5000
+Su-17M4;Aerial-35-1;Airplane_Combat;Airplane;1;Red;1;CJTF_RED;81;10000;50;5000
+Su-24M;Aerial-40-1;Airplane_Combat;Airplane;1;Red;1;CJTF_RED;81;30000;150;15000
+Su-24MR;Aerial-41-1;Airplane_Combat;Airplane;1;Red;1;CJTF_RED;81;35000;175;17500
+Su-25;Aerial-36-1;Airplane_Combat;Airplane;1;Red;1;CJTF_RED;81;15000;75;7500
+Su-25T;Aerial-37-1;Airplane_Combat;Airplane;1;Red;1;CJTF_RED;81;18000;90;9000
+Su-27;Aerial-2-1;Airplane_Combat;Airplane;1;Red;1;CJTF_RED;81;27000;270;13500
+Su-30;Aerial-13-1;Airplane_Combat;Airplane;1;Red;1;CJTF_RED;81;47000;470;23500
+Su-33;Aerial-3-1;Airplane_Combat;Airplane;1;Red;1;CJTF_RED;81;55000;550;27500
+Su-34;Aerial-39-1;Airplane_Combat;Airplane;1;Red;1;CJTF_RED;81;36000;180;18000
+Tornado GR4;Aerial-34-1;Airplane_Combat;Airplane;1;Blue;2;CJTF_BLUE;80;40000;400;20000
+Tornado IDS;Aerial-33-1;Airplane_Combat;Airplane;1;Blue;2;CJTF_BLUE;80;40000;400;20000
+A-50;Aerial-61-1;Airplane_Logistic;Airplane;1;Red;1;CJTF_RED;81;70000;700;35000
+E-2C;Aerial-64-1;Airplane_Logistic;Airplane;1;Blue;2;CJTF_BLUE;80;176000;1760;88000
+E-3A;Aerial-63-1;Airplane_Logistic;Airplane;1;Blue;2;CJTF_BLUE;80;270000;2700;135000
+IL-78M;Aerial-57-1;Airplane_Logistic;Airplane;1;Red;1;CJTF_RED;81;50000;500;25000
+KC130;Aerial-59-1;Airplane_Logistic;Airplane;1;Blue;2;CJTF_BLUE;80;22000;220;11000
+KC-135;Aerial-58-1;Airplane_Logistic;Airplane;1;Blue;2;CJTF_BLUE;80;30000;300;15000
+KC135MPRS;Aerial-60-1;Airplane_Logistic;Airplane;1;Blue;2;CJTF_BLUE;80;40000;400;20000
+KJ-2000;Aerial-62-1;Airplane_Logistic;Airplane;1;Red;1;CJTF_RED;81;250000;2500;125000
+S-3B Tanker;Aerial-56-1;Airplane_Logistic;Airplane;1;Blue;2;CJTF_BLUE;80;27000;270;13500
+An-26B;Aerial-54-1;Airplane_Transport;Airplane;1;Red;1;CJTF_RED;81;42000;420;21000
+An-30M;Aerial-55-1;Airplane_Transport;Airplane;1;Red;1;CJTF_RED;81;42000;420;21000
+C-130;Aerial-65-1;Airplane_Transport;Airplane;1;Blue;2;CJTF_BLUE;80;14000;140;7000
+C-17A;Aerial-66-1;Airplane_Transport;Airplane;1;Blue;2;CJTF_BLUE;80;14000;140;7000
+IL-76MD;Aerial-53-1;Airplane_Transport;Airplane;1;Red;1;CJTF_RED;81;50000;500;25000
+AH-1W;Rotary-10-1;Helico_Combat_Heavy;Helicopter;1;Blue;2;CJTF_BLUE;80;20000;60;10000
+AH-64A;Rotary-11-1;Helico_Combat_Heavy;Helicopter;1;Blue;2;CJTF_BLUE;80;24000;72;12000
+AH-64D;Rotary-12-1;Helico_Combat_Heavy;Helicopter;1;Blue;2;CJTF_BLUE;80;30000;90;15000
+Ka-50;Rotary-1-1;Helico_Combat_Heavy;Helicopter;1;Red;1;CJTF_RED;81;23000;69;11500
+Mi-24V;Rotary-8-1;Helico_Combat_Heavy;Helicopter;1;Red;1;CJTF_RED;81;18000;54;9000
+Mi-28N;Rotary-9-1;Helico_Combat_Heavy;Helicopter;1;Red;1;CJTF_RED;81;24000;72;12000
+OH-58D;Rotary-13-1;Helico_Combat_Heavy;Helicopter;1;Blue;2;CJTF_BLUE;80;11000;33;5500
+SA342L;Rotary-3-1;Helico_Combat_Light;Helicopter;1;Blue;2;CJTF_BLUE;80;3000;9;1500
+SA342M;Rotary-2-1;Helico_Combat_Light;Helicopter;1;Blue;2;CJTF_BLUE;80;4000;12;2000
+SA342Minigun;Rotary-4-1;Helico_Combat_Light;Helicopter;1;Blue;2;CJTF_BLUE;80;2000;6;1000
+SA342Mistral;Rotary-5-1;Helico_Combat_Light;Helicopter;1;Blue;2;CJTF_BLUE;80;4000;12;2000
+Mi-8MT;Rotary-7-1;Helico_Transport;Helicopter;1;Red;1;CJTF_RED;81;10000;30;5000
+SH-60B;Rotary-14-1;Helico_Transport;Helicopter;1;Blue;2;CJTF_BLUE;80;11000;33;5500
+UH-1H;Rotary-6-1;Helico_Transport;Helicopter;1;Blue;2;CJTF_BLUE;80;20000;60;10000
+MQ-9 Reaper;Aerial-67-1;Special_Jtac;Airplane;1;Blue;2;CJTF_BLUE;80;32000;16;16000
+RQ-1A Predator;Aerial-68-1;Special_Jtac;Airplane;1;Blue;2;CJTF_BLUE;80;4000;2;2000
+WingLoong-I;Aerial-69-1;Special_Jtac;Airplane;1;Red;1;CJTF_RED;81;2000;1;1000
+Gepard;Ground-115-1;Vehicle_AAA;Ground Unit;1;Blue;2;CJTF_BLUE;80;2000;20;1000
+Ural-375 ZU-23;AAA ZU 23 on Ural 375;Vehicle_AAA;Ground Unit;1;Red;1;CJTF_RED;81;2000;20;1000
+Ural-375 ZU-23 Insurgent;AAA ZU 23 Insurgent on Ural 375;Vehicle_AAA;Ground Unit;1;Red;1;CJTF_RED;81;2000;20;1000
+Vulcan;AAA Vulcan M163;Vehicle_AAA;Ground Unit;1;Blue;2;CJTF_BLUE;80;2000;20;1000
+ZSU-23-4 Shilka;SPAAA ZSU 23 4 Shilka;Vehicle_AAA;Ground Unit;1;Red;1;CJTF_RED;81;400;4;200
+ZU-23 Closed Insurgent;AAA ZU 23 Insurgent Closed;Vehicle_AAA;Ground Unit;1;Red;1;CJTF_RED;81;2000;20;1000
+ZU-23 Emplacement;AAA ZU 23 Emplacement;Vehicle_AAA;Ground Unit;1;Red;1;CJTF_RED;81;500;5;250
+ZU-23 Emplacement Closed;AAA;Vehicle_AAA;Ground Unit;1;Red;1;CJTF_RED;81;600;6;300
+ZU-23 Insurgent;AAA;Vehicle_AAA;Ground Unit;1;Red;1;CJTF_RED;81;1500;15;750
+Challenger2;Ground-34-1;Vehicle_Armor_Heavy;Ground Unit;1;Blue;2;CJTF_BLUE;80;2500;25;1250
+Leclerc_XXI;Ground-29-1;Vehicle_Armor_Heavy;Ground Unit;1;Blue;2;CJTF_BLUE;80;2500;25;1250
+Leopard1A3;Ground-30-1;Vehicle_Armor_Heavy;Ground Unit;1;Blue;2;CJTF_BLUE;80;2000;20;1000
+Leopard-2;Ground-31-1;Vehicle_Armor_Heavy;Ground Unit;1;Blue;2;CJTF_BLUE;80;2500;25;1250
+M-1 Abrams;M1A2 Abrams;Vehicle_Armor_Heavy;Ground Unit;1;Blue;2;CJTF_BLUE;80;2500;25;1250
+M-60;M60A3 Patton;Vehicle_Armor_Heavy;Ground Unit;1;Blue;2;CJTF_BLUE;80;1600;16;800
+Merkava_Mk4;Ground-32-1;Vehicle_Armor_Heavy;Ground Unit;1;Blue;2;CJTF_BLUE;80;2500;25;1250
+T-55;Ground-7-1;Vehicle_Armor_Heavy;Ground Unit;1;Red;1;CJTF_RED;81;1800;18;900
+T-72B;Ground-8-1;Vehicle_Armor_Heavy;Ground Unit;1;Red;1;CJTF_RED;81;2000;20;1000
+T-72B3;Ground-9-1;Vehicle_Armor_Heavy;Ground Unit;1;Red;1;CJTF_RED;81;2500;25;1250
+T-80UD;Ground-10-1;Vehicle_Armor_Heavy;Ground Unit;1;Red;1;CJTF_RED;81;2500;25;1250
+T-90;Ground-11-1;Vehicle_Armor_Heavy;Ground Unit;1;Red;1;CJTF_RED;81;3000;30;1500
+ZTZ96B;Ground-18-1;Vehicle_Armor_Heavy;Ground Unit;1;Red;1;CJTF_RED;81;3000;30;1500
+BRDM-2;Ground-3-1;Vehicle_Armor_Light;Ground Unit;1;Red;1;CJTF_RED;81;600;6;300
+BTR_D;Ground-4-1;Vehicle_Armor_Light;Ground Unit;1;Red;1;CJTF_RED;81;600;6;300
+Cobra;Ground-19-1;Vehicle_Armor_Light;Ground Unit;1;Red;1;CJTF_RED;81;400;4;200
+Grad_FDDM;Ground-2-1;Vehicle_Armor_Light;Ground Unit;1;Red;1;CJTF_RED;81;400;4;200
+M1043 HMMWV Armament;Ground-21-1;Vehicle_Armor_Light;Ground Unit;1;Blue;2;CJTF_BLUE;80;200;2;100
+M1045 HMMWV TOW;Ground-22-1;Vehicle_Armor_Light;Ground Unit;1;Blue;2;CJTF_BLUE;80;800;8;400
+M-113;Ground-20-1;Vehicle_Armor_Light;Ground Unit;1;Blue;2;CJTF_BLUE;80;600;6;300
+MTLB;Ground-1-1;Vehicle_Armor_Light;Ground Unit;1;Red;1;CJTF_RED;81;400;4;200
+BMD-1;Ground-12-1;Vehicle_Armor_Medium;Ground Unit;1;Red;1;CJTF_RED;81;800;8;400
+BMP-1;Ground-13-1;Vehicle_Armor_Medium;Ground Unit;1;Red;1;CJTF_RED;81;1400;14;700
+BMP-1;Ground-14-1;Vehicle_Armor_Medium;Ground Unit;1;Red;1;CJTF_RED;81;1400;14;700
+BMP-2;Ground-15-1;Vehicle_Armor_Medium;Ground Unit;1;Red;1;CJTF_RED;81;1600;16;800
+BMP-3;Ground-16-1;Vehicle_Armor_Medium;Ground Unit;1;Red;1;CJTF_RED;81;1800;18;900
+BTR-80;Ground-5-1;Vehicle_Armor_Medium;Ground Unit;1;Red;1;CJTF_RED;81;800;8;400
+BTR-82A;Ground-6-1;Vehicle_Armor_Medium;Ground Unit;1;Red;1;CJTF_RED;81;1000;10;500
+LAV-25;Ground-37-1;Vehicle_Armor_Medium;Ground Unit;1;Blue;2;CJTF_BLUE;80;700;7;350
+M1126 Stryker ICV;APC M1126 Stryker ICV;Vehicle_Armor_Medium;Ground Unit;1;Blue;2;CJTF_BLUE;80;1000;10;500
+M1128 Stryker MGS;SPG M1128 Stryker MGS;Vehicle_Armor_Medium;Ground Unit;1;Blue;2;CJTF_BLUE;80;1400;14;700
+M1134 Stryker ATGM;Ground-26-1;Vehicle_Armor_Medium;Ground Unit;1;Blue;2;CJTF_BLUE;80;1200;12;600
+M-2 Bradley;Ground-23-1;Vehicle_Armor_Medium;Ground Unit;1;Blue;2;CJTF_BLUE;80;1200;12;600
+Marder;Ground-35-1;Vehicle_Armor_Medium;Ground Unit;1;Blue;2;CJTF_BLUE;80;1000;10;500
+MCV-80;Ground-36-1;Vehicle_Armor_Medium;Ground Unit;1;Blue;2;CJTF_BLUE;80;1000;10;500
+TPZ;TPz Fuchs;Vehicle_Armor_Medium;Ground Unit;1;Blue;2;CJTF_BLUE;80;500;5;250
+ZBD04A;Ground-17-1;Vehicle_Armor_Medium;Ground Unit;1;Red;1;CJTF_RED;81;1200;12;600
+2B11 mortar;Ground-47-1;Vehicle_Arty;Ground Unit;1;Red;1;CJTF_RED;81;400;4;200
+Grad-URAL;MLRS BM 21 Grad;Vehicle_Arty;Ground Unit;1;Red;1;CJTF_RED;81;1500;15;750
+M-109;SPH M109 Paladin;Vehicle_Arty;Ground Unit;1;Blue;2;CJTF_BLUE;80;2500;25;1250
+MLRS;MLRS M270;Vehicle_Arty;Ground Unit;1;Blue;2;CJTF_BLUE;80;5500;55;2750
+SAU 2-C9;SPH 2S9 Nona;Vehicle_Arty;Ground Unit;1;Red;1;CJTF_RED;81;1200;12;600
+SAU Akatsia;SPH 2S3 Akatsia;Vehicle_Arty;Ground Unit;1;Red;1;CJTF_RED;81;2400;24;1200
+SAU Gvozdika;SPH 2S1 Gvozdika;Vehicle_Arty;Ground Unit;1;Red;1;CJTF_RED;81;1800;18;900
+SAU Msta;SPH 2S19 Msta;Vehicle_Arty;Ground Unit;1;Red;1;CJTF_RED;81;3000;30;1500
+Smerch;MLRS 9A52 Smerch;Vehicle_Arty;Ground Unit;1;Red;1;CJTF_RED;81;4000;40;2000
+SpGH_Dana;Ground-48-1;Vehicle_Arty;Ground Unit;1;Red;1;CJTF_RED;81;2600;26;1300
+Uragan_BM-27;MLRS 9K57 Uragan BM 27;Vehicle_Arty;Ground Unit;1;Red;1;CJTF_RED;81;5000;50;2500
+Soldier AK;Ground-53-1;Vehicle_Infantery;Ground Unit;1;Red;1;CJTF_RED;81;100;1;50
+Soldier M4;Ground-52-1;Vehicle_Infantery;Ground Unit;1;Blue;2;CJTF_BLUE;80;100;1;50
+Hummer;APC M1025 HMMWV;Vehicle_Logistic;Ground Unit;1;Blue;2;CJTF_BLUE;80;100;1;50
+M 818;Transport M818;Vehicle_Logistic;Ground Unit;1;Blue;2;CJTF_BLUE;80;300;3;150
+SKP-11;Ground-55-1;Vehicle_Logistic;Ground Unit;1;Red;1;CJTF_RED;81;100;1;50
+UAZ-469;Transport UAZ 469;Vehicle_Logistic;Ground Unit;1;Red;1;CJTF_RED;81;300;3;150
+Ural-375;Transport Ural 375;Vehicle_Logistic;Ground Unit;1;Red;1;CJTF_RED;81;300;3;150
+Ural-4320T;Transport Ural 4320T;Vehicle_Logistic;Ground Unit;1;Red;1;CJTF_RED;81;300;3;150
+1L13 EWR;EWR 1L13;Vehicle_SAM_EWR;Ground Unit;1;Red;1;CJTF_RED;81;10000;100;5000
+55G6 EWR;EWR 55G6;Vehicle_SAM_EWR;Ground Unit;1;Red;1;CJTF_RED;81;10000;100;5000
+Dog Ear radar;CP9 S80M1 Sborka;Vehicle_SAM_EWR;Ground Unit;1;Red;1;CJTF_RED;81;10000;100;5000
+p-19 s-125 sr;SAM SR P 19;Vehicle_SAM_EWR;Ground Unit;1;Red;1;CJTF_RED;81;1400;14;700
+Kub 1S91 str;SAM SA 6 Kub STR 9S91;Vehicle_SAM_Heavy;Ground Unit;1;Red;1;CJTF_RED;81;15000;150;7500
+Kub 2P25 ln;SAM SA 6 Kub LN 2P25;Vehicle_SAM_Heavy;Ground Unit;1;Red;1;CJTF_RED;81;5000;50;2500
+SA-11 Buk CC 9S470M1;SAM SA 11 Buk CC 9S470M1;Vehicle_SAM_Heavy;Ground Unit;1;Red;1;CJTF_RED;81;2000;20;1000
+SA-11 Buk LN 9A310M1;SAM SA 11 Buk LN 9A310M1;Vehicle_SAM_Heavy;Ground Unit;1;Red;1;CJTF_RED;81;8000;80;4000
+SA-11 Buk SR 9S18M1;SAM SA 11 Buk SR 9S18M1;Vehicle_SAM_Heavy;Ground Unit;1;Red;1;CJTF_RED;81;20000;200;10000
+Igla manpad INS;SAM SA 18 Igla MANPADS;Vehicle_SAM_Light;Ground Unit;1;Red;1;CJTF_RED;81;300;3;150
+M1097 Avenger;SAM Avenger M1097;Vehicle_SAM_Light;Ground Unit;1;Blue;2;CJTF_BLUE;80;1000;10;500
+M48 Chaparral;SAM Chaparral M48;Vehicle_SAM_Light;Ground Unit;1;Blue;2;CJTF_BLUE;80;8000;80;4000
+M6 Linebacker;SAM Linebacker M6;Vehicle_SAM_Light;Ground Unit;1;Blue;2;CJTF_BLUE;80;2000;20;1000
+SA-18 Igla comm;SAM SA 18 Igla comm;Vehicle_SAM_Light;Ground Unit;1;Red;1;CJTF_RED;81;300;3;150
+SA-18 Igla-S comm;Ground-101-1;Vehicle_SAM_Light;Ground Unit;1;Red;1;CJTF_RED;81;300;3;150
+SA-18 Igla-S manpad;Ground-102-1;Vehicle_SAM_Light;Ground Unit;1;Red;1;CJTF_RED;81;300;3;150
+Stinger comm;Ground-113-1;Vehicle_SAM_Light;Ground Unit;1;Blue;2;CJTF_BLUE;80;100;1;50
+Stinger comm dsr;Ground-114-1;Vehicle_SAM_Light;Ground Unit;1;Blue;2;CJTF_BLUE;80;100;1;50
+Strela-1 9P31;SAM SA 9 Strela 1 9P31;Vehicle_SAM_Light;Ground Unit;1;Red;1;CJTF_RED;81;5000;50;2500
+2S6 Tunguska;SAM SA 19 Tunguska 2S6;Vehicle_SAM_Medium;Ground Unit;1;Red;1;CJTF_RED;81;11000;110;5500
+HQ-7_LN_SP;HQ 7 Self Propelled LN;Vehicle_SAM_Medium;Ground Unit;1;Red;1;CJTF_RED;81;4000;40;2000
+HQ-7_STR_SP;HQ 7 Self Propelled STR;Vehicle_SAM_Medium;Ground Unit;1;Red;1;CJTF_RED;81;6000;60;3000
+Osa 9A33 ln;SAM SA 8 Osa 9A33;Vehicle_SAM_Medium;Ground Unit;1;Red;1;CJTF_RED;81;8000;80;4000
+Roland ADS;SAM Roland ADS;Vehicle_SAM_Medium;Ground Unit;1;Blue;2;CJTF_BLUE;80;12000;120;6000
+Roland Radar;SAM Roland Radar;Vehicle_SAM_Medium;Ground Unit;1;Blue;2;CJTF_BLUE;80;16000;160;8000
+Strela-10M3;SAM SA 13 Strela 10M3 9A35M3;Vehicle_SAM_Medium;Ground Unit;1;Red;1;CJTF_RED;81;11000;110;5500
+Tor 9A331;SAM SA 15 Tor 9A331;Vehicle_SAM_Medium;Ground Unit;1;Red;1;CJTF_RED;81;30000;300;15000
+5p73 s-125 ln;SAM SA 3 S 125 LN 5P73;Vehicle_SAM_Site;Ground Unit;1;Red;1;CJTF_RED;81;6000;60;3000
+Hawk cwar;SAM HAWK AN MPQ 55;Vehicle_SAM_Site;Ground Unit;1;Blue;2;CJTF_BLUE;80;10000;100;5000
+Hawk ln;SAM HAWK LN M192;Vehicle_SAM_Site;Ground Unit;1;Blue;2;CJTF_BLUE;80;4000;40;2000
+Hawk pcp;SAM HAWK LN M192;Vehicle_SAM_Site;Ground Unit;1;Blue;2;CJTF_BLUE;80;5000;50;2500
+Hawk sr;SAM HAWK AN MPQ 50;Vehicle_SAM_Site;Ground Unit;1;Blue;2;CJTF_BLUE;80;10000;100;5000
+Hawk tr;SAM HAWK AN MPQ 46;Vehicle_SAM_Site;Ground Unit;1;Blue;2;CJTF_BLUE;80;8000;80;4000
+Patriot AMG;SAM Patriot AMG AN MRC 137;Vehicle_SAM_Site;Ground Unit;1;Blue;2;CJTF_BLUE;80;21000;210;10500
+Patriot cp;SAM Patriot ICC;Vehicle_SAM_Site;Ground Unit;1;Blue;2;CJTF_BLUE;80;13000;130;6500
+Patriot ECS;SAM Patriot ECS AN MSQ 104;Vehicle_SAM_Site;Ground Unit;1;Blue;2;CJTF_BLUE;80;22000;220;11000
+Patriot EPP;SAM Patriot EPP III;Vehicle_SAM_Site;Ground Unit;1;Blue;2;CJTF_BLUE;80;12000;120;6000
+Patriot ln;SAM Patriot LN M901;Vehicle_SAM_Site;Ground Unit;1;Blue;2;CJTF_BLUE;80;10000;100;5000
+Patriot str;SAM Patriot STR AN MPQ 53;Vehicle_SAM_Site;Ground Unit;1;Blue;2;CJTF_BLUE;80;22000;220;11000
+rapier_fsa_blindfire_radar;Rapier FSA Blindfire Tracker;Vehicle_SAM_Site;Ground Unit;1;Blue;2;CJTF_BLUE;80;6000;60;3000
+rapier_fsa_launcher;Rapier FSA Launcher;Vehicle_SAM_Site;Ground Unit;1;Blue;2;CJTF_BLUE;80;3000;30;1500
+rapier_fsa_optical_tracker_unit;Ground-71-1;Vehicle_SAM_Site;Ground Unit;1;Blue;2;CJTF_BLUE;80;5000;50;2500
+S_75M_Volhov;SAM SA 2 LN SM 90;Vehicle_SAM_Site;Ground Unit;1;Red;1;CJTF_RED;81;3000;30;1500
+S-300PS 40B6M tr;SAM SA 10 S 300PS TR 30N6;Vehicle_SAM_Site;Ground Unit;1;Red;1;CJTF_RED;81;15000;150;7500
+S-300PS 40B6MD sr;SAM SA 10 S 300PS SR 5N66M;Vehicle_SAM_Site;Ground Unit;1;Red;1;CJTF_RED;81;20000;200;10000
+S-300PS 54K6 cp;SAM SA 10 S 300PS CP 54K6;Vehicle_SAM_Site;Ground Unit;1;Red;1;CJTF_RED;81;4000;40;2000
+S-300PS 5P85C ln;SAM SA 10 S 300PS LN 5P85C;Vehicle_SAM_Site;Ground Unit;1;Red;1;CJTF_RED;81;3000;30;1500
+S-300PS 5P85D ln;SAM SA 10 S 300PS LN 5P85D;Vehicle_SAM_Site;Ground Unit;1;Red;1;CJTF_RED;81;3000;30;1500
+S-300PS 64H6E sr;SAM SA 10 S 300PS SR 64H6E;Vehicle_SAM_Site;Ground Unit;1;Red;1;CJTF_RED;81;20000;200;10000
+snr s-125 tr;SAM SA 3 S 125 TR SNR;Vehicle_SAM_Site;Ground Unit;1;Red;1;CJTF_RED;81;9000;90;4500
+SNR_75V;SAM SA 2 TR SNR 75 Fan Song;Vehicle_SAM_Site;Ground Unit;1;Red;1;CJTF_RED;81;7000;70;3500
