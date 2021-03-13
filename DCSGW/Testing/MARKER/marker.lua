@@ -32,7 +32,6 @@
 --f18     = SPAWN:New("FA-18C_hornet")
 --su27    = SPAWN:New("Su-27")
 
-
 ---------------------------------------------
 -- Function Spawn unit
 ---------------------------------------------
@@ -163,6 +162,7 @@ function DCSGW_FNC_Marker_Removed( Event )
         end
     end
 end
+
 
 
 -- DECLARE EVENT
