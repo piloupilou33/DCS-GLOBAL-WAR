@@ -1,4 +1,10 @@
-
+--=================================================================================
+--=================================================================================
+--
+-- MARKER SYSTEM FOR MISSION DCSGW
+--
+--=================================================================================
+--=================================================================================
 
 
 -- Functions à créer
@@ -21,11 +27,15 @@
 
 -- for testing only
 ------------------------------------------
-abrams  = SPAWN:New("M-1 Abrams")
-T90     = SPAWN:New("T-90")
-f18     = SPAWN:New("f18")
-su27    = SPAWN:New("su27")
+--abrams  = SPAWN:New("M-1 Abrams")
+--T90     = SPAWN:New("T-90")
+--f18     = SPAWN:New("FA-18C_hornet")
+--su27    = SPAWN:New("Su-27")
 
+
+---------------------------------------------
+-- Function Spawn unit
+---------------------------------------------
 function SpawnRequest(text, coord)
   local Spawn = nil
     if text:find("abrams") then
@@ -39,7 +49,9 @@ function SpawnRequest(text, coord)
     end
   Spawn:SpawnFromVec3(coord)
 end
-
+---------------------------------------------
+-- Function destruction units
+---------------------------------------------
 function DestroyRequest(text, coord)
     local destroyZoneName     = string.format("destroy %d", destroyZoneCount)
     local zoneRadiusToDestroy = ZONE_RADIUS:New(destroyZoneName, coord:GetVec2(), 1000)
@@ -51,9 +63,33 @@ function DestroyRequest(text, coord)
     end
     zoneRadiusToDestroy:SearchZone( destroyUnit , Object.Category.UNIT)
 end
-
-
-
+---------------------------------------------
+-- Function selection groupes
+---------------------------------------------
+  zone_select = 0
+  function Select_Group(text, coord)
+      local text    = text 
+      local coord   = coord
+      local selected_Units = {}
+      local Params = DCSGW_FNC_Treatment_marker( text, coord )
+      
+      local ZoneName     = string.format("SelectZone %d", zone_select)
+      local zoneRadiusToSelect = ZONE_RADIUS:New( ZoneName, coord:GetVec2(), 1000)
+        zone_select = zone_select + 1
+  
+     local function fnc_selected_units(unit)
+     
+      local group = unit:GetGroup()
+      
+          table.insert(group , selected_Units)
+          trigger.action.outText("UNIT(S) "..group:GetName().." in table.", 10)
+          return true
+      end
+  
+      zoneRadiusToSelect:SearchZone( fnc_selected_units , Object.Category.UNIT)
+      
+  end
+---------------------------------------------
 
 
 -- FUNCTIONS
@@ -101,20 +137,22 @@ end
 function DCSGW_FNC_Marker_Removed( Event )
 
   if Event.text~=nil and Event.text:lower():find("-") then 
-         local text = Event.text:lower()
+         local text = Event.text
          local vec3 = {z=Event.pos.z, x=Event.pos.x}
          local coord = COORDINATE:NewFromVec3(vec3)
 
-        if Event.text:lower():find("-create") then
-            env.info("Marker : Create unit at position.",showMessageBox)
-            SpawnRequest(text, coord)
+        if Event.text:find("-create") then
+            env.info("Marker : Create unit at position." ,showMessageBox)
+--            SpawnRequest(text, coord)
+            DCSGW_FNC_Spawn_From_Marker (text, coord)
           elseif Event.text:lower():find("-debug") then
             env.info("Marker : no event associated",showMessageBox)
           elseif Event.text:lower():find("-destroy") then
             env.info("Marker : Destroy units in perimeter",showMessageBox)
             DestroyRequest(text, coord)
-          elseif Event.text:lower():find("-item1") then
-            env.info("Marker : no event associated",showMessageBox)
+          elseif Event.text:lower():find("-select") then
+            Select_Group(text, coord)
+            env.info("Marker : Selection Group",showMessageBox)
           elseif Event.text:lower():find("-item2") then
             env.info("Marker : no event associated",showMessageBox)
           elseif Event.text:lower():find("-item3") then
