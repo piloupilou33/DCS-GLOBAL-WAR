@@ -10,8 +10,8 @@
 
 -- Parameters dans Defines
 --------------------------------------------------------------------------------------------------------
-DCSGW_Start_Ground_Saving_time        = 10    -- in seconds : Départ de la routine de saving après x secondes
-DCSGW_Interval_Ground_Saving_time     = 30    -- in seconds : Le Saving des units se fera toutes les x secondes
+DCSGW_Start_Ground_Saving_time        = 10  -- in seconds : Départ de la routine de saving après x secondes
+DCSGW_Interval_Ground_Saving_time     = 5   -- in seconds : Le Saving des units se fera toutes les x secondes
 
 DCSGW_File_Saving_Ground_BLUE         = path_scripts.."Testing\\Saving\\Saves\\Ground_Blue.lua"
 DCSGW_File_Saving_Ground_RED          = path_scripts.."Testing\\Saving\\Saves\\Ground_Red.lua"
@@ -33,53 +33,7 @@ DCSGW_SET_GROUND_UNITS        = SET_GROUP:New():FilterCategories("ground"):Filte
 
 
 function DCSGW_SET_GROUND_UNITS:OnAfterAdded(From, Event, To, ObjectName, Object)
-    env.info("New Ground Group Registered : "..ObjectName)
-        local RegisteredGroup   = Object
-        local GroupeName        = RegisteredGroup:GetName()             -- return string
-        local GroupeCoalition   = RegisteredGroup:GetCoalition()        -- return DCS#Coalition.side (0,1,2)
-        local GroupeCountry     = RegisteredGroup:GetCountry()          -- return DCS#country.id
-        local GroupeTypeName    = RegisteredGroup:GetTypeName()        -- return string
-        local GroupePosition    = RegisteredGroup:GetVec2()             -- return Vec2 ( GroupePosition.x / GroupePosition.y )
-        local TableNameCoalition  = nil
-        local SaveFileCoalition   = nil
-        local TableGroundUnits    = nil 
-          
-          if GroupeCoalition == 2 then 
-              TableNameCoalition  = DCSGW_TABLE_BLUE_Name
-              TableGroundUnits    = DCSGW_TABLE_BLUE_Ground
-              SaveFileCoalition   = DCSGW_File_Saving_Ground_BLUE
-          elseif GroupeCoalition == 1 then 
-              TableNameCoalition  = DCSGW_TABLE_RED_Name
-              TableGroundUnits    = DCSGW_TABLE_RED_Ground
-              SaveFileCoalition   = DCSGW_File_Saving_Ground_RED
-          end
-
-        local GroupeUnits       = RegisteredGroup:GetUnits()            -- return Table
-        local GroupeUnits_Count = #GroupeUnits
-        
-        TableGroundUnits[GroupeName] = {}
-        TableGroundUnits[GroupeName]["Name"]             = GroupeName
-        TableGroundUnits[GroupeName]["Coalition"]        = GroupeCoalition
-        TableGroundUnits[GroupeName]["Country"]          = GroupeCountry
-        TableGroundUnits[GroupeName]["Type"]             = GroupeTypeName
-        TableGroundUnits[GroupeName]["Position"]         = {}
-        TableGroundUnits[GroupeName]["Position"]["x"]    = GroupePosition.x                                                 
-        TableGroundUnits[GroupeName]["Position"]["y"]    = GroupePosition.y
-        TableGroundUnits[GroupeName]["Units"]            = {}
-        TableGroundUnits[GroupeName]["DCSGW_TASK"]       = {}
-          
-        for z = 1, GroupeUnits_Count do
-          local Unit          = RegisteredGroup:GetUnit( z )
-          local UnitPosition  = Unit:GetVec2()
-                    
-          TableGroundUnits[GroupeName]["Units"][z] = {}
-          TableGroundUnits[GroupeName]["Units"][z]["Name"]     = Unit:GetName()
-          TableGroundUnits[GroupeName]["Units"][z]["Type"]     = Unit:GetTypeName()
-          TableGroundUnits[GroupeName]["Units"][z]["x"]        = UnitPosition.x
-          TableGroundUnits[GroupeName]["Units"][z]["y"]        = UnitPosition.y
-          TableGroundUnits[GroupeName]["Units"][z]["Heading"]  = Unit:GetHeading()
-          TableGroundUnits[GroupeName]["Units"][z]["Life"]     = 1
-        end
+  env.info("Name ADDED : "..ObjectName)
 end
 
 -- Register Function SPAWN GROUP
@@ -137,7 +91,7 @@ function DCSGW_FNC_SPAWN_Ground_Groups ( DCSGW_File_Saving_Ground )
             else 
               y = y
             end
-           
+            
               groupData["units"][y] = {} 
               groupData["units"][y]["type"] = UnitType
               groupData["units"][y]["transportable"] = {}  
@@ -153,9 +107,7 @@ function DCSGW_FNC_SPAWN_Ground_Groups ( DCSGW_File_Saving_Ground )
 
    -- Creation du Group (SPAWN)
    --------------------------------------------------------------------------------------------------------
-   -- example : coalition.addGroup(country.id.USA, Group.Category.GROUND, groupData)
-      
-      coalition.addGroup( GroupeCountry, Group.Category.GROUND, groupData )
+    coalition.addGroup( GroupeCountry, 2, groupData )
    
    
    -- LANCEMENT EVENT pour le Group Créé
@@ -397,7 +349,7 @@ SCHEDULER_countGroupsBlue = SCHEDULER:New( nil,
           end
           ) -- End forEachGroup
           
-  end, {}, DCSGW_Start_Ground_Saving_time, DCSGW_Interval_Ground_Saving_time -- #Start (number) #Repeat (number) #RandomizeFactor (number between 0 and 1 randomize repeat) #Stop (number)
+  end, {}, 10, DCSGW_Interval_Ground_Saving_time -- #Start (number) #Repeat (number) #RandomizeFactor (number between 0 and 1 randomize repeat) #Stop (number)
 ) -- End Scheduler
 
 

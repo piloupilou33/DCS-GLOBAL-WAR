@@ -72,23 +72,25 @@ function DCSGW_FNC_Spawn_From_Marker(text, coord)
           env.info("Creation d'un ground - Name = "..Name)
     end
   end
-  
+  nb_Units = Params[3]
   units= { ["Type"] = Type, ["Name"] = "unit_"..Name, ["x"] =Position.x, ["y"] =Position.y, ["Heading"] = 0, ["skill"] ="Average"}
   env.info("Creation d'un ground - Position = "..Position.x.." | "..Position.y)
   -- Launch Spawn
-  DCSGW_FNC_Spawn_Group (Type, Name, Position, units, Country, GroupCoalition)
+  DCSGW_FNC_Spawn_Group (Type, nb_Units, Name, Position, units, Country, GroupCoalition)
 
 end
 
-function DCSGW_FNC_Spawn_Group(Type, Name, Position, units, Country, GroupCoalition)
+function DCSGW_FNC_Spawn_Group(Type, nb_Units, Name, Position, units, Country, GroupCoalition)
 
   local GroupParam_Name       = Name
   local GroupParam_Position   = Position  -- Position Vec2 required
   local GroupParam_Country    = Country
   local GroupParam_Coalition  = GroupCoalition
+
   -- Units params :       Type | Name | Position Vec2 | Heading | skill
   local GroupParam_units      = units
-
+  local GroupParam_nbunits    = nb_Units
+  
   env.info("Création d'un groupe GROUND : "..GroupParam_Name.. " Position : ".. GroupParam_Position.x.." | "..GroupParam_Position.y.." Country = "..GroupParam_Country.." Coalition = "..GroupParam_Coalition)
   env.info("Unité = "..GroupParam_units.Type.." Skill = "..GroupParam_units.skill.." Position = X" ..GroupParam_units["x"].." |Y "..GroupParam_units["y"].." |H "..GroupParam_units.Heading.." Name = "..GroupParam_units["Name"])
 
@@ -109,22 +111,29 @@ function DCSGW_FNC_Spawn_Group(Type, Name, Position, units, Country, GroupCoalit
             } -- end of [1]
 
         -- Ajout des Units du GROUP
-          for k,v in pairs(GroupParam_units) do                    
-              groupData["units"][k] = {} 
-              groupData["units"][k]["type"] = GroupParam_units.Type
-              groupData["units"][k]["transportable"] = {}  
-              groupData["units"][k]["transportable"]["randomTransportable"] = true 
-              groupData["units"][k]["skill"] = GroupParam_units.skill
-              groupData["units"][k]["y"] = GroupParam_units.y
-              groupData["units"][k]["x"] = GroupParam_units.x
-              groupData["units"][k]["name"] = GroupParam_units.Name
-              groupData["units"][k]["heading"] = GroupParam_units.Heading
-              groupData["units"][k]["playerCanDrive"] = true 
-          end
-
+              local Ecart = 0
+              for i = 1, GroupParam_nbunits do  
+                 
+              groupData["units"][i] = {} 
+              
+              groupData["units"][i]["type"] = GroupParam_units.Type
+              groupData["units"][i]["transportable"] = {}  
+              groupData["units"][i]["transportable"]["randomTransportable"] = true 
+              groupData["units"][i]["skill"] = GroupParam_units.skill
+              groupData["units"][i]["y"] = GroupParam_units.y + Ecart
+              groupData["units"][i]["x"] = GroupParam_units.x
+              groupData["units"][i]["name"] = GroupParam_units.Name
+              groupData["units"][i]["heading"] = GroupParam_units.Heading
+              groupData["units"][i]["playerCanDrive"] = true 
+              Ecart = Ecart + 10
+            end
+    env.info ("CREATION GROUP : Groupe country = "..GroupParam_Country.." coalition = "..GroupParam_Coalition)
    -- Creation du Group (SPAWN)
    --------------------------------------------------------------------------------------------------------
-    coalition.addGroup(GroupParam_Country, GroupParam_Coalition, groupData)
+   -- example : coalition.addGroup(country.id.USA, Group.Category.GROUND, groupData)
+    
+    coalition.addGroup(GroupParam_Country, Group.Category.GROUND, groupData)
+    
     groupData = {}
     local GroupCreated = GROUP:FindByName( GroupParam_Name )
    

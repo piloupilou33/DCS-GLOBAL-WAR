@@ -51,6 +51,7 @@ end
 ---------------------------------------------
 -- Function destruction units
 ---------------------------------------------
+destroyZoneCount=0
 function DestroyRequest(text, coord)
     local destroyZoneName     = string.format("destroy %d", destroyZoneCount)
     local zoneRadiusToDestroy = ZONE_RADIUS:New(destroyZoneName, coord:GetVec2(), 1000)

@@ -16,10 +16,8 @@ DCSGW_SET_GROUND_UNITS:ForEachGroup(
         local GroupeName        = GROUP:GetName()             -- return string
         local GroupeCoalition   = GROUP:GetCoalition()        -- return DCS#Coalition.side (0,1,2)
         local GroupeCountry     = GROUP:GetCountry()          -- return DCS#country.id
-        --local GroupeType        = Group:GetType()             -- return string
         local GroupeTypeName    = GROUP:GetTypeName()        -- return string
         local GroupePosition    = GROUP:GetVec2()             -- return Vec2 ( GroupePosition.x / GroupePosition.y )
-        --local GroupePosition    = GROUP:GetVec3()             -- return Vec3 ( GroupePosition.x / GroupePosition.y / GroupePosition.z )
         local TableNameCoalition  = nil
         local SaveFileCoalition   = nil
         local TableGroundUnits    = nil 
@@ -34,33 +32,33 @@ DCSGW_SET_GROUND_UNITS:ForEachGroup(
               SaveFileCoalition   = DCSGW_File_Saving_Ground_RED
           end
 
-        local GroupeUnits       = GROUP:GetUnits()            -- return Table
-        
-        local GroupeUnits_Count = #GroupeUnits
-        
-        TableGroundUnits[GroupeName] = {}
-        TableGroundUnits[GroupeName]["Name"]             = GroupeName
-        TableGroundUnits[GroupeName]["Coalition"]        = GroupeCoalition
-        TableGroundUnits[GroupeName]["Country"]          = GroupeCountry
-        TableGroundUnits[GroupeName]["Type"]             = GroupeTypeName
-        TableGroundUnits[GroupeName]["Position"]         = {}
-        TableGroundUnits[GroupeName]["Position"]["x"]    = GroupePosition.x                                                 
-        TableGroundUnits[GroupeName]["Position"]["y"]    = GroupePosition.y
-        TableGroundUnits[GroupeName]["Units"]            = {}
-        TableGroundUnits[GroupeName]["DCSGW_TASK"]       = {}
-          
-        for i = 1, GroupeUnits_Count do
-          local Unit          = GROUP:GetUnit( i )
-          local UnitPosition  = Unit:GetVec2()
-                    
-          TableGroundUnits[GroupeName]["Units"][i] = {}
-          TableGroundUnits[GroupeName]["Units"][i]["Name"]     = Unit:GetName()
-          TableGroundUnits[GroupeName]["Units"][i]["Type"]     = Unit:GetTypeName()
-          TableGroundUnits[GroupeName]["Units"][i]["x"]        = UnitPosition.x
-          TableGroundUnits[GroupeName]["Units"][i]["y"]        = UnitPosition.y
-          TableGroundUnits[GroupeName]["Units"][i]["Heading"]  = Unit:GetHeading()
-          TableGroundUnits[GroupeName]["Units"][i]["Life"]     = 1
-        end
+--        local GroupeUnits       = GROUP:GetUnits()            -- return Table
+--        
+--        local GroupeUnits_Count = #GroupeUnits
+--        
+--        TableGroundUnits[GroupeName] = {}
+--        TableGroundUnits[GroupeName]["Name"]             = GroupeName
+--        TableGroundUnits[GroupeName]["Coalition"]        = GroupeCoalition
+--        TableGroundUnits[GroupeName]["Country"]          = GroupeCountry
+--        TableGroundUnits[GroupeName]["Type"]             = GroupeTypeName
+--        TableGroundUnits[GroupeName]["Position"]         = {}
+--        TableGroundUnits[GroupeName]["Position"]["x"]    = GroupePosition.x                                                 
+--        TableGroundUnits[GroupeName]["Position"]["y"]    = GroupePosition.y
+--        TableGroundUnits[GroupeName]["Units"]            = {}
+--        TableGroundUnits[GroupeName]["DCSGW_TASK"]       = {}
+--          
+--        for i = 1, GroupeUnits_Count do
+--          local Unit          = GROUP:GetUnit( i )
+--          local UnitPosition  = Unit:GetVec2()
+--                    
+--          TableGroundUnits[GroupeName]["Units"][i] = {}
+--          TableGroundUnits[GroupeName]["Units"][i]["Name"]     = Unit:GetName()
+--          TableGroundUnits[GroupeName]["Units"][i]["Type"]     = Unit:GetTypeName()
+--          TableGroundUnits[GroupeName]["Units"][i]["x"]        = UnitPosition.x
+--          TableGroundUnits[GroupeName]["Units"][i]["y"]        = UnitPosition.y
+--          TableGroundUnits[GroupeName]["Units"][i]["Heading"]  = Unit:GetHeading()
+--          TableGroundUnits[GroupeName]["Units"][i]["Life"]     = 1
+--        end
 
         Saving_Ground_Group = IntegratedserializeWithCycles( TableNameCoalition, TableGroundUnits )
         writemission( Saving_Ground_Group, SaveFileCoalition )
@@ -77,9 +75,13 @@ SCHEDULER_countGroupsBlue = SCHEDULER:New( nil,
           
           if GROUP:IsAlive() then 
             local GroupeName        = GROUP:GetName()             -- return string
+--            env.info("Groupe Name = "..GroupeName)
             local GroupeCoalition   = GROUP:GetCoalition()        -- return DCS#Coalition.side (0,1,2)
+--            env.info("Groupe Coalition = "..GroupeCoalition)
             local GroupeCountry     = GROUP:GetCountry()          -- return DCS#country.id
+--            env.info("Groupe Country = "..GroupeCountry)
             local GroupePosition    = GROUP:GetVec2()             -- return Vec2 ( GroupePosition.x / GroupePosition.y )
+--            env.info("Groupe Position = "..GroupePosition.x.." | "..GroupePosition.y)
             local GroupeUnits       = GROUP:GetUnits()            -- return Table
             
             local GroupeUnits_Count = #GroupeUnits
