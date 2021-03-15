@@ -1,116 +1,113 @@
---=================================================================================
---=================================================================================
+--=================================================================================================--
+--=================================================================================================--
 --
--- MENU MISSION DCSGW
+-- MENU CA MISSION DCSGW
 --
---=================================================================================
---=================================================================================
-
-
-
+--=================================================================================================--
+--=================================================================================================--
 
 -----------------------------------------------------------------------------------------------------
--- Load Moose
+-- Load Moose si nécessaire en Standalone test.
 --assert(loadfile( "C:\\Scripts\\DCS-GLOBAL-WAR\\DCSGW\\Core\\Moose_2.5.3.lua" ))() -- For testing only
 -----------------------------------------------------------------------------------------------------
 
-
--- FUNCTIONS
 -----------------------------------------------------------------------------------------------------
-
------------------------------------------------------------------------------------------------------
--- Function DCSGW_General_Menu_CA ()
---
--- MENU_GROUP:New(Group, MenuText, ParentMenu)
--- MENU_GROUP_COMMAND:New(Group, MenuText, ParentMenu, CommandMenuFunction, CommandMenuArgument, ...)
+-- Helps : 
+--        MENU_GROUP:New(Group, MenuText, ParentMenu)
+--        MENU_GROUP_COMMAND:New(Group, MenuText, ParentMenu, CommandMenuFunction, CommandMenuArgument, ...)
 -----------------------------------------------------------------------------------------------------
 -- External variables required : 
 --        AIRBASE_BLUE_MAIN   ( from Init__Mission.lua )
 -----------------------------------------------------------------------------------------------------
+--
+--
+--=================================================================================================--
+-- DEFINES
+--=================================================================================================--
+DCSGW_CA_Menus = {}             -- Declaration de Table registering menus
+DCSGW_CA_SCHEDULER_MODULE = {}  -- Declaration de Table pour Affichage des Modules
 
-
-
-
-
-function DCSGW_ModuleMenu_Logistic_ground (groupGround)
-      
-    SCHEDULER_Menu_Logisitic = SCHEDULER:New( nil, 
+--=================================================================================================--
+-- FUNCTIONS
+--=================================================================================================--
+function DCSGW_Module_Menu_Logistic_ground ( Params )
+   local Module_Type  = "Ground Logistique"
+   local WrapperGroup = Params[1]
+   local GroupeName   = Params[2]
+   
+    -- On commence à supprimer le Menu Principal
+    FNC_Test_Del_Menu_Principal ( GroupeName )  
+    
+    -- On lance la boucle du module  
+    DCSGW_CA_SCHEDULER_MODULE[GroupeName] = {}
+    DCSGW_CA_SCHEDULER_MODULE[GroupeName][Module_Type] = SCHEDULER:New( nil, 
       function ()   
       MESSAGE:New(" Logistic Ground : "..
                   "\n\n"..
-                  "ce Menu sera affiché en permanence tant que Cancel ou Validation ne sera pas pressé"..
+                  "ce Menu sera affiche en permanence tant que Cancel ou Validation ne sera pas OK"..
                   "\n"..
                   "Bon vol"
-            ,3,"Menu ",true):ToGroup(groupGround)
-            
-            function cancel (groupGround)
-            DCSGW_MenuCA_lvl_2_Logistique_1:Remove()
-            DCSGW_MenuCA_lvl_2_Logistique_2:Remove()
-            FNC_Test_Create_Menu_Principal (groupGround)
-            SCHEDULER_Menu_Logisitic:Stop()
-            end
-            
-            function test(groupGround)
-            env.info("test",true)
-            end
-            
+                  ,3,"Module ",true):ToGroup(WrapperGroup)
 
-          end, {},0,1 -- #Start (number) #Repeat (number) #RandomizeFactor (number between 0 and 1 randomize repeat) #Stop (number)
-    )-- fin scheduler
-      
-            
-            FNC_Test_Del_Menu_Principal ()
-                        
-            DCSGW_MenuCA_lvl_2_Logistique_1     = MENU_GROUP_COMMAND:New( groupGround, "test1"   ,nil , test, groupGround)
-            DCSGW_MenuCA_lvl_2_Logistique_2     = MENU_GROUP_COMMAND:New( groupGround, "Cancel"   ,nil , cancel, groupGround)
+          end, {} ,0 ,1 -- #Start (number) #Repeat (number) #RandomizeFactor (number between 0 and 1 randomize repeat) #Stop (number)
+    ) -- fin scheduler
+    
+            -- On créé le menu de Logistique
+            DCSGW_CA_Menus[GroupeName][Module_Type] = {}
+            DCSGW_CA_Menus[GroupeName][Module_Type][1]      = MENU_GROUP_COMMAND:New( WrapperGroup, "Test 1"      ,nil , test,        { WrapperGroup, GroupeName    }) -- < Params[1] = Wapper#Group | Params[2] = Group Name #String >
+            DCSGW_CA_Menus[GroupeName][Module_Type][98]     = MENU_GROUP_COMMAND:New( WrapperGroup, "Validate"    ,nil , Validate,    { WrapperGroup, GroupeName, Module_Type, "Validation"     }) -- < Params[1] = Wapper#Group | Params[2] = Group Name #String | Params[3] = Name of module #String | Params[4] = Name of function #String >      
+            DCSGW_CA_Menus[GroupeName][Module_Type][99]     = MENU_GROUP_COMMAND:New( WrapperGroup, "Cancel"      ,nil , Cancel,      { WrapperGroup, GroupeName, Module_Type, "Cancellation"   }) -- < Params[1] = Wapper#Group | Params[2] = Group Name #String | Params[3] = Name of module #String | Params[4] = Name of function #String >
 end
 
-function DCSGW_ModuleMenu_Logistic_air ()
+function DCSGW_Module_Menu_Logistic_air ()
 
 end
 
-function DCSGW_ModuleMenu_JTAC ()
+function DCSGW_Module_Menu_JTAC ()
 
 end
 
-function DCSGW_ModuleMenu_SAM ()
+function DCSGW_Module_Menu_SAM ()
 
 end
 
-function DCSGW_ModuleMenu_Ground ()
+function DCSGW_Module_Menu_Ground ()
 
 end
 
-function DCSGW_ModuleMenu_Airbase_type ()
+function DCSGW_Module_Menu_Airbase_type ()
 
 end
 
 
+  -- Function menu principal
+  ----------------------------------------------------
+function FNC_Test_Create_Menu_Principal ( WrapperGroup , unitGroup )
 
-function FNC_Test_Del_Menu_Principal ()
-    DCSGW_MenuCA_lvl_1:ClearParentMenu("Manage Airbases")
-    DCSGW_MenuCA_lvl_2:ClearParentMenu("Manage Supports")
-    DCSGW_MenuCA_lvl_3:ClearParentMenu("Manage Groups")
-    DCSGW_MenuCA_lvl_4:ClearParentMenu("Manage Missions")
-end
-
-function FNC_Test_Create_Menu_Principal (groupGround,k)
-
-     DCSGW_MenuCA_lvl_1 = MENU_GROUP:New( groupGround, "Manage Airbases" )
-     DCSGW_MenuCA_lvl_1_Main           = MENU_GROUP:New( groupGround, AIRBASE_BLUE_MAIN, DCSGW_MenuCA_lvl_1 )
+     local WrapperGroup   = WrapperGroup
+     local groupName      = unitGroup
      
-   DCSGW_MenuCA_lvl_2 = MENU_GROUP:New( groupGround, "Manage Supports" )
---                local DCSGW_MenuCA_lvl_2_Logistique     = MENU_GROUP:New( groupGround, "Logistique" , DCSGW_MenuCA_lvl_2 )
-     DCSGW_MenuCA_lvl_2_Logistique     = MENU_GROUP_COMMAND:New( groupGround, "Logistique"   ,DCSGW_MenuCA_lvl_2 , DCSGW_ModuleMenu_Logistic_ground, groupGround)
-     DCSGW_MenuCA_lvl_2_Tactique       = MENU_GROUP:New( groupGround, "Tactique"   , DCSGW_MenuCA_lvl_2 )
-    
-   DCSGW_MenuCA_lvl_3 = MENU_GROUP:New( groupGround, "Manage Groups" )
-     DCSGW_MenuCA_lvl_3_Move           = MENU_GROUP:New( groupGround, "Move"   , DCSGW_MenuCA_lvl_3 )
-    
-   DCSGW_MenuCA_lvl_4 = MENU_GROUP:New( groupGround, "Manage Missions" )
-     DCSGW_MenuCA_lvl_4_List           = MENU_GROUP:New( groupGround, "Currents missions"  , DCSGW_MenuCA_lvl_4 )
-     DCSGW_MenuCA_lvl_4_Create         = MENU_GROUP:New( groupGround, "Create mission"     , DCSGW_MenuCA_lvl_4 )
+      DCSGW_CA_Menus[groupName]["Menu_principal"][1] = MENU_GROUP:New( WrapperGroup, "Manage Airbases" )
+      DCSGW_CA_Menus[groupName]["Menu_principal"][2] = MENU_GROUP:New( WrapperGroup, "Manage Supports" )
+      DCSGW_CA_Menus[groupName]["Menu_principal"][3] = MENU_GROUP:New( WrapperGroup, "Manage Groups" )
+      DCSGW_CA_Menus[groupName]["Menu_principal"][4] = MENU_GROUP:New( WrapperGroup, "Manage Missions" )
+     
+      DCSGW_CA_Menus[groupName]["Menu_secondaire"][1] = MENU_GROUP:New( WrapperGroup, AIRBASE_BLUE_MAIN, DCSGW_CA_Menus[groupName]["Menu_principal"][1] )
+      DCSGW_CA_Menus[groupName]["Menu_secondaire"][2] = MENU_GROUP:New( WrapperGroup, "Tactique"   , DCSGW_CA_Menus[groupName]["Menu_principal"][2] )
+      DCSGW_CA_Menus[groupName]["Menu_secondaire"][3] = MENU_GROUP_COMMAND:New( WrapperGroup, "Logistique"   ,DCSGW_CA_Menus[groupName]["Menu_principal"][2] , DCSGW_Module_Menu_Logistic_ground, { WrapperGroup, groupName }) -- < Params[1] = Wapper#Group | Params[2] = Group Name #String >
+      DCSGW_CA_Menus[groupName]["Menu_secondaire"][4] = MENU_GROUP:New( WrapperGroup, "Move"   , DCSGW_CA_Menus[groupName]["Menu_principal"][3] )
+      DCSGW_CA_Menus[groupName]["Menu_secondaire"][5] = MENU_GROUP:New( WrapperGroup, "Currents missions"  , DCSGW_CA_Menus[groupName]["Menu_principal"][4] )
+      DCSGW_CA_Menus[groupName]["Menu_secondaire"][6] = MENU_GROUP:New( WrapperGroup, "Create mission"     , DCSGW_CA_Menus[groupName]["Menu_principal"][4] )
 end
+
+function FNC_Test_Del_Menu_Principal ( groupName )
+      local GroupName = groupName
+      DCSGW_CA_Menus[GroupName]["Menu_principal"][1]:Remove() 
+      DCSGW_CA_Menus[GroupName]["Menu_principal"][2]:Remove()
+      DCSGW_CA_Menus[GroupName]["Menu_principal"][3]:Remove()
+      DCSGW_CA_Menus[GroupName]["Menu_principal"][4]:Remove()  
+end
+
 
 function DCSGW_General_Menu_CA ( AIRBASE_BLUE_MAIN )
 
@@ -151,12 +148,95 @@ function DCSGW_General_Menu_CA ( AIRBASE_BLUE_MAIN )
 
 end 
 
+  -- Functions utils génériques pour menus
+  ----------------------------------------------------
+function Cancel ( Params )
+  local WrapperGroup = Params[1]
+  local GroupeName   = Params[2]
+  local Module_Type  = Params[3]
+  local FunctionType = Params[4]
+  -- On stop le MSG permanent
+  DCSGW_CA_SCHEDULER_MODULE[GroupeName][Module_Type]:Stop()  
+  -- On valide par un message à l'utilisateur
+  MESSAGE:New( FunctionType .." ".. Module_Type ,5 , "Module "):ToGroup( WrapperGroup )
+  -- On supprime les menus logisitiques
+  DCSGW_CA_Menus[GroupeName][Module_Type][1]:Remove()
+  -- On supprime les menus de Validation et de Cancellation
+  DCSGW_CA_Menus[GroupeName][Module_Type][98]:Remove() -- Validate Menu
+  DCSGW_CA_Menus[GroupeName][Module_Type][99]:Remove() -- Cancel Menu
+  -- On relance la création du Menu principal
+  FNC_Test_Create_Menu_Principal ( WrapperGroup, GroupeName )
+end
+            
+function test()
+  env.info(" Test OK ",true)
+end
 
--- RUN
+function Validate( Params )
+  local WrapperGroup = Params[1]
+  local GroupeName   = Params[2]
+  local Module_Type  = Params[3]
+  local FunctionType = Params[4]
+  
+  -- ECRITURE DE PROCESS DE VALIDATION POUR TYPE DE MODULE
+  
+  Cancel ( Params )
+
+end
+
+--=================================================================================================--
+-- RUNNING SCRIPT
+--=================================================================================================--
+
 -----------------------------------------------------------------------------------------------------
-DCSGW_General_Menu_CA ( AIRBASE_BLUE_MAIN )
+-- EVENT PlayerEnterUnit --> Creation du menu à l'entrée dans une unité sol / Registering du menu dans la Table 
+-----------------------------------------------------------------------------------------------------
+  PlayerEnterUnitEventHandler = EVENTHANDLER:New() -- Creates the EventHandler
+  PlayerEnterUnitEventHandler:HandleEvent( EVENTS.PlayerEnterUnit ) 
+  function PlayerEnterUnitEventHandler:OnEventPlayerEnterUnit( EventData )
+    BASE:F({EventData})
+   if EventData.initiator ~= nil then 
+      
+      local Unit          =   EventData.initiator -- unit#001
+      if Unit.Category.GROUND_UNIT then
+        local unitGroup     =   Unit:getGroup():getName()
+        local unitNumber    =   Unit:getNumber()
+        local unitPlayer    =   Unit:getPlayerName()
+    
+        local WrapperGroup  =   GROUP:FindByName( unitGroup )
+        local unitType = WrapperGroup:GetUnit(unitNumber):GetTypeName()
+      
+        MESSAGE:New("Bienvenue "..unitPlayer..", dans votre '"..unitType.."'\n Le mode CA 'ON' ! ",10,"DCSGW Info "):ToGroup( WrapperGroup )  
+        
+        DCSGW_CA_Menus[unitGroup]={}
+        DCSGW_CA_Menus[unitGroup]["Menu_principal"]={}
+        DCSGW_CA_Menus[unitGroup]["Menu_secondaire"]={}
+          
+        FNC_Test_Create_Menu_Principal ( WrapperGroup, unitGroup )
+      end
+    end
+  end
+-----------------------------------------------------------------------------------------------------
+-- EVENT PlayerLeaveUnit --> Non utilisée 
+-----------------------------------------------------------------------------------------------------
+  PlayerLeaveUnitEventHandler = EVENTHANDLER:New() -- Creates the EventHandler
+  PlayerLeaveUnitEventHandler:HandleEvent( EVENTS.PlayerLeaveUnit ) 
+  function PlayerLeaveUnitEventHandler:OnEventPlayerEnterUnit( EventData )
+    BASE:F({EventData})
 
+    local Unit          =   EventData.initiator -- unit#001
+    local unitGroup     =   Unit:getGroup():getName()
+    local unitNumber    =   Unit:getNumber()
+    local unitPlayer    =   Unit:getPlayerName()
 
+    local WrapperGroup  =   GROUP:FindByName( unitGroup )
+    local unitType = WrapperGroup:GetUnit(unitNumber):GetTypeName()
+  
+    MESSAGE:New("Bye bye "..unitPlayer..", vous quittez votre '"..unitType.."'\n Le mode CA 'OFF' ! ",10,"DCSGW Info "):ToGroup( WrapperGroup )  
+    
+    
+    --end
+  end
 
 
 

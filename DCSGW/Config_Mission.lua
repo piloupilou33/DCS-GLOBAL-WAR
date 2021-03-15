@@ -19,19 +19,19 @@ env.info( "-------------------------------------------------------------" )
   --[ required : variable path_scripts defined in *.miz ]
   
 DCSGW_Saving_Folder_Global		= path_scripts.."Saves\\"
-DCSGW_Saving_Folder_Airboss	 	= path_scripts.."Saves\\AirbossData\\"
-DCSGW_Saving_Folder_Ground	 	= path_scripts.."Saves\\GroundSave\\"
-DCSGW_Saving_Folder_Static	 	= path_scripts.."Saves\\StaticSave\\"
-DCSGW_Saving_Folder_Player	 	= path_scripts.."Saves\\PlayerSave\\"
+DCSGW_Saving_Folder_Airboss	 	= DCSGW_Saving_Folder_Global.."AirbossData\\"
+DCSGW_Saving_Folder_Ground	 	= DCSGW_Saving_Folder_Global.."GroundSave\\"
+DCSGW_Saving_Folder_Static	 	= DCSGW_Saving_Folder_Global.."StaticSave\\"
+DCSGW_Saving_Folder_Player	 	= DCSGW_Saving_Folder_Global.."PlayerSave\\"
 
 -- ACTIVITY
 --================================================================================= 
 
-DCSGW_SSB_Activity          = true
-DCSGW_Airboss_Activity      = true
-DCSGW_ATIS_Activity         = true
+DCSGW_Activity_SSB          = true
+DCSGW_Activity_Airboss      = true
+DCSGW_Activity_ATIS         = true
 
-DCSGW_AutoSaving_Activity   = true
+DCSGW_Activity_AutoSaving   = true
 
 -- MAIN AIRBASE
 --================================================================================= 
