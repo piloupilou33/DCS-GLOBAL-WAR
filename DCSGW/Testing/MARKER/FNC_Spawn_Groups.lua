@@ -27,7 +27,7 @@ writemission( Saving_Ground_prices, DCSGW_File_Ground_Units_Price_save )
 ------------------------------------------
 
 -- Init ID de spawn = A remplacer par un ID Global registré
-ID_Spawn = 0
+--ID_Spawn = 0
 
 function DCSGW_FNC_Preparation_Spawn()
 
@@ -40,8 +40,11 @@ function DCSGW_FNC_Spawn_From_Marker(text, coord)
   local units = {}
   local Country = nil 
   local GroupCoalition = nil 
-  
+  local UnitName = nil
   local Params = {}
+  local ID_Spawn = nil
+  ID_Spawn_Unit = nil 
+  
     --  Examples catching values
     -- [1] catching Type :  -value    
     -- [2] param 1 : value = ?  
@@ -52,7 +55,8 @@ function DCSGW_FNC_Spawn_From_Marker(text, coord)
         table.insert(Params, param) 
       end
  
-  ID_Spawn = ID_Spawn + 1
+ 
+--  ID_Spawn = ID_Spawn + 1
   
   for k,v in pairs(CSVReturn) do
 --  for x = 2, #CSVReturn - 1  do
@@ -61,6 +65,19 @@ function DCSGW_FNC_Spawn_From_Marker(text, coord)
 --  env.info("Creation d'un ground - test  = "..CSVReturn[k][1])
 --  env.info("Creation d'un ground - test  = "..CSVReturn[k][3])
   
+  -- Attribution de l'ID
+    if CSVReturn[k][7] == 1 then 
+    
+      ID_Spawn = DCSGW_TABLE_Ground_Accounts["ID_Group_Ground_RED"]            
+--      ID_Spawn_Unit = DCSGW_TABLE_Ground_Accounts["ID_Unit_Ground_RED"] 
+      GroupParam_Coalition  = CSVReturn[k][7]  
+    elseif CSVReturn[k][7] == 2 then 
+    
+      ID_Spawn = DCSGW_TABLE_Ground_Accounts["ID_Group_Ground_BLUE"]            
+--      ID_Spawn_Unit = DCSGW_TABLE_Ground_Accounts["ID_Unit_Ground_BLUE"]   
+      GroupParam_Coalition  = CSVReturn[k][7] 
+    end
+
     if CSVReturn[k][1] == Params[2] then
         Name      = Params[2].."-"..CSVReturn[k][3].."-"..ID_Spawn
         Type = CSVReturn[k][1]
@@ -70,14 +87,15 @@ function DCSGW_FNC_Spawn_From_Marker(text, coord)
         GroupCoalition = CSVReturn[k][7]
           env.info("Creation d'un ground - Coalition = "..GroupCoalition)
           env.info("Creation d'un ground - Name = "..Name)
+       UnitName = Params[2].."-"..CSVReturn[k][3].."-unitID_"
+       nb_Units = Params[3]
     end
   end
-  nb_Units = Params[3]
-  units= { ["Type"] = Type, ["Name"] = "unit_"..Name, ["x"] =Position.x, ["y"] =Position.y, ["Heading"] = 0, ["skill"] ="Average"}
+  
+  units= { ["Type"] = Type, ["Name"] = UnitName, ["x"] =Position.x, ["y"] =Position.y, ["Heading"] = 0, ["skill"] ="Average"}
   env.info("Creation d'un ground - Position = "..Position.x.." | "..Position.y)
   -- Launch Spawn
   DCSGW_FNC_Spawn_Group (Type, nb_Units, Name, Position, units, Country, GroupCoalition)
-
 end
 
 function DCSGW_FNC_Spawn_Group(Type, nb_Units, Name, Position, units, Country, GroupCoalition)
@@ -110,23 +128,43 @@ function DCSGW_FNC_Spawn_Group(Type, nb_Units, Name, Position, units, Country, G
               ["start_time"] = 0,
             } -- end of [1]
 
+
         -- Ajout des Units du GROUP
               local Ecart = 0
               for i = 1, GroupParam_nbunits do  
-                 
-              groupData["units"][i] = {} 
               
-              groupData["units"][i]["type"] = GroupParam_units.Type
-              groupData["units"][i]["transportable"] = {}  
-              groupData["units"][i]["transportable"]["randomTransportable"] = true 
-              groupData["units"][i]["skill"] = GroupParam_units.skill
-              groupData["units"][i]["y"] = GroupParam_units.y + Ecart
-              groupData["units"][i]["x"] = GroupParam_units.x
-              groupData["units"][i]["name"] = GroupParam_units.Name
-              groupData["units"][i]["heading"] = GroupParam_units.Heading
-              groupData["units"][i]["playerCanDrive"] = true 
-              Ecart = Ecart + 10
+                if GroupParam_Coalition == 1 then 
+                  DCSGW_TABLE_Ground_Accounts["ID_Unit_Ground_RED"] = DCSGW_TABLE_Ground_Accounts["ID_Unit_Ground_RED"] + 1
+                  ID_Spawn_Unit = DCSGW_TABLE_Ground_Accounts["ID_Unit_Ground_RED"]
+                elseif GroupParam_Coalition == 2 then 
+                  DCSGW_TABLE_Ground_Accounts["ID_Unit_Ground_BLUE"] = DCSGW_TABLE_Ground_Accounts["ID_Unit_Ground_BLUE"] + 1
+                  ID_Spawn_Unit = DCSGW_TABLE_Ground_Accounts["ID_Unit_Ground_BLUE"]
+                end 
+                
+                local nameUnit = GroupParam_units.Name..ID_Spawn_Unit
+                
+                groupData["units"][i] = {} 
+                
+                groupData["units"][i]["type"] = GroupParam_units.Type
+                groupData["units"][i]["transportable"] = {}  
+                groupData["units"][i]["transportable"]["randomTransportable"] = true 
+                groupData["units"][i]["skill"] = GroupParam_units.skill
+                groupData["units"][i]["y"] = GroupParam_units.y + Ecart
+                groupData["units"][i]["x"] = GroupParam_units.x
+                groupData["units"][i]["name"] = nameUnit
+                groupData["units"][i]["heading"] = GroupParam_units.Heading
+                groupData["units"][i]["playerCanDrive"] = true 
+                Ecart = Ecart + 10
+
             end
+            
+              if GroupParam_Coalition == 1 then 
+                  DCSGW_TABLE_Ground_Accounts["ID_Group_Ground_RED"] = DCSGW_TABLE_Ground_Accounts["ID_Group_Ground_RED"] + 1
+              elseif GroupParam_Coalition == 2 then 
+                  DCSGW_TABLE_Ground_Accounts["ID_Group_Ground_BLUE"] = DCSGW_TABLE_Ground_Accounts["ID_Group_Ground_BLUE"] + 1
+              end
+            
+            
     env.info ("CREATION GROUP : Groupe country = "..GroupParam_Country.." coalition = "..GroupParam_Coalition)
    -- Creation du Group (SPAWN)
    --------------------------------------------------------------------------------------------------------
@@ -134,8 +172,14 @@ function DCSGW_FNC_Spawn_Group(Type, nb_Units, Name, Position, units, Country, G
     
     coalition.addGroup(GroupParam_Country, Group.Category.GROUND, groupData)
     
-    groupData = {}
+    -- Create event DEAD for units of Group Created : Call FUNCTION From Saving_System.lua
+    --------------------------------------------------------------------------------------------------------
     local GroupCreated = GROUP:FindByName( GroupParam_Name )
+    DCSGW_FNC_Event_Ground_Units_Dead ( GroupCreated )
+    
+    -- Empty groupData for others
+    groupData = {}
+--    local GroupCreated = GROUP:FindByName( GroupParam_Name )
    
-    return GroupCreated -- wrapper#GROUP
+--    return GroupCreated -- wrapper#GROUP
 end    
