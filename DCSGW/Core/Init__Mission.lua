@@ -33,15 +33,18 @@ function DCSGW_Define_Main_Airbases( Airbase )
   local MAIN_Airbase_Name        = Airbase:GetName()            -- return "string"
   local MAIN_Airbase_ID          = Airbase:GetID()              -- return number
   local MAIN_Airbase_Coalition   = Airbase:GetCoalitionName()   -- return "string"
+  local MAIN_Airbase_Category    = Airbase:GetCategoryName()    -- return "string"
   
-  if MAIN_Airbase_Coalition == "Red" then
-    AIRBASE_RED_MAIN    = MAIN_Airbase_Name
-    env.info("AIRBASE : "..AIRBASE_RED_MAIN.." définie en tant que Main Airbase pour la Coalition : ".. MAIN_Airbase_Coalition)
-  elseif MAIN_Airbase_Coalition == "Blue" then
-    AIRBASE_BLUE_MAIN   = MAIN_Airbase_Name
-    env.info("AIRBASE : "..AIRBASE_BLUE_MAIN.." définie en tant que Main Airbase pour la Coalition : ".. MAIN_Airbase_Coalition)
-  elseif MAIN_Airbase_Coalition == "Neutral" then 
-    -- nothing
+  if MAIN_Airbase_Category == "Airplane" then
+      if MAIN_Airbase_Coalition == "Red" then
+        AIRBASE_RED_MAIN    = MAIN_Airbase_Name
+        env.info("AIRBASE : "..AIRBASE_RED_MAIN.." définie en tant que Main Airbase pour la Coalition : ".. MAIN_Airbase_Coalition)
+      elseif MAIN_Airbase_Coalition == "Blue" then
+        AIRBASE_BLUE_MAIN   = MAIN_Airbase_Name
+        env.info("AIRBASE : "..AIRBASE_BLUE_MAIN.." définie en tant que Main Airbase pour la Coalition : ".. MAIN_Airbase_Coalition)
+      elseif MAIN_Airbase_Coalition == "Neutral" then 
+        -- nothing
+      end
   end
 --  env.info("AIRBASE : "..MAIN_Airbase_Name.." définie en tant que Main Airbase pour la Coalition : ".. MAIN_Airbase_Coalition)
   
