@@ -36,120 +36,191 @@ contenu2 = "C'est ainsi, nous allons envoyer du tactic sur zone".."\n\n".."bonne
 --=================================================================================================--
 -- FUNCTIONS
 --=================================================================================================--
+  
+  -- Functions
+  ----------------------------------------------------
+function DCSGW_FNC_Request_Logistic_vehicle ( Params )
+  local WrapperGroup  = Params[1]  -- return => Wrapper#GROUP
+  local GroupName     = Params[2]  -- return "string" => Name of group initiator
+  local Module_Type   = Params[3]  -- retunr "string" => Module type ("Logistic", "Tactic", ...)
+  local FunctionType  = Params[4]  -- return "string" => Function requested ("Request Ammo Truck", ...)
+  
+  DCSGW_CA_Menus[GroupName][FunctionType] = {}
+  
+  if FunctionType == "Request Ammo Truck" then
+    FNC_Del_Previous_Menu ( GroupName, Module_Type )
+    DCSGW_CA_Menus[GroupName][FunctionType][1]  = MENU_GROUP:New(WrapperGroup, " test1 ", nil)
+    DCSGW_CA_Menus[GroupName][FunctionType][2]  = MENU_GROUP:New(WrapperGroup, " test2 ", nil)
+    DCSGW_CA_Menus[GroupName][FunctionType][3]  = MENU_GROUP:New(WrapperGroup, " test3 ", nil)
+    DCSGW_CA_Menus[GroupName][FunctionType][4]  = MENU_GROUP:New(WrapperGroup, " test4 ", nil)
+    DCSGW_CA_Menus[GroupName][FunctionType][99] = MENU_GROUP_COMMAND:New( WrapperGroup, "Cancel"  ,nil , Cancel, { WrapperGroup, GroupName, Module_Type, "Cancellation"   })
+  elseif FunctionType == "Request Fuel Truck" then 
+    FNC_Del_Previous_Menu ( GroupName, Module_Type )
+    DCSGW_CA_Menus[GroupName][FunctionType][1]  = MENU_GROUP:New(WrapperGroup, " test1 ", nil)
+    DCSGW_CA_Menus[GroupName][FunctionType][2]  = MENU_GROUP:New(WrapperGroup, " test2 ", nil)
+    DCSGW_CA_Menus[GroupName][FunctionType][3]  = MENU_GROUP:New(WrapperGroup, " test3 ", nil)
+    DCSGW_CA_Menus[GroupName][FunctionType][4]  = MENU_GROUP:New(WrapperGroup, " test4 ", nil)
+    DCSGW_CA_Menus[GroupName][FunctionType][99] = MENU_GROUP_COMMAND:New( WrapperGroup, "Cancel"  ,nil , Cancel, { WrapperGroup, GroupName, Module_Type, "Cancellation"   })
+  else 
+
+  MESSAGE:New("Pas de correspondance pour la function : "..FunctionType.." \n On quitte le Module "..Module_Type ,15,"Module "):ToGroup(WrapperGroup)
+  local Params = {WrapperGroup, GroupName, Module_Type, "Cancellation"}
+  Cancel( Params )
+  end
+end   
+  
+  
+  
+  -- Function Modules - lvl 2
+  ----------------------------------------------------
 function DCSGW_Module_Menu_Support_Logistic ( Params )
    local Module_Type  = "Logistic"
    local WrapperGroup = Params[1]
-   local GroupeName   = Params[2]
+   local GroupName   = Params[2]
    
     -- On commence à supprimer le Menu Principal
-    FNC_Test_Del_Menu_Principal ( GroupeName )  
+    FNC_Test_Del_Menu_Principal ( GroupName )  
     
     -- On lance la boucle du module  
-    DCSGW_CA_SCHEDULER_MODULE[GroupeName] = {}
-    DCSGW_CA_SCHEDULER_MODULE[GroupeName][Module_Type] = SCHEDULER:New( nil, 
+    DCSGW_CA_SCHEDULER_MODULE[GroupName] = {}
+    DCSGW_CA_SCHEDULER_MODULE[GroupName][Module_Type] = SCHEDULER:New( nil, 
       function ()   
-      MESSAGE:New(Module_Type..
-                  "\n\n"..contenu
-                  ,3,"Module ",true):ToGroup(WrapperGroup)
-
+      MESSAGE:New(Module_Type.."\n\n"..contenu ,3,"Module ",true):ToGroup(WrapperGroup)
           end, {} ,0 ,1 -- #Start (number) #Repeat (number) #RandomizeFactor (number between 0 and 1 randomize repeat) #Stop (number)
     ) -- fin scheduler
     
     -- On créé le menu de Logistique
-    DCSGW_CA_Menus[GroupeName][Module_Type] = {}
-    DCSGW_CA_Menus[GroupeName][Module_Type][1]      = MENU_GROUP_COMMAND:New( WrapperGroup, "Request Ammo Truck"      ,nil , fnc_test,          { WrapperGroup, GroupeName, Module_Type, "Request Ammo Truck"    }) -- < Params[1] = Wapper#Group | Params[2] = Group Name #String | Params[3] = Name of module #String | Params[4] = Name of function #String >
-    DCSGW_CA_Menus[GroupeName][Module_Type][2]      = MENU_GROUP_COMMAND:New( WrapperGroup, "Request Fuel Truck"      ,nil , fnc_test,          { WrapperGroup, GroupeName, Module_Type, "Request Fuel Truck"    }) -- < Params[1] = Wapper#Group | Params[2] = Group Name #String | Params[3] = Name of module #String | Params[4] = Name of function #String >
-    DCSGW_CA_Menus[GroupeName][Module_Type][3]      = MENU_GROUP_COMMAND:New( WrapperGroup, "Request Air Tanker"      ,nil , fnc_test,          { WrapperGroup, GroupeName, Module_Type, "Request Air Tanker"    }) -- < Params[1] = Wapper#Group | Params[2] = Group Name #String | Params[3] = Name of module #String | Params[4] = Name of function #String >
-                            
---    DCSGW_CA_Menus[GroupeName][Module_Type][98]     = MENU_GROUP_COMMAND:New( WrapperGroup, "Validate"    ,nil , Validate,          { WrapperGroup, GroupeName, Module_Type, "Validation"     }) -- < Params[1] = Wapper#Group | Params[2] = Group Name #String | Params[3] = Name of module #String | Params[4] = Name of function #String >      
-    DCSGW_CA_Menus[GroupeName][Module_Type][99]     = MENU_GROUP_COMMAND:New( WrapperGroup, "Cancel"      ,nil , Cancel,            { WrapperGroup, GroupeName, Module_Type, "Cancellation"   }) -- < Params[1] = Wapper#Group | Params[2] = Group Name #String | Params[3] = Name of module #String | Params[4] = Name of function #String >
+    DCSGW_CA_Menus[GroupName][Module_Type] = {}
+--    DCSGW_CA_Menus[GroupName][Module_Type][1]      = MENU_GROUP_COMMAND:New( WrapperGroup, "Request Ammo Truck"      ,nil , DCSGW_FNC_Request_Logistic_vehicle,          { WrapperGroup, GroupName, Module_Type, "Request Ammo Truck"    }) -- < Params[1] = Wapper#Group | Params[2] = Group Name #String | Params[3] = Name of module #String | Params[4] = Name of function #String >
+--    DCSGW_CA_Menus[GroupName][Module_Type][2]      = MENU_GROUP_COMMAND:New( WrapperGroup, "Request Fuel Truck"      ,nil , DCSGW_FNC_Request_Logistic_vehicle,          { WrapperGroup, GroupName, Module_Type, "Request Fuel Truck"    }) -- < Params[1] = Wapper#Group | Params[2] = Group Name #String | Params[3] = Name of module #String | Params[4] = Name of function #String >
+--    DCSGW_CA_Menus[GroupName][Module_Type][3]      = MENU_GROUP_COMMAND:New( WrapperGroup, "Request Air Tanker"      ,nil , DCSGW_FNC_Request_Logistic_vehicle,          { WrapperGroup, GroupName, Module_Type, "Request Air Tanker"    }) -- < Params[1] = Wapper#Group | Params[2] = Group Name #String | Params[3] = Name of module #String | Params[4] = Name of function #String >
+
+--    DCSGW_CA_Menus[GroupName][Module_Type][97]     = MENU_GROUP_COMMAND:New( WrapperGroup, "Return"      ,nil , Return,            { WrapperGroup, GroupName, Module_Type, "Return"   }) -- < Params[1] = Wapper#Group | Params[2] = Group Name #String | Params[3] = Name of module #String | Params[4] = Name of function #String >                        
+--    DCSGW_CA_Menus[GroupName][Module_Type][98]     = MENU_GROUP_COMMAND:New( WrapperGroup, "Validate"    ,nil , Validate,          { WrapperGroup, GroupName, Module_Type, "Validation"     }) -- < Params[1] = Wapper#Group | Params[2] = Group Name #String | Params[3] = Name of module #String | Params[4] = Name of function #String >      
+    DCSGW_CA_Menus[GroupName][Module_Type][99]     = MENU_GROUP_COMMAND:New( WrapperGroup, "Cancel"      ,nil , Cancel,            { WrapperGroup, GroupName, Module_Type, "Cancellation"   }) -- < Params[1] = Wapper#Group | Params[2] = Group Name #String | Params[3] = Name of module #String | Params[4] = Name of function #String >
 end
 
 function DCSGW_Module_Menu_Support_Tactic ( Params )
-   local Module_Type  = "Tactic"
+--   local Module_Type  = "Tactic"
    local WrapperGroup = Params[1]
-   local GroupeName   = Params[2]
+   local GroupName    = Params[2]
+   local Module_Type  = Params[3]
+   local FunctionType = Params[4]
    -- On commence à supprimer le Menu Principal
-    FNC_Test_Del_Menu_Principal ( GroupeName )  
+    FNC_Test_Del_Menu_Principal ( GroupName )  
     
     -- On lance la boucle du module  
-    DCSGW_CA_SCHEDULER_MODULE[GroupeName] = {}
-    DCSGW_CA_SCHEDULER_MODULE[GroupeName][Module_Type] = SCHEDULER:New( nil, 
+    DCSGW_CA_SCHEDULER_MODULE[GroupName][Module_Type] = SCHEDULER:New( nil, 
       function ()   
-      MESSAGE:New(Module_Type..
-                  "\n\n"..contenu
-                  ,3,"Module ",true):ToGroup(WrapperGroup)
-
+      MESSAGE:New(Module_Type.."\n\n"..contenu ,3,"Module ",true):ToGroup(WrapperGroup)
           end, {} ,0 ,1 -- #Start (number) #Repeat (number) #RandomizeFactor (number between 0 and 1 randomize repeat) #Stop (number)
     ) -- fin scheduler
-    
-    -- On créé le menu de Logistique
-    DCSGW_CA_Menus[GroupeName][Module_Type] = {}
-    DCSGW_CA_Menus[GroupeName][Module_Type][1]      = MENU_GROUP_COMMAND:New( WrapperGroup, "Request AWACS"         ,nil , fnc_test,   { WrapperGroup, GroupeName, Module_Type, "Request AWACS"         }) -- < Params[1] = Wapper#Group | Params[2] = Group Name #String | Params[3] = Name of module #String | Params[4] = Name of function #String >
-    DCSGW_CA_Menus[GroupeName][Module_Type][2]      = MENU_GROUP_COMMAND:New( WrapperGroup, "Request JTAC Air"      ,nil , fnc_test,   { WrapperGroup, GroupeName, Module_Type, "Request JTAC Air"      }) -- < Params[1] = Wapper#Group | Params[2] = Group Name #String | Params[3] = Name of module #String | Params[4] = Name of function #String >
-    DCSGW_CA_Menus[GroupeName][Module_Type][3]      = MENU_GROUP_COMMAND:New( WrapperGroup, "Request JTAC Ground"   ,nil , fnc_test,   { WrapperGroup, GroupeName, Module_Type, "Request JTAC Ground"   }) -- < Params[1] = Wapper#Group | Params[2] = Group Name #String | Params[3] = Name of module #String | Params[4] = Name of function #String >
-                            
---    DCSGW_CA_Menus[GroupeName][Module_Type][98]     = MENU_GROUP_COMMAND:New( WrapperGroup, "Validate"    ,nil , Validate,   { WrapperGroup, GroupeName, Module_Type, "Validation"     }) -- < Params[1] = Wapper#Group | Params[2] = Group Name #String | Params[3] = Name of module #String | Params[4] = Name of function #String >      
-    DCSGW_CA_Menus[GroupeName][Module_Type][99]     = MENU_GROUP_COMMAND:New( WrapperGroup, "Cancel"      ,nil , Cancel,     { WrapperGroup, GroupeName, Module_Type, "Cancellation"   }) -- < Params[1] = Wapper#Group | Params[2] = Group Name #String | Params[3] = Name of module #String | Params[4] = Name of function #String >    
+--    
+--    -- On créé le menu
+    DCSGW_CA_Menus[GroupName][Module_Type] = {}
+--    DCSGW_CA_Menus[GroupName][Module_Type][1]      = MENU_GROUP_COMMAND:New( WrapperGroup, "Request AWACS"         ,nil , fnc_test,   { WrapperGroup, GroupName, Module_Type, "Request AWACS"         }) -- < Params[1] = Wapper#Group | Params[2] = Group Name #String | Params[3] = Name of module #String | Params[4] = Name of function #String >
+--    DCSGW_CA_Menus[GroupName][Module_Type][2]      = MENU_GROUP_COMMAND:New( WrapperGroup, "Request JTAC Air"      ,nil , fnc_test,   { WrapperGroup, GroupName, Module_Type, "Request JTAC Air"      }) -- < Params[1] = Wapper#Group | Params[2] = Group Name #String | Params[3] = Name of module #String | Params[4] = Name of function #String >
+--    DCSGW_CA_Menus[GroupName][Module_Type][3]      = MENU_GROUP_COMMAND:New( WrapperGroup, "Request JTAC Ground"   ,nil , fnc_test,   { WrapperGroup, GroupName, Module_Type, "Request JTAC Ground"   }) -- < Params[1] = Wapper#Group | Params[2] = Group Name #String | Params[3] = Name of module #String | Params[4] = Name of function #String >
+--
+--    DCSGW_CA_Menus[GroupName][Module_Type][97]     = MENU_GROUP_COMMAND:New( WrapperGroup, "Return"      ,nil , Return,     { WrapperGroup, GroupName, Module_Type, "Return"   }) -- < Params[1] = Wapper#Group | Params[2] = Group Name #String | Params[3] = Name of module #String | Params[4] = Name of function #String >                            
+--    DCSGW_CA_Menus[GroupName][Module_Type][98]     = MENU_GROUP_COMMAND:New( WrapperGroup, "Validate"    ,nil , Validate,   { WrapperGroup, GroupName, Module_Type, "Validation"     }) -- < Params[1] = Wapper#Group | Params[2] = Group Name #String | Params[3] = Name of module #String | Params[4] = Name of function #String >      
+    DCSGW_CA_Menus[GroupName][Module_Type][99]     = MENU_GROUP_COMMAND:New( WrapperGroup, "Cancel"      ,nil , Cancel,     { WrapperGroup, GroupName, Module_Type, "Cancellation"   }) -- < Params[1] = Wapper#Group | Params[2] = Group Name #String | Params[3] = Name of module #String | Params[4] = Name of function #String >    
+end
+
+function DCSGW_Module_Menu_Groups ( Params )
+   local Module_Type  = "Group Management"
+   local WrapperGroup = Params[1]
+   local GroupName    = Params[2]
+   
 end
 
 function DCSGW_Module_Menu_JTAC ( Params )
    local Module_Type  = "JTAC"
    local WrapperGroup = Params[1]
-   local GroupeName   = Params[2]
+   local GroupName   = Params[2]
    
 end
 
 function DCSGW_Module_Menu_SAM ( Params )
    local Module_Type  = "SAM"
    local WrapperGroup = Params[1]
-   local GroupeName   = Params[2]
+   local GroupName   = Params[2]
    
 end
 
 function DCSGW_Module_Menu_Ground ( Params )
    local Module_Type  = "Ground Logistique"
    local WrapperGroup = Params[1]
-   local GroupeName   = Params[2]
+   local GroupName   = Params[2]
    
 end
 
 function DCSGW_Module_Menu_Airbase_type ( Params )
    local Module_Type  = "Airbase type"
    local WrapperGroup = Params[1]
-   local GroupeName   = Params[2]
+   local GroupName   = Params[2]
    
 end
 
-
-  -- Function menu principal
+  -- Function menu principal - lvl 1
   ----------------------------------------------------
 function FNC_Test_Create_Menu_Principal ( WrapperGroup , unitGroup )
 
      local WrapperGroup   = WrapperGroup
-     local groupName      = unitGroup
+     local GroupName      = unitGroup
+     local Module_Type    = nil
+     local WapperGroupCoalition = WrapperGroup:GetCoalition()
+     local Main_Airbase   = nil 
      
-      DCSGW_CA_Menus[unitGroup]={}
-      DCSGW_CA_Menus[unitGroup]["Menu_principal"]={}
-      DCSGW_CA_Menus[unitGroup]["Menu_secondaire"]={}
+     if WapperGroupCoalition == 1 then 
+      Main_Airbase = AIRBASE_RED_MAIN
+      elseif WapperGroupCoalition == 2 then 
+      Main_Airbase = AIRBASE_BLUE_MAIN
+     end
      
-      DCSGW_CA_Menus[groupName]["Menu_principal"][1] = MENU_GROUP:New( WrapperGroup, "Manage Airbases" )
-      DCSGW_CA_Menus[groupName]["Menu_principal"][2] = MENU_GROUP:New( WrapperGroup, "Manage Supports" )
-      DCSGW_CA_Menus[groupName]["Menu_principal"][3] = MENU_GROUP:New( WrapperGroup, "Manage Groups" )
-      DCSGW_CA_Menus[groupName]["Menu_principal"][4] = MENU_GROUP:New( WrapperGroup, "Manage Missions" )
-     
-      DCSGW_CA_Menus[groupName]["Menu_secondaire"][1] = MENU_GROUP:New( WrapperGroup, AIRBASE_BLUE_MAIN,  DCSGW_CA_Menus[groupName]["Menu_principal"][1] )
-      DCSGW_CA_Menus[groupName]["Menu_secondaire"][2] = MENU_GROUP:New( WrapperGroup, "Airbases",         DCSGW_CA_Menus[groupName]["Menu_principal"][1] )
-      DCSGW_CA_Menus[groupName]["Menu_secondaire"][3] = MENU_GROUP_COMMAND:New( WrapperGroup, "Tactic",       DCSGW_CA_Menus[groupName]["Menu_principal"][2],   DCSGW_Module_Menu_Support_Tactic,     { WrapperGroup, groupName }) -- < Params[1] = Wapper#Group | Params[2] = Group Name #String >
-      DCSGW_CA_Menus[groupName]["Menu_secondaire"][4] = MENU_GROUP_COMMAND:New( WrapperGroup, "Logistic",     DCSGW_CA_Menus[groupName]["Menu_principal"][2],   DCSGW_Module_Menu_Support_Logistic,   { WrapperGroup, groupName }) -- < Params[1] = Wapper#Group | Params[2] = Group Name #String >
-      DCSGW_CA_Menus[groupName]["Menu_secondaire"][5] = MENU_GROUP:New( WrapperGroup, "Move"   , DCSGW_CA_Menus[groupName]["Menu_principal"][3] )
-      DCSGW_CA_Menus[groupName]["Menu_secondaire"][6] = MENU_GROUP:New( WrapperGroup, "Currents missions"  , DCSGW_CA_Menus[groupName]["Menu_principal"][4] )
-      DCSGW_CA_Menus[groupName]["Menu_secondaire"][7] = MENU_GROUP:New( WrapperGroup, "Create mission"     , DCSGW_CA_Menus[groupName]["Menu_principal"][4] )
+      DCSGW_CA_SCHEDULER_MODULE[GroupName] = {}
+      
+      DCSGW_CA_Menus[GroupName]={}
+      DCSGW_CA_Menus[GroupName]["Menu_principal"]={}
+      DCSGW_CA_Menus[GroupName]["Menu_secondaire"]={}
+      
+----- PRINCIPAL
+---------------- 
+      DCSGW_CA_Menus[GroupName]["Menu_principal"][1] = MENU_GROUP:New( WrapperGroup, "Manage Airbases" )
+      DCSGW_CA_Menus[GroupName]["Menu_principal"][2] = MENU_GROUP:New( WrapperGroup, "Manage Supports" )
+      DCSGW_CA_Menus[GroupName]["Menu_principal"][3] = MENU_GROUP:New( WrapperGroup, "Manage Groups" )
+      DCSGW_CA_Menus[GroupName]["Menu_principal"][4] = MENU_GROUP:New( WrapperGroup, "Manage Missions" )
+      
+----- SECONDAIRE
+----------------     
+      DCSGW_CA_Menus[GroupName]["Menu_secondaire"][1] = MENU_GROUP:New( WrapperGroup, Main_Airbase,  DCSGW_CA_Menus[GroupName]["Menu_principal"][1] )
+          Module_Type    = "Manage "..Main_Airbase
+          DCSGW_CA_Menus[GroupName]["Menu_secondaire"][11] = MENU_GROUP_COMMAND:New( WrapperGroup, "Request HQ Truck"     ,DCSGW_CA_Menus[GroupName]["Menu_secondaire"][1] , DCSGW_Module_Menu_Support_Logistic,   { WrapperGroup, GroupName, Module_Type, "Request HQ Truck"   }) -- < Params[1] = Wapper#Group | Params[2] = Group Name #String | Params[3] = Name of module #String | Params[4] = Name of function #String >
+      
+      DCSGW_CA_Menus[GroupName]["Menu_secondaire"][2] = MENU_GROUP:New( WrapperGroup, "Airbases",         DCSGW_CA_Menus[GroupName]["Menu_principal"][1] )
+      DCSGW_CA_Menus[GroupName]["Menu_secondaire"][3] = MENU_GROUP:New( WrapperGroup, "Logistic",         DCSGW_CA_Menus[GroupName]["Menu_principal"][2] )
+          Module_Type    = "Logistic"
+          DCSGW_CA_Menus[GroupName]["Menu_secondaire"][32] = MENU_GROUP_COMMAND:New( WrapperGroup, "Request Ammo Truck"     ,DCSGW_CA_Menus[GroupName]["Menu_secondaire"][3] , DCSGW_Module_Menu_Support_Logistic,   { WrapperGroup, GroupName, Module_Type, "Request Ammo Truck"   }) -- < Params[1] = Wapper#Group | Params[2] = Group Name #String | Params[3] = Name of module #String | Params[4] = Name of function #String >
+          DCSGW_CA_Menus[GroupName]["Menu_secondaire"][33] = MENU_GROUP_COMMAND:New( WrapperGroup, "Request Fuel Truck"     ,DCSGW_CA_Menus[GroupName]["Menu_secondaire"][3] , DCSGW_Module_Menu_Support_Logistic,   { WrapperGroup, GroupName, Module_Type, "Request Fuel Truck"   }) -- < Params[1] = Wapper#Group | Params[2] = Group Name #String | Params[3] = Name of module #String | Params[4] = Name of function #String >
+          DCSGW_CA_Menus[GroupName]["Menu_secondaire"][34] = MENU_GROUP_COMMAND:New( WrapperGroup, "Request Air Tanker"     ,DCSGW_CA_Menus[GroupName]["Menu_secondaire"][3] , DCSGW_Module_Menu_Support_Logistic,   { WrapperGroup, GroupName, Module_Type, "Request Air Tanker"   }) -- < Params[1] = Wapper#Group | Params[2] = Group Name #String | Params[3] = Name of module #String | Params[4] = Name of function #String >
+      
+      DCSGW_CA_Menus[GroupName]["Menu_secondaire"][4] = MENU_GROUP:New( WrapperGroup, "Tactic",         DCSGW_CA_Menus[GroupName]["Menu_principal"][2] )
+          Module_Type    = "Tactic"
+--          DCSGW_CA_Menus[GroupName]["Menu_secondaire"][41] = {}
+          DCSGW_CA_Menus[GroupName]["Menu_secondaire"][42] = MENU_GROUP_COMMAND:New( WrapperGroup, "Request AWACS"          ,DCSGW_CA_Menus[GroupName]["Menu_secondaire"][4] , DCSGW_Module_Menu_Support_Tactic,   { WrapperGroup, GroupName, Module_Type, "Request AWACS"         }) -- < Params[1] = Wapper#Group | Params[2] = Group Name #String | Params[3] = Name of module #String | Params[4] = Name of function #String >
+          DCSGW_CA_Menus[GroupName]["Menu_secondaire"][43] = MENU_GROUP_COMMAND:New( WrapperGroup, "Request JTAC Air"       ,DCSGW_CA_Menus[GroupName]["Menu_secondaire"][4] , DCSGW_Module_Menu_Support_Tactic,   { WrapperGroup, GroupName, Module_Type, "Request JTAC Air"      }) -- < Params[1] = Wapper#Group | Params[2] = Group Name #String | Params[3] = Name of module #String | Params[4] = Name of function #String >
+          DCSGW_CA_Menus[GroupName]["Menu_secondaire"][44] = MENU_GROUP_COMMAND:New( WrapperGroup, "Request JTAC Ground"    ,DCSGW_CA_Menus[GroupName]["Menu_secondaire"][4] , DCSGW_Module_Menu_Support_Tactic,   { WrapperGroup, GroupName, Module_Type, "Request JTAC Ground"   }) -- < Params[1] = Wapper#Group | Params[2] = Group Name #String | Params[3] = Name of module #String | Params[4] = Name of function #String >
+--        DCSGW_CA_Menus[GroupName]["Menu_secondaire"][45] = MENU_GROUP_COMMAND:New( WrapperGroup, "Cancel"                 ,DCSGW_CA_Menus[GroupName]["Menu_secondaire"][4] , Cancel,     { WrapperGroup, GroupName, Module_Type, "Cancellation"   }) -- < Params[1] = Wapper#Group | Params[2] = Group Name #String | Params[3] = Name of module #String | Params[4] = Name of function #String >    
+--      DCSGW_CA_Menus[groupName]["Menu_secondaire"][3] = MENU_GROUP_COMMAND:New( WrapperGroup, "Tactic",       DCSGW_CA_Menus[groupName]["Menu_principal"][2],   DCSGW_Module_Menu_Support_Tactic,     { WrapperGroup, groupName }) -- < Params[1] = Wapper#Group | Params[2] = Group Name #String >
+--      DCSGW_CA_Menus[groupName]["Menu_secondaire"][4] = MENU_GROUP_COMMAND:New( WrapperGroup, "Logistic",     DCSGW_CA_Menus[groupName]["Menu_principal"][2],   DCSGW_Module_Menu_Support_Logistic,   { WrapperGroup, groupName }) -- < Params[1] = Wapper#Group | Params[2] = Group Name #String >
+      DCSGW_CA_Menus[GroupName]["Menu_secondaire"][5] = MENU_GROUP:New( WrapperGroup, "Create"   , DCSGW_CA_Menus[GroupName]["Menu_principal"][3] )
+      DCSGW_CA_Menus[GroupName]["Menu_secondaire"][6] = MENU_GROUP:New( WrapperGroup, "Currents missions"  , DCSGW_CA_Menus[GroupName]["Menu_principal"][4] )
+      DCSGW_CA_Menus[GroupName]["Menu_secondaire"][7] = MENU_GROUP:New( WrapperGroup, "Create mission"     , DCSGW_CA_Menus[GroupName]["Menu_principal"][4] )
     
 end
 
-function FNC_Test_Del_Menu_Principal ( groupName )
-      local GroupName = groupName
+function FNC_Test_Del_Menu_Principal ( GroupName )
+      local GroupName = GroupName
       DCSGW_CA_Menus[GroupName]["Menu_principal"][1]:Remove() 
       DCSGW_CA_Menus[GroupName]["Menu_principal"][2]:Remove()
       DCSGW_CA_Menus[GroupName]["Menu_principal"][3]:Remove()
@@ -197,25 +268,59 @@ end
 
   -- Functions utils génériques pour menus
   ----------------------------------------------------
+function FNC_Del_Previous_Menu ( GroupName, Module_Type )
+      local GroupName = GroupName
+      local Module_Type = Module_Type
+        for k, v in pairs(DCSGW_CA_Menus[GroupName][Module_Type]) do
+            DCSGW_CA_Menus[GroupName][Module_Type][k]:Remove()
+        end  
+end
+
+function FNC_Restaur_Previous_Menu ( GroupName, Module_Type )
+      local GroupName = GroupName
+      local Module_Type = Module_Type
+        for k, v in pairs(DCSGW_CA_Menus[GroupName][Module_Type]) do
+            DCSGW_CA_Menus[GroupName][Module_Type][k]:Remove()
+        end  
+      
+end
+
+function Return ( Params )
+  local WrapperGroup  = Params[1]
+  local GroupName     = Params[2]
+  local Module_Type   = Params[3]
+  local FunctionType  = Params[4]
+  
+end 
+
 function Cancel ( Params )
   local WrapperGroup = Params[1]
-  local GroupeName   = Params[2]
+  local GroupName    = Params[2]
   local Module_Type  = Params[3]
   local FunctionType = Params[4]
   -- On stop le MSG permanent
-  DCSGW_CA_SCHEDULER_MODULE[GroupeName][Module_Type]:Stop()  
+  env.info("Value GroupName ="..GroupName)
+  env.info("Value Module_Type ="..Module_Type)
+--  env.info("Value Scheduler ="..DCSGW_CA_SCHEDULER_MODULE[GroupName][Module_Type])
+  if DCSGW_CA_SCHEDULER_MODULE[GroupName][Module_Type] == nil then 
+    env.info("Pas de valeur pour Scheduler")
+  else 
+    DCSGW_CA_SCHEDULER_MODULE[GroupName][Module_Type]:Stop() 
+  end
   -- On valide par un message à l'utilisateur
   MESSAGE:New( FunctionType .." ".. Module_Type ,5 , "Module "):ToGroup( WrapperGroup )
   -- On supprime les menus du module concerné
-  for k, v in pairs(DCSGW_CA_Menus[GroupeName][Module_Type]) do
-      DCSGW_CA_Menus[GroupeName][Module_Type][k]:Remove()
+  for k, v in pairs(DCSGW_CA_Menus[GroupName][Module_Type]) do
+      DCSGW_CA_Menus[GroupName][Module_Type][k]:Remove()
   end
   
   -- On reinitialise le contenu du module
-  contenu = ""
+  contenu = " "
+  
+  fnc_Cleaning_Menu_LvL2 ( GroupName )
   
   -- On relance la création du Menu principal
-  FNC_Test_Create_Menu_Principal ( WrapperGroup, GroupeName )
+  FNC_Test_Create_Menu_Principal ( WrapperGroup, GroupName )
 end
             
 function fnc_test ( Params )
@@ -232,7 +337,7 @@ end
 
 function Validate ( Params )
   local WrapperGroup = Params[1]
-  local GroupeName   = Params[2]
+  local GroupName   = Params[2]
   local Module_Type  = Params[3]
   local FunctionType = Params[4]
   
@@ -322,17 +427,3 @@ end
     
     --end
   end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
