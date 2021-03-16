@@ -145,6 +145,7 @@ function FNC_Test_Create_Menu_Principal ( WrapperGroup , unitGroup )
       DCSGW_CA_Menus[groupName]["Menu_secondaire"][5] = MENU_GROUP:New( WrapperGroup, "Move"   , DCSGW_CA_Menus[groupName]["Menu_principal"][3] )
       DCSGW_CA_Menus[groupName]["Menu_secondaire"][6] = MENU_GROUP:New( WrapperGroup, "Currents missions"  , DCSGW_CA_Menus[groupName]["Menu_principal"][4] )
       DCSGW_CA_Menus[groupName]["Menu_secondaire"][7] = MENU_GROUP:New( WrapperGroup, "Create mission"     , DCSGW_CA_Menus[groupName]["Menu_principal"][4] )
+    
 end
 
 function FNC_Test_Del_Menu_Principal ( groupName )
