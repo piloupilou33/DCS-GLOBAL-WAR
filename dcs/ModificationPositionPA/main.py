@@ -19,6 +19,7 @@ for line in lst_csv:
     updated_unit=unit
     updated_unit["x"]=float(line[-2])
     updated_unit["y"]=float(line[-1])
+    
     #save
     json_dump = json.dumps(json_data)
     json_dump = json_dump.replace(json.dumps(unit), json.dumps(updated_unit))
