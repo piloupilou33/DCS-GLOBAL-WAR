@@ -85,24 +85,28 @@ function DCSGW_FNC_Request_Ammo_Truck ( Params )
   local Position = nil
   local units = {}
   local Country = nil 
+  
+ ID_Spawn = DSWGW_CONFIG["ID"]["ID_Ground"]
  
  if Coalition == 1 then -- RED
   Type = "UAZ-469" -- a renseigner
-  Main_Airbase = AIRBASE_RED_MAIN
-  ID_Spawn = DCSGW_TABLE_Ground_Accounts["ID_Group_Ground_RED"]
-  DCSGW_TABLE_Ground_Accounts["ID_Group_Ground_RED"] = DCSGW_TABLE_Ground_Accounts["ID_Group_Ground_RED"] + 1
+  Main_Airbase = DSWGW_CONFIG["MAIN_AIRBASE_RED"]
+--  ID_Spawn = DCSGW_TABLE_Ground_Accounts["ID_Group_Ground_RED"]
+--  DCSGW_TABLE_Ground_Accounts["ID_Group_Ground_RED"] = DCSGW_TABLE_Ground_Accounts["ID_Group_Ground_RED"] + 1
   Country = 81 -- RED
  elseif Coalition == 2 then -- BLUE
   Type = "Tigr_233036"
-  Main_Airbase = AIRBASE_BLUE_MAIN
-  ID_Spawn = DCSGW_TABLE_Ground_Accounts["ID_Group_Ground_BLUE"]
-  DCSGW_TABLE_Ground_Accounts["ID_Group_Ground_BLUE"] = DCSGW_TABLE_Ground_Accounts["ID_Group_Ground_BLUE"] + 1
+  Main_Airbase = DSWGW_CONFIG["MAIN_AIRBASE_BLUE"]
+--  ID_Spawn = DCSGW_TABLE_Ground_Accounts["ID_Group_Ground_BLUE"]
+--  DCSGW_TABLE_Ground_Accounts["ID_Group_Ground_BLUE"] = DCSGW_TABLE_Ground_Accounts["ID_Group_Ground_BLUE"] + 1
   Country = 80 -- BLUE
  end
  
  Name = "HQ_"..CoalitionName.."|"..Type.."|"..ID_Spawn
  Position = AIRBASE:FindByName(Main_Airbase):GetCoordinate():GetVec2()
  units = { ["Type"] = Type, ["Name"] = Name, ["x"] =Position.x, ["y"] =Position.y, ["Heading"] = 0, ["skill"] ="Average"}
+ 
+ DSWGW_CONFIG["ID"]["ID_Ground"] = DSWGW_CONFIG["ID"]["ID_Ground"] + 1
  
  DCSGW_FNC_Spawn_Group(Type, 1, Name, Position, units, Country, Coalition)
 
@@ -212,9 +216,9 @@ function FNC_Test_Create_Menu_Principal ( WrapperGroup , unitGroup )
      local Main_Airbase   = nil 
      
      if WapperGroupCoalition == 1 then 
-      Main_Airbase = AIRBASE_RED_MAIN
+      Main_Airbase = DSWGW_CONFIG["MAIN_AIRBASE_RED"]
       elseif WapperGroupCoalition == 2 then 
-      Main_Airbase = AIRBASE_BLUE_MAIN
+      Main_Airbase = DSWGW_CONFIG["MAIN_AIRBASE_BLUE"]
      end
      
       DCSGW_CA_SCHEDULER_MODULE[GroupName] = {}
@@ -375,10 +379,10 @@ function fnc_test ( Params )
 end
 
 function Validate ( Params )
-  local WrapperGroup = Params[1]
-  local GroupName   = Params[2]
-  local Module_Type  = Params[3]
-  local FunctionType = Params[4]
+  local WrapperGroup  = Params[1]
+  local GroupName     = Params[2]
+  local Module_Type   = Params[3]
+  local FunctionType  = Params[4]
   
   -- ECRITURE DE PROCESS DE VALIDATION POUR TYPE DE MODULE
   
@@ -465,3 +469,5 @@ end
     
     --end
   end
+----------------------------------------------------------------------------------------------------- 
+env.info("DCSGW - INFO : DCSGW_Menu_CA.lua ==> LOADED")

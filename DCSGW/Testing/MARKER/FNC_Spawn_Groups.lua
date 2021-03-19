@@ -43,7 +43,7 @@ function DCSGW_FNC_Spawn_From_Marker(text, coord)
   local UnitName = nil
   local Params = {}
   local ID_Spawn = nil
-  ID_Spawn_Unit = nil 
+
   
     --  Examples catching values
     -- [1] catching Type :  -value    
@@ -174,8 +174,8 @@ function DCSGW_FNC_Spawn_Group(Type, nb_Units, Name, Position, units, Country, G
     
     -- Create event DEAD for units of Group Created : Call FUNCTION From Saving_System.lua
     --------------------------------------------------------------------------------------------------------
-    local GroupCreated = GROUP:FindByName( GroupParam_Name )
-    DCSGW_FNC_Event_Ground_Units_Dead ( GroupCreated )
+--    local GroupCreated = GROUP:FindByName( GroupParam_Name )
+--    DCSGW_FNC_Event_Ground_Units_Dead ( GroupCreated )
     
     -- Empty groupData for others
     groupData = {}

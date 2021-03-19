@@ -8,21 +8,23 @@
 --
 --=================================================================================
 
-env.info( "-------------------------------------------------------------" )
-env.info( "[[[[   INFOS SERVEUR   ]]]] START - CONFIG_MISSION.LUA ------" )
-env.info( "-------------------------------------------------------------" )
-
 --=================================================================================
 -- PARAMETERS MISSION --
 --================================================================================= 
- 
-  --[ required : variable path_scripts defined in *.miz ]
+
+-- Admin Defines (pour accès à certaines fonctionnalités, example : Créate unité à la volée)
+--================================================================================= 
+DCSGW_Pseudo_Admins = { "Kinder", "Boyington" }
+
+
+--[ required : variable path_scripts defined in *.miz ]
   
 DCSGW_Saving_Folder_Global		= path_scripts.."Saves\\"
 DCSGW_Saving_Folder_Airboss	 	= DCSGW_Saving_Folder_Global.."AirbossData\\"
 DCSGW_Saving_Folder_Ground	 	= DCSGW_Saving_Folder_Global.."GroundSave\\"
 DCSGW_Saving_Folder_Static	 	= DCSGW_Saving_Folder_Global.."StaticSave\\"
 DCSGW_Saving_Folder_Player	 	= DCSGW_Saving_Folder_Global.."PlayerSave\\"
+
 
 -- ACTIVITY
 --================================================================================= 
@@ -49,13 +51,6 @@ DCSGW_LIMIT_Max_Tanker_Red    = 4
 DCSGW_LIMIT_Max_Awacs_Blue    = 2
 DCSGW_LIMIT_Max_Awacs_Red     = 2
 
-
--- SIDE POINTS (WC = War Coins)
---================================================================================= 
-POINTS_Solde_BLUE     = 100000 
-POINTS_Solde_RED      = 100000
-
-
 -- INDEX Radios / TACAN
 --================================================================================= 
  -- radios 
@@ -69,64 +64,72 @@ POINTS_Solde_RED      = 100000
   DCSGW_Index_tacan_TANKER        = 20
   DCSGW_Index_tacan_CARRIER       = 70
   DCSGW_Channel_tacan_TANKER      = "Y"
-  DCSGW_Channel_tacan_TANKER      = "X"
+  DCSGW_Channel_tacan_CARRIER     = "X"
 
+-- SIDE POINTS (WC = War Coins) - Pour premier lancement uniquement, pas d'influence si mission déjà en cours
+--================================================================================= 
+DCSGW_WC_Solde_BLUE     = 100000 
+DCSGW_WC_Solde_RED      = 100000
+
+-- Other
+--================================================================================= 
+DCSGW_LifeTime_Static_Ground_Inf_Destroyed  = 2   -- Nb de Turn avant suppression de la base de Saving
+DCSGW_LifeTime_Static_Ground_Veh_Destroyed  = 15  -- Nb de Turn avant suppression de la base de Saving
+DCSGW_LifeTime_Scenery_Destroyed            = 20  -- Nb de Turn avant suppression de la base de Saving
 
 -- STOCK WAREHOUSES
 --================================================================================= 
  
  --[ Parameters => {{ Type (string) , Quantity (nb) , Cost (nb) , Lift (bool) }} ] 
  
- -- BLUE side
-  STOCK_BLUE_Vehicle_Armor_Light    = { }
-  STOCK_BLUE_Vehicle_Armor_Medium   = { }
-  STOCK_BLUE_Vehicle_Armor_Heavy    = { }
-  STOCK_BLUE_Vehicle_Arty           = { }
-  STOCK_BLUE_Vehicle_AAA            = { }
-  STOCK_BLUE_Vehicle_SAM_Light      = { }
-  STOCK_BLUE_Vehicle_SAM_Medium     = { }
-  STOCK_BLUE_Vehicle_SAM_Heavy      = { }
-  STOCK_BLUE_Vehicle_Infantery      = { }
-  STOCK_BLUE_Vehicle_Logistic       = { }
-  
-  STOCK_BLUE_Airplane_Transport     = { }
-  STOCK_BLUE_Airplane_Bombard       = { }
-  STOCK_BLUE_Airplane_Combat        = { }
-  
-  STOCK_BLUE_Helico_Combat_Light    = { }
-  STOCK_BLUE_Helico_Combat_Heavy    = { }
-  STOCK_BLUE_Helico_Transport       = { }
-  
-  STOCK_BLUE_Special_Jtac           = { }
-  STOCK_BLUE_Ship                   = { }
-  STOCK_BLUE_Ressources             = { }
-
- -- RED Side
-  STOCK_RED_Vehicle_Armor_Light     = { }
-  STOCK_RED_Vehicle_Armor_Medium    = { }
-  STOCK_RED_Vehicle_Armor_Heavy     = { }
-  STOCK_RED_Vehicle_Arty            = { }
-  STOCK_RED_Vehicle_AAA             = { }
-  STOCK_RED_Vehicle_SAM_Light       = { }
-  STOCK_RED_Vehicle_SAM_Medium      = { }
-  STOCK_RED_Vehicle_SAM_Heavy       = { }
-  STOCK_RED_Vehicle_Infantery       = { }
-  STOCK_RED_Vehicle_Logistic        = { }
-  
-  STOCK_RED_Airplane_Transport      = { }
-  STOCK_RED_Airplane_Bombard        = { }
-  STOCK_RED_Airplane_Combat         = { }
-  
-  STOCK_RED_Helico_Combat_Light     = { }
-  STOCK_RED_Helico_Combat_Heavy     = { }
-  STOCK_RED_Helico_Transport        = { }
-  
-  STOCK_RED_Special_Jtac            = { }
-  STOCK_RED_Ship                    = { }
-  STOCK_RED_Ressources              = { }
+-- -- BLUE side
+--  STOCK_BLUE_Vehicle_Armor_Light    = { }
+--  STOCK_BLUE_Vehicle_Armor_Medium   = { }
+--  STOCK_BLUE_Vehicle_Armor_Heavy    = { }
+--  STOCK_BLUE_Vehicle_Arty           = { }
+--  STOCK_BLUE_Vehicle_AAA            = { }
+--  STOCK_BLUE_Vehicle_SAM_Light      = { }
+--  STOCK_BLUE_Vehicle_SAM_Medium     = { }
+--  STOCK_BLUE_Vehicle_SAM_Heavy      = { }
+--  STOCK_BLUE_Vehicle_Infantery      = { }
+--  STOCK_BLUE_Vehicle_Logistic       = { }
+--  
+--  STOCK_BLUE_Airplane_Transport     = { }
+--  STOCK_BLUE_Airplane_Bombard       = { }
+--  STOCK_BLUE_Airplane_Combat        = { }
+--  
+--  STOCK_BLUE_Helico_Combat_Light    = { }
+--  STOCK_BLUE_Helico_Combat_Heavy    = { }
+--  STOCK_BLUE_Helico_Transport       = { }
+--  
+--  STOCK_BLUE_Special_Jtac           = { }
+--  STOCK_BLUE_Ship                   = { }
+--  STOCK_BLUE_Ressources             = { }
+--
+-- -- RED Side
+--  STOCK_RED_Vehicle_Armor_Light     = { }
+--  STOCK_RED_Vehicle_Armor_Medium    = { }
+--  STOCK_RED_Vehicle_Armor_Heavy     = { }
+--  STOCK_RED_Vehicle_Arty            = { }
+--  STOCK_RED_Vehicle_AAA             = { }
+--  STOCK_RED_Vehicle_SAM_Light       = { }
+--  STOCK_RED_Vehicle_SAM_Medium      = { }
+--  STOCK_RED_Vehicle_SAM_Heavy       = { }
+--  STOCK_RED_Vehicle_Infantery       = { }
+--  STOCK_RED_Vehicle_Logistic        = { }
+--  
+--  STOCK_RED_Airplane_Transport      = { }
+--  STOCK_RED_Airplane_Bombard        = { }
+--  STOCK_RED_Airplane_Combat         = { }
+--  
+--  STOCK_RED_Helico_Combat_Light     = { }
+--  STOCK_RED_Helico_Combat_Heavy     = { }
+--  STOCK_RED_Helico_Transport        = { }
+--  
+--  STOCK_RED_Special_Jtac            = { }
+--  STOCK_RED_Ship                    = { }
+--  STOCK_RED_Ressources              = { }
 
 --================================================================================= 
 
-env.info( "-------------------------------------------------------------" )
-env.info( "[[[[   INFOS SERVEUR   ]]]] END - CONFIG_MISSION.LUA --------" )
-env.info( "-------------------------------------------------------------" )
+env.info("DCSGW - INFO : Config_Mission.lua ==> LOADED")

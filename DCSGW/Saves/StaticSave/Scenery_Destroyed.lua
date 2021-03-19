@@ -1,0 +1,17 @@
+SceneryDestroyed = {}
+SceneryDestroyed[235438247] = {}
+SceneryDestroyed[235438247]["y"] = 9.2085618972778
+SceneryDestroyed[235438247]["x"] = -245711.15380859
+SceneryDestroyed[235438247]["z"] = -87131.489868164
+SceneryDestroyed[499613696] = {}
+SceneryDestroyed[499613696]["y"] = 9.214165687561
+SceneryDestroyed[499613696]["x"] = -245708.703125
+SceneryDestroyed[499613696]["z"] = -87162.3515625
+SceneryDestroyed[235438209] = {}
+SceneryDestroyed[235438209]["y"] = 9.2338857650757
+SceneryDestroyed[235438209]["x"] = -245722.76635742
+SceneryDestroyed[235438209]["z"] = -87140.94543457
+SceneryDestroyed[235438221] = {}
+SceneryDestroyed[235438221]["y"] = 9.2551975250244
+SceneryDestroyed[235438221]["x"] = -245718.88769531
+SceneryDestroyed[235438221]["z"] = -87137.770263672

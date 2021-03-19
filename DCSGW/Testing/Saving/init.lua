@@ -16,8 +16,8 @@ env.info( "DCSGW -- testing ---------------------------------- START ---" )
 --assert(loadfile(path_scripts .. "Testing\\Saving\\Ground_loading.lua"))()
 
 --assert(loadfile(path_scripts .. "Testing\\Saving\\Ground_saving.lua"))()
-assert(loadfile(path_scripts .. "Testing\\Saving\\Saving_System.lua"))()
-
+--assert(loadfile(path_scripts .. "Testing\\Saving\\Saving_System.lua"))()
+assert(loadfile(path_scripts .. "Testing\\Saving\\Saving_System_v2.lua"))()
 env.info( "DCSGW -- testing ---------------------------------- DONE ---" )
 
 env.info( "DCSGW -- Init Test ---------------------------------- Loaded ---" )

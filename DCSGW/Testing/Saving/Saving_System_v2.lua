@@ -15,18 +15,21 @@ DCSGW_File_Saving_Ground_Accounts     = path_scripts.."Testing\\Saving\\Saves\\G
 DCSGW_File_Saving_Ground_BLUE         = path_scripts.."Testing\\Saving\\Saves\\Ground_Blue.lua"
 DCSGW_File_Saving_Ground_RED          = path_scripts.."Testing\\Saving\\Saves\\Ground_Red.lua"
 DCSGW_File_Saving_Ground_Destroyed    = path_scripts.."Testing\\Saving\\Saves\\Ground_Destroyed.lua"
+DCSGW_File_Saving_Scenery_Destroyed   = path_scripts.."Testing\\Saving\\Saves\\Scenery_Destroyed.lua"
 
 DCSGW_TABLE_Ground_Accounts           = {}  -- empty table
 DCSGW_TABLE_BLUE_Ground               = {}  -- empty table
 DCSGW_TABLE_RED_Ground                = {}  -- empty table
-DCSGW_TABLE_STATIC_Ground_destroyed   = {}  -- empty table
+--DCSGW_TABLE_STATIC_Ground_destroyed   = {}  -- empty table
 
-DCSGW_TABLE_Ground_Accounts_Name      = "GroundGroupsAccounts"        -- Table BLUE du file de saving
+DCSGW_TABLE_Ground_Accounts_Name      = "GroundGroupsAccounts"    -- Table BLUE du file de saving
 DCSGW_TABLE_BLUE_Name                 = "GroundGroupsBlue"        -- Table BLUE du file de saving
 DCSGW_TABLE_RED_Name                  = "GroundGroupsRed"         -- Table RED du file de saving
 DCSGW_TABLE_Destroyed_Name            = "GroundGroupsDestroyed"   -- Table DESTROYED du file de saving
+DCSGW_TABLE_Scenery_Name              = "SceneryDestroyed"
 
-DCSGW_SET_GROUND_UNITS        = SET_GROUP:New():FilterCategories("ground"):FilterStart()
+DCSGW_SET_GROUND_UNITS                = SET_GROUP:New():FilterCategories("ground"):FilterStart()
+
 
 
 -- Register Functions
@@ -159,9 +162,9 @@ function DCSGW_FNC_SPAWN_Ground_Groups ( DCSGW_File_Saving_Ground )
    
    -- LANCEMENT EVENT pour le Group Créé
    --------------------------------------------------------------------------------------------------------
-    local GroupCreated = GROUP:FindByName( DCSGW_File_Saving_Ground[k]["Name"] )
+--    local GroupCreated = GROUP:FindByName( DCSGW_File_Saving_Ground[k]["Name"] )
     
-    DCSGW_FNC_Event_Ground_Units_Dead ( GroupCreated )
+--    DCSGW_FNC_Event_Ground_Units_Dead ( GroupCreated )
     
 --    GroupCreated:HandleEvent( EVENTS.Dead )
 --  
@@ -252,20 +255,37 @@ function DCSGW_FNC_Ground_Accounts_update ()
 
 end
 
-function DCSGW_FNC_Event_Ground_Units_Dead ( GroupEventDead )
-
-  GroupEventDead:HandleEvent( EVENTS.Dead )
+--function DCSGW_FNC_Event_Ground_Units_Dead ( GroupEventDead )
+function DCSGW_FNC_Event_Ground_Dead ( GroupEventDead )
+--  GroupEventDead:HandleEvent( EVENTS.Dead )
   
     function  GroupEventDead:OnEventDead( EventData )
-        local GroupCreatedName          = GroupEventDead:GetName()
-        local GroupCreated_Compo        = GroupEventDead:GetUnits()
-        local nbr_Units_in_Group        = #GroupCreated_Compo - 1
-        local nbr_Units_init_in_Group   = GroupEventDead:GetInitialSize() - 1
-        local unitName                  = EventData.IniUnitName
-        local unit                      = EventData.IniUnit
-        local unitCoalition             = EventData.IniCoalition
-        local unitPosition              = unit:GetVec2()
-        local unitType                  = EventData.IniTypeName
+        
+--        if EventData.IniUnit and EventData.IniObjectCategory==Object.Category.SCENERY then
+----          local Id_scenery = EventData.IniUnit:GetID()
+--          local Position_scenery  = EventData.IniUnit:GetVec3()
+--          local initiator_scenery = EventData.initiator.id_
+--          DCSGW_TABLE_Scenery[initiator_scenery] = {}
+--          DCSGW_TABLE_Scenery[initiator_scenery]["x"] = Position_scenery.x
+--          DCSGW_TABLE_Scenery[initiator_scenery]["y"] = Position_scenery.y
+--          DCSGW_TABLE_Scenery[initiator_scenery]["z"] = Position_scenery.z
+----          table.insert(DCSGW_TABLE_Scenery,{Position_scenery,initiator_scenery})
+--          
+--          Saving_scenery_Destroyed = IntegratedserializeWithCycles( DCSGW_TABLE_Scenery_Name, DCSGW_TABLE_Scenery )
+--          writemission( Saving_scenery_Destroyed, DCSGW_File_Saving_Scenery_Destroyed ) 
+--          env.info( "Update & Save Scenery file : OK" )
+          
+--        elseif EventData.IniUnit and EventData.IniObjectCategory==Object.Category.UNIT then
+        if EventData.IniUnit and EventData.IniObjectCategory==Object.Category.UNIT then
+          local GroupCreatedName          = GroupEventDead:GetName()
+          local GroupCreated_Compo        = GroupEventDead:GetUnits()
+          local nbr_Units_in_Group        = #GroupCreated_Compo - 1
+          local nbr_Units_init_in_Group   = GroupEventDead:GetInitialSize() - 1
+          local unitName                  = EventData.IniUnitName
+          local unit                      = EventData.IniUnit
+          local unitCoalition             = EventData.IniCoalition
+          local unitPosition              = unit:GetVec2()
+          local unitType                  = EventData.IniTypeName
         
           if unitCoalition == 2 then 
               TableNameCoalition  = DCSGW_TABLE_BLUE_Name
@@ -309,8 +329,27 @@ function DCSGW_FNC_Event_Ground_Units_Dead ( GroupEventDead )
           Saving_Ground_Group = IntegratedserializeWithCycles( TableNameCoalition, TableGroundUnits )
           writemission( Saving_Ground_Group, SaveFileCoalition )
         end
+        
+        end
     end
 
+end
+
+function DCSGW_FNC_Event_Scenery_Dead ()
+  function  SceneryEventDead:OnEventDead( EventData )
+    if EventData.IniUnit and EventData.IniObjectCategory==Object.Category.SCENERY then
+      local Position_scenery  = EventData.IniUnit:GetVec3()
+      local initiator_scenery = EventData.initiator.id_
+      DCSGW_TABLE_Scenery[initiator_scenery] = {}
+      DCSGW_TABLE_Scenery[initiator_scenery]["x"] = Position_scenery.x
+      DCSGW_TABLE_Scenery[initiator_scenery]["y"] = Position_scenery.y
+      DCSGW_TABLE_Scenery[initiator_scenery]["z"] = Position_scenery.z
+      
+      Saving_scenery_Destroyed = IntegratedserializeWithCycles( DCSGW_TABLE_Scenery_Name, DCSGW_TABLE_Scenery )
+      writemission( Saving_scenery_Destroyed, DCSGW_File_Saving_Scenery_Destroyed ) 
+      env.info( "Update & Save Scenery file : OK" )
+    end
+  end
 end
 
 function DCSGW_FNC_Static_Spawn ()
@@ -329,9 +368,7 @@ function DCSGW_FNC_Static_Spawn ()
           elseif CoalitionStatic == 1 then 
               CountryStatic = 81
           end  
-        
-        
-        
+
         local staticObj = {
             ["heading"] = HeadingStatic,
 --            ["groupId"] = 3,
@@ -345,18 +382,18 @@ function DCSGW_FNC_Static_Spawn ()
             ["x"] = PositionXStatic,
             ["dead"] = true,
           }
-          
+      
           coalition.addStaticObject(CountryStatic, staticObj)
         
         staticObj = {}
             -- register in table pour prochaines Saves
-                DCSGW_TABLE_STATIC_Ground_destroyed[k] = {}
-                DCSGW_TABLE_STATIC_Ground_destroyed[k]["Name"]         = NameStatic
-                DCSGW_TABLE_STATIC_Ground_destroyed[k]["Coalition"]    = CoalitionStatic
-                DCSGW_TABLE_STATIC_Ground_destroyed[k]["Type"]         = TypeStatic
-                DCSGW_TABLE_STATIC_Ground_destroyed[k]["x"]            = PositionXStatic
-                DCSGW_TABLE_STATIC_Ground_destroyed[k]["y"]            = PositionYStatic
-                DCSGW_TABLE_STATIC_Ground_destroyed[k]["Dead"]         = true               
+--                DCSGW_TABLE_STATIC_Ground_destroyed[k] = {}
+--                DCSGW_TABLE_STATIC_Ground_destroyed[k]["Name"]         = NameStatic
+--                DCSGW_TABLE_STATIC_Ground_destroyed[k]["Coalition"]    = CoalitionStatic
+--                DCSGW_TABLE_STATIC_Ground_destroyed[k]["Type"]         = TypeStatic
+--                DCSGW_TABLE_STATIC_Ground_destroyed[k]["x"]            = PositionXStatic
+--                DCSGW_TABLE_STATIC_Ground_destroyed[k]["y"]            = PositionYStatic
+--                DCSGW_TABLE_STATIC_Ground_destroyed[k]["Dead"]         = true               
         
         
         
@@ -390,10 +427,21 @@ function DCSGW_FNC_Static_Spawn ()
       end
 end
 
+function DCSGW_FNC_Scenery_Exploz ()
+  for k,v in pairs( SceneryDestroyed ) do
+      local vec3 = COORDINATE:New(SceneryDestroyed[k].x, SceneryDestroyed[k].y, SceneryDestroyed[k].z)
+      vec3:Explosion(1000)
+  end
+  DCSGW_TABLE_Scenery  = SceneryDestroyed
+end
+
+
 
 --------------------------------------------------------------------------------------------------------
 -- RUN Spawning units registered in file
 --------------------------------------------------------------------------------------------------------
+  
+  ----------------------------------------------------------- 
   -- Gestion GROUND ACCOUNTS
   -----------------------------------------------------------  
 
@@ -407,18 +455,34 @@ end
           
     end, {}, 5, 10 -- #Start (number) #Repeat (number) #RandomizeFactor (number between 0 and 1 randomize repeat) #Stop (number)
 ) -- End Scheduler
-  
-    -- Gestion GROUND DESTROYED
+
+  -----------------------------------------------------------
+  -- Gestion SCENERY DESTROYED
+  -----------------------------------------------------------
+  if file_exists( DCSGW_File_Saving_Scenery_Destroyed ) then
+    dofile(DCSGW_File_Saving_Scenery_Destroyed)
+    DCSGW_FNC_Scenery_Exploz ()
+    
+    env.info( "Le fichier de sauvegarde DESTROYED Scenery : "..DCSGW_File_Saving_Scenery_Destroyed.." est en cours de chargement" )
+  else 
+    DCSGW_TABLE_Scenery  = {}  -- empty table 
+    env.info( "Le fichier de sauvegarde DESTROYED Scenery : "..DCSGW_File_Saving_Scenery_Destroyed.." n'éxiste pas, un nouveau sera créé lors de la destruction de scenery" )
+  end 
+  -----------------------------------------------------------  
+  -- Gestion GROUND DESTROYED
   -----------------------------------------------------------
   if file_exists( DCSGW_File_Saving_Ground_Destroyed ) then
     -- Ouverture du fichier de sauvegarde.
     dofile(DCSGW_File_Saving_Ground_Destroyed)
-    DCSGW_FNC_Static_Spawn ( GroundGroupsDestroyed )
+    DCSGW_TABLE_STATIC_Ground_destroyed = GroundGroupsDestroyed
+    DCSGW_FNC_Static_Spawn ( )
       -- "GroundGroupsDestroyed"
     env.info( "Le fichier de sauvegarde DESTROYED Ground Units : "..DCSGW_File_Saving_Ground_Destroyed.." est en cours de chargement" )
-  else 
+  else
+    DCSGW_TABLE_STATIC_Ground_destroyed = {}
     env.info( "Le fichier de sauvegarde DESTROYED Ground Units : "..DCSGW_File_Saving_Ground_Destroyed.." n'éxiste pas, un nouveau sera créé lors de l'apparition de nouvelles unités ground détruites sur carte" )
   end
+  -----------------------------------------------------------
   -- Gestion GROUND BLUE
   -----------------------------------------------------------
   if file_exists( DCSGW_File_Saving_Ground_BLUE ) then
@@ -433,6 +497,7 @@ end
   else 
     env.info( "Le fichier de sauvegarde BLUE: "..DCSGW_File_Saving_Ground_BLUE.." n'éxiste pas, un nouveau sera créé lors de l'apparition de nouvelles unités ground sur carte" )
   end
+  -----------------------------------------------------------  
   -- Gestion GROUND RED
   -----------------------------------------------------------
   if file_exists( DCSGW_File_Saving_Ground_RED ) then
@@ -447,8 +512,30 @@ end
   else 
     env.info( "Le fichier de sauvegarde RED : "..DCSGW_File_Saving_Ground_RED.." n'éxiste pas, un nouveau sera créé lors de l'apparition de nouvelles unités ground sur carte" )
   end
+  
+-------------------------------------------------------------------------------------------------------- 
+-- EVENT DEAD
+--------------------------------------------------------------------------------------------------------
 
--- Saving Groups
+-- Decalage de 3 min du lancement de l'Event pour éviter les redondances
+
+SCHEDULER:New( nil,function () 
+    SceneryEventDead = EVENTHANDLER:New()
+    SceneryEventDead:HandleEvent( EVENTS.Dead )
+    DCSGW_FNC_Event_Scenery_Dead()
+    env.info("Scheduler Dead Scenery Event - Active")
+end, {}, 60*3 -- #Start (number) #Repeat (number) #RandomizeFactor (number between 0 and 1 randomize repeat) #Stop (number)
+) -- End Scheduler
+
+SCHEDULER:New( nil,function () 
+    GroupEventDead = EVENTHANDLER:New()
+    GroupEventDead:HandleEvent( EVENTS.Dead )
+    DCSGW_FNC_Event_Ground_Dead ( GroupEventDead )
+    env.info("Scheduler Dead Ground Event - Active")
+end, {}, 10 -- #Start (number) #Repeat (number) #RandomizeFactor (number between 0 and 1 randomize repeat) #Stop (number)
+) -- End Scheduler
+--------------------------------------------------------------------------------------------------------
+-- Saving Groups - Register all group on ma and/or update
 --------------------------------------------------------------------------------------------------------
 DCSGW_SET_GROUND_UNITS:ForEachGroup(
       function( GROUP )
@@ -507,7 +594,8 @@ DCSGW_SET_GROUND_UNITS:ForEachGroup(
         
       end
       )
-
+      
+--------------------------------------------------------------------------------------------------------
 -- Routine d'Update des groupes
 --------------------------------------------------------------------------------------------------------
 SCHEDULER_countGroupsBlue = SCHEDULER:New( nil, 
@@ -529,13 +617,13 @@ SCHEDULER_countGroupsBlue = SCHEDULER:New( nil,
             local TableGroundUnits    = nil 
           
             if GroupeCoalition == 2 then 
-                TableNameCoalition    = DCSGW_TABLE_BLUE_Name
+--                TableNameCoalition    = DCSGW_TABLE_BLUE_Name
                 TableGroundUnits      = DCSGW_TABLE_BLUE_Ground
-                SaveFileCoalition     = DCSGW_File_Saving_Ground_BLUE
+--                SaveFileCoalition     = DCSGW_File_Saving_Ground_BLUE
             elseif GroupeCoalition == 1 then 
-                TableNameCoalition    = DCSGW_TABLE_RED_Name
+--                TableNameCoalition    = DCSGW_TABLE_RED_Name
                 TableGroundUnits      = DCSGW_TABLE_RED_Ground
-                SaveFileCoalition     = DCSGW_File_Saving_Ground_RED
+--                SaveFileCoalition     = DCSGW_File_Saving_Ground_RED
             end
             
             -- Si le groupe est vivant / existant, on update uniquement la positon groupe
@@ -554,11 +642,7 @@ SCHEDULER_countGroupsBlue = SCHEDULER:New( nil,
                   TableGroundUnits[GroupeName]["Units"][i]["Heading"]  = Unit:GetHeading()
                 end
             end
-          
-            -- On écrit le file concerné par l'unité
-            Saving_Ground_Group = IntegratedserializeWithCycles( TableNameCoalition, TableGroundUnits )
-            writemission( Saving_Ground_Group, SaveFileCoalition )
-          
+         
             env.info( "Group updated : "..GroupeName )
            
           else
@@ -568,9 +652,19 @@ SCHEDULER_countGroupsBlue = SCHEDULER:New( nil,
           end
           ) -- End forEachGroup
           
+                      -- On écrit le file concerné par l'unité
+            Saving_Ground_Group_BLUE = IntegratedserializeWithCycles( DCSGW_TABLE_BLUE_Name, DCSGW_TABLE_BLUE_Ground )
+            writemission( Saving_Ground_Group_BLUE, DCSGW_File_Saving_Ground_BLUE )
+            env.info( "Save Ground Units BLUE file : OK" )
+                        -- On écrit le file concerné par l'unité
+            Saving_Ground_Group_RED = IntegratedserializeWithCycles( DCSGW_TABLE_RED_Name, DCSGW_TABLE_RED_Ground )
+            writemission( Saving_Ground_Group_RED, DCSGW_File_Saving_Ground_RED )
+            env.info( "Save Ground Units RED file : OK" )
+            
   end, {}, DCSGW_Start_Ground_Saving_time, DCSGW_Interval_Ground_Saving_time -- #Start (number) #Repeat (number) #RandomizeFactor (number between 0 and 1 randomize repeat) #Stop (number)
 ) -- End Scheduler
 
-
+--------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------
 
 
