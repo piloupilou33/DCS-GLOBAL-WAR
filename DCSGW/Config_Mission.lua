@@ -12,8 +12,7 @@
 -- PARAMETERS MISSION --
 --================================================================================= 
 
--- Admin Defines (pour accès à certaines fonctionnalités, example : Créate unité à la volée)
---================================================================================= 
+-- Admin Defines (pour accès à certaines fonctionnalités, example : Création unités à la volée)
 DCSGW_Pseudo_Admins = { "Kinder", "Boyington" }
 
 
