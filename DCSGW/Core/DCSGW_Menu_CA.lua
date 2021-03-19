@@ -8,7 +8,7 @@
 
 -----------------------------------------------------------------------------------------------------
 -- Load Moose si nécessaire en Standalone test.
---assert(loadfile( "C:\\Scripts\\DCS-GLOBAL-WAR\\DCSGW\\Core\\Moose_2.5.3.lua" ))() -- For testing only
+-- assert(loadfile( "C:\\Scripts\\DCS-GLOBAL-WAR\\DCSGW\\Core\\Moose_2.5.3.lua" ))() -- For testing only
 -----------------------------------------------------------------------------------------------------
 
 -----------------------------------------------------------------------------------------------------
@@ -24,8 +24,8 @@
 --=================================================================================================--
 -- DEFINES
 --=================================================================================================--
-DCSGW_CA_Menus = {}             -- @Declaration de Table registering menus
-DCSGW_CA_SCHEDULER_MODULE = {}  -- @Declaration de Table pour Affichage des Modules
+DCSGW_CA_Menus = {}             ---@type Table registering menus
+DCSGW_CA_SCHEDULER_MODULE = {}  ---@type Table pour Affichage des Modules
 
 contenu = " "
 
@@ -40,10 +40,10 @@ contenu2 = "C'est ainsi, nous allons envoyer du tactic sur zone".."\n\n".."bonne
   -- Functions
   ----------------------------------------------------
 function DCSGW_FNC_Request_Logistic_vehicle ( Params )
-  local WrapperGroup  = Params[1]  -- @return => Wrapper#GROUP
-  local GroupName     = Params[2]  -- @return "string" => Name of group initiator
-  local Module_Type   = Params[3]  -- @retunr "string" => Module type ("Logistic", "Tactic", ...)
-  local FunctionType  = Params[4]  -- @return "string" => Function requested ("Request Ammo Truck", ...)
+  local WrapperGroup  = Params[1]  ---@return Wrapper#GROUP
+  local GroupName     = Params[2]  ---@return "string" => Name of group initiator
+  local Module_Type   = Params[3]  ---@return "string" => Module type ("Logistic", "Tactic", ...)
+  local FunctionType  = Params[4]  ---@return "string" => Function requested ("Request Ammo Truck", ...)
   
   DCSGW_CA_Menus[GroupName][FunctionType] = {}
   
@@ -71,10 +71,10 @@ end
   
 function DCSGW_FNC_Request_Ammo_Truck ( Params )
 -- used function from ... DCSGW_FNC_Spawn_Group(Type, nb_Units, Name, Position, units, Country, GroupCoalition)
-  local WrapperGroup  = Params[1]  -- @return => Wrapper#GROUP initiator
-  local GroupName     = Params[2]  -- @return "string" => Name of group initiator
-  local Module_Type   = Params[3]  -- @retunr "string" => Module type ("Logistic", "Tactic", ...)
-  local FunctionType  = Params[4]  -- @return "string" => Function requested ("Request Ammo Truck", ...)
+  local WrapperGroup  = Params[1]  ---@return Wrapper#GROUP initiator
+  local GroupName     = Params[2]  ---@return "string" => Name of group initiator
+  local Module_Type   = Params[3]  ---@return "string" => Module type ("Logistic", "Tactic", ...)
+  local FunctionType  = Params[4]  ---@return "string" => Function requested ("Request Ammo Truck", ...)
   local Main_Airbase   = nil 
      
   local Type = nil 
@@ -156,7 +156,7 @@ function DCSGW_Module_Menu_Support_Tactic ( Params )
     DCSGW_CA_SCHEDULER_MODULE[GroupName][Module_Type] = SCHEDULER:New( nil, 
       function ()   
       MESSAGE:New(Module_Type.."\n\n"..contenu ,3,"Module ",true):ToGroup(WrapperGroup)
-          end, {} ,0 ,1 -- #Start (number) #Repeat (number) #RandomizeFactor (number between 0 and 1 randomize repeat) #Stop (number)
+          end, {} ,0 ,1 ---@list #Start (number) #Repeat (number) #RandomizeFactor (number between 0 and 1 randomize repeat) #Stop (number)
     ) -- fin scheduler
 --    
 --    -- On créé le menu
