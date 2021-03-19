@@ -16,7 +16,7 @@ env.info( "-------------------------------------------------------------" )
 -- Si il existe, on load les paramètres à partir des fichiers de sauvegarde par la suite. 
 
 DCSGW_THEATRE = env.mission.theatre
-DCSGW_Turn = 1
+DCSGW_Turn = 0
 
 AIRBASE_RED_MAIN    = nil
 AIRBASE_BLUE_MAIN   = nil

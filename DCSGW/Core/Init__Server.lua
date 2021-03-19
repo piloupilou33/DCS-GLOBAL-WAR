@@ -31,6 +31,8 @@ assert(loadfile( path_scripts.."Core\\Init__Mission.lua"   ))() --
 -- LOAD MISSION 
 -----------------------------------------------------------------------------------------------------
 
+-- Turn Increment
+assert(loadfile( path_scripts.."Core\\DCSGW_Turn_Time.lua"   ))() --
 -- Saving System
 assert(loadfile( path_scripts.."Core\\DCSGW_Saving_System.lua"   ))() --
 -- CA Menu System

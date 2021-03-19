@@ -17,10 +17,9 @@
 --        MENU_GROUP_COMMAND:New(Group, MenuText, ParentMenu, CommandMenuFunction, CommandMenuArgument, ...)
 -----------------------------------------------------------------------------------------------------
 -- External variables required : 
---        AIRBASE_BLUE_MAIN   ( from Init__Mission.lua )
+--   AIRBASE_BLUE_MAIN   ( from Init__Mission.lua )
 -----------------------------------------------------------------------------------------------------
---
---
+
 --=================================================================================================--
 -- DEFINES
 --=================================================================================================--
@@ -91,14 +90,10 @@ function DCSGW_FNC_Request_Ammo_Truck ( Params )
  if Coalition == 1 then -- RED
   Type = "UAZ-469" -- a renseigner
   Main_Airbase = DSWGW_CONFIG["MAIN_AIRBASE_RED"]
---  ID_Spawn = DCSGW_TABLE_Ground_Accounts["ID_Group_Ground_RED"]
---  DCSGW_TABLE_Ground_Accounts["ID_Group_Ground_RED"] = DCSGW_TABLE_Ground_Accounts["ID_Group_Ground_RED"] + 1
   Country = 81 -- RED
  elseif Coalition == 2 then -- BLUE
   Type = "Tigr_233036"
   Main_Airbase = DSWGW_CONFIG["MAIN_AIRBASE_BLUE"]
---  ID_Spawn = DCSGW_TABLE_Ground_Accounts["ID_Group_Ground_BLUE"]
---  DCSGW_TABLE_Ground_Accounts["ID_Group_Ground_BLUE"] = DCSGW_TABLE_Ground_Accounts["ID_Group_Ground_BLUE"] + 1
   Country = 80 -- BLUE
  end
  

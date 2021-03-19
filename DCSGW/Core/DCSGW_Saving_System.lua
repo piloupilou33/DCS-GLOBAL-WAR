@@ -261,10 +261,22 @@ end
 
 function DCSGW_FNC_Scenery_Exploz ()
   for k,v in pairs( SceneryDestroyed ) do
-    local vec3 = COORDINATE:New(SceneryDestroyed[k].x, SceneryDestroyed[k].y, SceneryDestroyed[k].z)
-    vec3:Explosion(1000)
+  
+  local turn_current = DSWGW_CONFIG["Turn"]
+  local turn_event_scenery = SceneryDestroyed[k].Turn_event
+  local turn_suppr_scenery = turn_event_scenery + DCSGW_LifeTime_Scenery_Destroyed
+    
+    if turn_current >= turn_suppr_scenery  then
+      SceneryDestroyed[k] = nil
+    else  
+      local vec3 = COORDINATE:New(SceneryDestroyed[k].x, SceneryDestroyed[k].y, SceneryDestroyed[k].z)
+      vec3:Explosion(1000)
+    end
   end
   DCSGW_TABLE_Scenery  = SceneryDestroyed
+  
+  Saving_scenery_Destroyed = IntegratedserializeWithCycles( DCSGW_TABLE_Scenery_Name, DCSGW_TABLE_Scenery )
+  writemission( Saving_scenery_Destroyed, DCSGW_File_Saving_Scenery_Destroyed ) 
 end
 
 --------------------------------------------------------------------------------------------------------
