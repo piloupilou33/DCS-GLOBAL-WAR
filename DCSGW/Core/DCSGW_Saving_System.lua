@@ -186,7 +186,7 @@ function DCSGW_FNC_Event_Ground_Dead ( GroupEventDead )
             DCSGW_TABLE_STATIC_Ground_destroyed[unitName]["x"]            = unitPosition.x
             DCSGW_TABLE_STATIC_Ground_destroyed[unitName]["y"]            = unitPosition.y
             DCSGW_TABLE_STATIC_Ground_destroyed[unitName]["Dead"]         = true               
-            
+            DCSGW_TABLE_STATIC_Ground_destroyed[unitName]["Turn_event"]   = DSWGW_CONFIG["Turn"]
             -- Réécriture table
             Saving_Ground_Unit_Destroyed = IntegratedserializeWithCycles( DCSGW_TABLE_Destroyed_Ground_Name, DCSGW_TABLE_STATIC_Ground_destroyed )
             writemission( Saving_Ground_Unit_Destroyed, DCSGW_File_Saving_Ground_Destroyed ) 
@@ -218,6 +218,7 @@ function DCSGW_FNC_Event_Scenery_Dead ()
       DCSGW_TABLE_Scenery[initiator_scenery]["x"] = Position_scenery.x
       DCSGW_TABLE_Scenery[initiator_scenery]["y"] = Position_scenery.y
       DCSGW_TABLE_Scenery[initiator_scenery]["z"] = Position_scenery.z
+      DCSGW_TABLE_Scenery[initiator_scenery]["Turn_event"] = DSWGW_CONFIG["Turn"]
       
       Saving_scenery_Destroyed = IntegratedserializeWithCycles( DCSGW_TABLE_Scenery_Name, DCSGW_TABLE_Scenery )
       writemission( Saving_scenery_Destroyed, DCSGW_File_Saving_Scenery_Destroyed ) 
