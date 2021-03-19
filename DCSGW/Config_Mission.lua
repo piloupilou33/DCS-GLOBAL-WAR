@@ -21,6 +21,7 @@ DCSGW_Pseudo_Admins = { "Kinder", "Boyington" }
   
 DCSGW_Saving_Folder_Global		= path_scripts.."Saves\\"
 DCSGW_Saving_Folder_Airboss	 	= DCSGW_Saving_Folder_Global.."AirbossData\\"
+DCSGW_Saving_Folder_Airbases  = DCSGW_Saving_Folder_Global.."AirbasesSave\\"
 DCSGW_Saving_Folder_Ground	 	= DCSGW_Saving_Folder_Global.."GroundSave\\"
 DCSGW_Saving_Folder_Static	 	= DCSGW_Saving_Folder_Global.."StaticSave\\"
 DCSGW_Saving_Folder_Player	 	= DCSGW_Saving_Folder_Global.."PlayerSave\\"

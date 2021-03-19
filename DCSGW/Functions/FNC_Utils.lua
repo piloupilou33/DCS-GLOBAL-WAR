@@ -63,21 +63,10 @@ function DCSGW_FNC_Spawn_Group(Type, nb_Units, Name, Position, units, Country, G
               ["name"] = GroupParam_Name,
             } -- end
   
-  ID_Spawn_Unit = DSWGW_CONFIG["ID"]["ID_Ground_Units"]
+  local ID_Spawn_Unit = DSWGW_CONFIG["ID"]["ID_Ground_Units"]
 -- Ajout des Units du GROUP
   local Ecart = 0
     for i = 1, GroupParam_nbunits do  
-    
---      if GroupParam_Coalition == 1 then 
-----        DCSGW_TABLE_Ground_Accounts["ID_Unit_Ground_RED"] = DCSGW_TABLE_Ground_Accounts["ID_Unit_Ground_RED"] + 1
-----        ID_Spawn_Unit = DCSGW_TABLE_Ground_Accounts["ID_Unit_Ground_RED"]
---      elseif GroupParam_Coalition == 2 then 
-----        DCSGW_TABLE_Ground_Accounts["ID_Unit_Ground_BLUE"] = DCSGW_TABLE_Ground_Accounts["ID_Unit_Ground_BLUE"] + 1
-----        ID_Spawn_Unit = DCSGW_TABLE_Ground_Accounts["ID_Unit_Ground_BLUE"]
---      end 
-    
---    DSWGW_CONFIG["ID"]["ID_Ground"] = DSWGW_CONFIG["ID"]["ID_Ground"] + 1
---    ID_Spawn_Unit = DSWGW_CONFIG["ID"]["ID_Ground"]
 
 --  DSWGW_CONFIG["ID"]["ID_Ground"]        
 --  DSWGW_CONFIG["ID"]["ID_Air"]           
@@ -85,9 +74,7 @@ function DCSGW_FNC_Spawn_Group(Type, nb_Units, Name, Position, units, Country, G
 --  DSWGW_CONFIG["ID"]["ID_Ground_Units"]   
 --  DSWGW_CONFIG["ID"]["ID_Air_Units"]      
 --  DSWGW_CONFIG["ID"]["ID_Ship_Units"]     
-      
-      
-      
+
       local nameUnit = GroupParam_units.Name..ID_Spawn_Unit
       
       groupData["units"][i] = {} 
@@ -104,18 +91,11 @@ function DCSGW_FNC_Spawn_Group(Type, nb_Units, Name, Position, units, Country, G
       Ecart = Ecart + 10
       ID_Spawn_Unit = ID_Spawn_Unit +1
       
-      
   end
   
   DSWGW_CONFIG["ID"]["ID_Ground_Units"]  = ID_Spawn_Unit
   DCSGW_Config_Save()
---  if GroupParam_Coalition == 1 then 
---      DCSGW_TABLE_Ground_Accounts["ID_Group_Ground_RED"] = DCSGW_TABLE_Ground_Accounts["ID_Group_Ground_RED"] + 1
---  elseif GroupParam_Coalition == 2 then 
---      DCSGW_TABLE_Ground_Accounts["ID_Group_Ground_BLUE"] = DCSGW_TABLE_Ground_Accounts["ID_Group_Ground_BLUE"] + 1
---  end
-              
-    env.info ("CREATION GROUP : Groupe country = "..GroupParam_Country.." coalition = "..GroupParam_Coalition)
+   
    -- Creation du Group (SPAWN)
    --------------------------------------------------------------------------------------------------------
    -- example : coalition.addGroup(country.id.USA, Group.Category.GROUND, groupData)  
@@ -128,16 +108,19 @@ function DCSGW_FNC_Spawn_Group(Type, nb_Units, Name, Position, units, Country, G
 end
 
 function DCSGW_FNC_Spawn_From_Marker(text, coord)
-  local Type = nil 
-  local Position = coord:GetVec2() -- Position Vec2
-  local Name = nil
-  local units = {}
-  local Country = nil 
-  local GroupCoalition = nil 
-  local UnitName = nil
-  local Params = {}
-  local ID_Spawn = nil
-  local nb_Units = nil
+  local Type            = nil
+  local Name            = nil
+  local Country         = nil 
+  local GroupCoalition  = nil 
+  local UnitName        = nil
+  local ID_Spawn        = nil
+  local nb_Units        = nil
+  
+  local Position        = coord:GetVec2() -- Position Vec2
+  
+  local units     = {}
+  local Params    = {}
+  
   for param in (text.."="):gmatch("([^=]*)=") do 
     table.insert(Params, param) 
   end
@@ -170,8 +153,8 @@ function DCSGW_FNC_Spawn_From_Marker(text, coord)
   DSWGW_CONFIG["ID"]["ID_Ground"] = DSWGW_CONFIG["ID"]["ID_Ground"] + 1
   
   units= { ["Type"] = Type, ["Name"] = UnitName, ["x"] =Position.x, ["y"] =Position.y, ["Heading"] = 0, ["skill"] ="Average"}
-  env.info("Creation d'un ground - Position = "..Position.x.." | "..Position.y)
-  -- Launch Spawn
+
+  -- Launch Spawn FNC
   DCSGW_FNC_Spawn_Group (Type, nb_Units, Name, Position, units, Country, GroupCoalition)
 end
 
