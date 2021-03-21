@@ -26,6 +26,7 @@ DCSGW_TABLE_Scenery_Name              = "SceneryDestroyed"        -- Table SCENE
 
 DCSGW_SET_GROUND_UNITS                = SET_GROUP:New():FilterCategories("ground"):FilterStart()
 
+DCSGW_SAVING_Loaded = false
 -- Register Functions
 --------------------------------------------------------------------------------------------------------
 
@@ -38,7 +39,7 @@ function DCSGW_SET_GROUND_UNITS:OnAfterAdded(From, Event, To, ObjectName, Object
         local TableNameCoalition  = nil
         local SaveFileCoalition   = nil
         local TableGroundUnits    = nil 
-          
+         
           if GroupeCoalition == 2 then 
               TableNameCoalition  = DCSGW_TABLE_BLUE_Ground_Name
               TableGroundUnits    = DCSGW_TABLE_BLUE_Ground
@@ -64,22 +65,38 @@ function DCSGW_SET_GROUND_UNITS:OnAfterAdded(From, Event, To, ObjectName, Object
           
         for z = 1, GroupeUnits_Count do
           local Unit          = RegisteredGroup:GetUnit( z )
+          local UnitType      = Unit:GetTypeName()
           local UnitPosition  = Unit:GetVec2()
-                    
+          
+          local cost          = 0
+          local maintenance   = 0
+          local bonuskill     = 0
+          
+          for k,v in pairs( CSV_Prices_Units_db ) do
+            if UnitType == CSV_Prices_Units_db[k][1] then
+              cost        = tonumber( CSV_Prices_Units_db[k][10] )
+              maintenance = tonumber( CSV_Prices_Units_db[k][11] )
+              bonuskill   = tonumber( CSV_Prices_Units_db[k][12] )
+            end
+          end   
+        
           TableGroundUnits[GroupeName]["Units"][z] = {}
           TableGroundUnits[GroupeName]["Units"][z]["Name"]      = Unit:GetName()
-          TableGroundUnits[GroupeName]["Units"][z]["Type"]      = Unit:GetTypeName()
+          TableGroundUnits[GroupeName]["Units"][z]["Type"]      = UnitType
           TableGroundUnits[GroupeName]["Units"][z]["x"]         = UnitPosition.x
           TableGroundUnits[GroupeName]["Units"][z]["y"]         = UnitPosition.y
           TableGroundUnits[GroupeName]["Units"][z]["Heading"]   = Unit:GetHeading()
           TableGroundUnits[GroupeName]["Units"][z]["Life"]      = 1
-          TableGroundUnits[GroupeName]["Units"][z]["Cost"]      = 0
-          TableGroundUnits[GroupeName]["Units"][z]["BonusKill"] = 0
+          TableGroundUnits[GroupeName]["Units"][z]["Cost"]      = cost
+          TableGroundUnits[GroupeName]["Units"][z]["Maint"]     = maintenance
+          TableGroundUnits[GroupeName]["Units"][z]["BonusKill"] = bonuskill
+          
         end
+            
     env.info("DCSGW Saving System => New Ground Group Registered : "..ObjectName)
 end
 
-function DCSGW_FNC_SPAWN_Ground_Groups ( DCSGW_File_Saving_Ground )  
+function DCSGW_FNC_SPAWN_Ground_Groups ( DCSGW_File_Saving_Ground )
 
   for k,v in pairs( DCSGW_File_Saving_Ground ) do
         local GroupeCoalition   = DCSGW_File_Saving_Ground[k]["Coalition"]
@@ -282,7 +299,7 @@ end
 --------------------------------------------------------------------------------------------------------
 -- RUN Spawning units registered in file
 --------------------------------------------------------------------------------------------------------
-  
+
   -----------------------------------------------------------
   -- Gestion SCENERY DESTROYED
   -----------------------------------------------------------
@@ -290,19 +307,19 @@ end
     dofile(DCSGW_File_Saving_Scenery_Destroyed)
     DCSGW_FNC_Scenery_Exploz ()
     env.info( "DCSGW Saving System => file DESTROYED Scenery en cours de chargement : "..DCSGW_File_Saving_Scenery_Destroyed )
-  else 
-    DCSGW_TABLE_Scenery  = {}  -- empty table 
+  else
+    DCSGW_TABLE_Scenery  = {}  -- empty table
     env.info( "DCSGW Saving System => file DESTROYED Scenery not found, un nouveau fichier sera disponible : "..DCSGW_File_Saving_Scenery_Destroyed )
-  end 
-  -----------------------------------------------------------  
+  end
+  -----------------------------------------------------------
   -- Gestion GROUND DESTROYED
   -----------------------------------------------------------
   if file_exists( DCSGW_File_Saving_Ground_Destroyed ) then
     -- Ouverture du fichier de sauvegarde.
     dofile(DCSGW_File_Saving_Ground_Destroyed)
     DCSGW_TABLE_STATIC_Ground_destroyed = GroundGroupsDestroyed
-    DCSGW_FNC_Static_Spawn ( )
- 
+    DCSGW_FNC_Static_Spawn ()
+
     env.info( "DCSGW Saving System => file DESTROYED Ground en cours de chargement : "..DCSGW_File_Saving_Ground_Destroyed )
   else
     DCSGW_TABLE_STATIC_Ground_destroyed = {}
@@ -315,31 +332,30 @@ end
     -- Ouverture du fichier de sauvegarde.
     dofile(DCSGW_File_Saving_Ground_BLUE)
     DCSGW_File_Saving_Ground = GroundGroupsBlue
-    DCSGW_FNC_SPAWN_Ground_Groups ( DCSGW_File_Saving_Ground ) 
+    DCSGW_FNC_SPAWN_Ground_Groups ( DCSGW_File_Saving_Ground )
     env.info( "DCSGW Saving System => file BLUE Ground en cours de chargement : "..DCSGW_File_Saving_Ground_BLUE )
-  else 
+  else
     env.info( "DCSGW Saving System => file BLUE Ground not found, un nouveau fichier sera disponible : "..DCSGW_File_Saving_Ground_BLUE )
   end
-  -----------------------------------------------------------  
+  -----------------------------------------------------------
   -- Gestion GROUND RED
   -----------------------------------------------------------
   if file_exists( DCSGW_File_Saving_Ground_RED ) then
     -- Ouverture du fichier de sauvegarde.
     dofile(DCSGW_File_Saving_Ground_RED)
     DCSGW_File_Saving_Ground = GroundGroupsRed
-    DCSGW_FNC_SPAWN_Ground_Groups ( DCSGW_File_Saving_Ground ) 
+    DCSGW_FNC_SPAWN_Ground_Groups ( DCSGW_File_Saving_Ground )
     env.info( "DCSGW Saving System => file RED  Ground en cours de chargement : "..DCSGW_File_Saving_Ground_RED )
-  else 
+  else
     env.info( "DCSGW Saving System => file RED  Ground not found, un nouveau fichier sera disponible : "..DCSGW_File_Saving_Ground_RED )
   end
-  
--------------------------------------------------------------------------------------------------------- 
+
+--------------------------------------------------------------------------------------------------------
 -- EVENT DEAD
 --------------------------------------------------------------------------------------------------------
 
 -- Decalage de 3 min du lancement de l'Event pour éviter les redondances
-
-SCHEDULER:New( nil,function () 
+SCHEDULER:New( nil, function ()
     SceneryEventDead = EVENTHANDLER:New()
     SceneryEventDead:HandleEvent( EVENTS.Dead )
     DCSGW_FNC_Event_Scenery_Dead()
@@ -347,13 +363,14 @@ SCHEDULER:New( nil,function ()
 end, {}, 60*3 -- #Start (number) #Repeat (number) #RandomizeFactor (number between 0 and 1 randomize repeat) #Stop (number)
 ) -- End Scheduler
 
-SCHEDULER:New( nil,function () 
+SCHEDULER:New( nil, function ()
     GroupEventDead = EVENTHANDLER:New()
     GroupEventDead:HandleEvent( EVENTS.Dead )
     DCSGW_FNC_Event_Ground_Dead ( GroupEventDead )
     env.info("DCSGW Saving System => Scheduler Dead Ground Event - Activated")
 end, {}, 10 -- #Start (number) #Repeat (number) #RandomizeFactor (number between 0 and 1 randomize repeat) #Stop (number)
 ) -- End Scheduler
+
 --------------------------------------------------------------------------------------------------------
 -- Saving Groups - Register all group on ma and/or update
 --------------------------------------------------------------------------------------------------------
@@ -366,16 +383,16 @@ DCSGW_SET_GROUND_UNITS:ForEachGroup(
     local GroupeTypeName      = GROUP:GetTypeName()   -- return string
     local GroupePosition      = GROUP:GetVec2()       -- return Vec2 ( GroupePosition.x / GroupePosition.y )
     local GroupeUnits         = GROUP:GetUnits()      -- return Table
-    local GroupeUnits_Count   = #GroupeUnits 
+    local GroupeUnits_Count   = #GroupeUnits
     local TableNameCoalition  = nil
     local SaveFileCoalition   = nil
     local TableGroundUnits    = nil
-         
-    if GroupeCoalition == 2 then 
+
+    if GroupeCoalition == 2 then
       TableNameCoalition  = DCSGW_TABLE_BLUE_Ground_Name
       TableGroundUnits    = DCSGW_TABLE_BLUE_Ground
       SaveFileCoalition   = DCSGW_File_Saving_Ground_BLUE
-    elseif GroupeCoalition == 1 then 
+    elseif GroupeCoalition == 1 then
       TableNameCoalition  = DCSGW_TABLE_RED_Ground_Name
       TableGroundUnits    = DCSGW_TABLE_RED_Ground
       SaveFileCoalition   = DCSGW_File_Saving_Ground_RED
@@ -387,15 +404,15 @@ DCSGW_SET_GROUND_UNITS:ForEachGroup(
     TableGroundUnits[GroupeName]["Country"]          = GroupeCountry
     TableGroundUnits[GroupeName]["Type"]             = GroupeTypeName
     TableGroundUnits[GroupeName]["Position"]         = {}
-    TableGroundUnits[GroupeName]["Position"]["x"]    = GroupePosition.x                                                 
+    TableGroundUnits[GroupeName]["Position"]["x"]    = GroupePosition.x
     TableGroundUnits[GroupeName]["Position"]["y"]    = GroupePosition.y
     TableGroundUnits[GroupeName]["Units"]            = {}
     TableGroundUnits[GroupeName]["DCSGW_TASK"]       = {}
-      
+
     for i = 1, GroupeUnits_Count do
       local Unit          = GROUP:GetUnit( i )
       local UnitPosition  = Unit:GetVec2()
-                
+
       TableGroundUnits[GroupeName]["Units"][i] = {}
       TableGroundUnits[GroupeName]["Units"][i]["Name"]     = Unit:GetName()
       TableGroundUnits[GroupeName]["Units"][i]["Type"]     = Unit:GetTypeName()
@@ -408,18 +425,18 @@ DCSGW_SET_GROUND_UNITS:ForEachGroup(
     -- Save de la table
     Saving_Ground_Group = IntegratedserializeWithCycles( TableNameCoalition, TableGroundUnits )
     writemission( Saving_Ground_Group, SaveFileCoalition )
-    
+
   end
   )
-      
+
 --------------------------------------------------------------------------------------------------------
 -- Routine d'Update des groupes
 --------------------------------------------------------------------------------------------------------
-SCHEDULER_countGroupsBlue = SCHEDULER:New( nil, 
-  function ()      
+SCHEDULER_countGroupsBlue = SCHEDULER:New( nil,
+  function ()
     DCSGW_SET_GROUND_UNITS:ForEachGroup(
-       function( GROUP )      
-          if GROUP:IsAlive() then 
+       function( GROUP )
+          if GROUP:IsAlive() then
             local GroupeName          = GROUP:GetName()             -- return string
             local GroupeCoalition     = GROUP:GetCoalition()        -- return DCS#Coalition.side (0,1,2)
             local GroupeCountry       = GROUP:GetCountry()          -- return DCS#country.id
@@ -430,18 +447,18 @@ SCHEDULER_countGroupsBlue = SCHEDULER:New( nil,
             
             local TableNameCoalition  = nil
             local SaveFileCoalition   = nil
-            local TableGroundUnits    = nil 
-          
-            if GroupeCoalition == 2 then 
+            local TableGroundUnits    = nil
+            
+            if GroupeCoalition == 2 then
                 TableGroundUnits      = DCSGW_TABLE_BLUE_Ground
-            elseif GroupeCoalition == 1 then 
+            elseif GroupeCoalition == 1 then
                 TableGroundUnits      = DCSGW_TABLE_RED_Ground
             end
             
             -- Si le groupe est vivant / existant, on update uniquement la positon groupe
-            TableGroundUnits[GroupeName]["Position"]["x"]    = GroupePosition.x                                                 
+            TableGroundUnits[GroupeName]["Position"]["x"]    = GroupePosition.x                         
             TableGroundUnits[GroupeName]["Position"]["y"]    = GroupePosition.y
-          
+
             for i = 1, GroupeUnits_Count do
                 local Unit            = GROUP:GetUnit( i )
                 local UnitPosition    = Unit:GetVec2()
@@ -472,5 +489,6 @@ SCHEDULER_countGroupsBlue = SCHEDULER:New( nil,
   end, {}, DCSGW_Start_Ground_Saving_time, DCSGW_Interval_Ground_Saving_time -- #Start (number) #Repeat (number) #RandomizeFactor (number between 0 and 1 randomize repeat) #Stop (number)
 ) -- End Scheduler
 
+DCSGW_SAVING_Loaded = true
 --------------------------------------------------------------------------------------------------------
 env.info("DCSGW - INFO : DCSGW_Saving_System.lua ==> LOADED")

@@ -101,8 +101,8 @@ else
 end
 
 if file_exists( DCSGW_File_Ground_Units_Price ) then
-  CSVReturn = CSVread( DCSGW_File_Ground_Units_Price )
-  Saving_Ground_prices = IntegratedserializeWithCycles( "Prices_Ground_Units", CSVReturn )
+  CSV_Prices_Units_db = CSVread( DCSGW_File_Ground_Units_Price )
+  Saving_Ground_prices = IntegratedserializeWithCycles( "Prices_Ground_Units", CSV_Prices_Units_db )
   writemission( Saving_Ground_prices, DCSGW_File_Ground_Units_Price_save )
 end
 

@@ -69,7 +69,7 @@ function DCSGW_FNC_Request_Logistic_vehicle ( Params )
 end   
   
 function DCSGW_FNC_Request_Ammo_Truck ( Params )
--- used function from ... DCSGW_FNC_Spawn_Group(Type, nb_Units, Name, Position, units, Country, GroupCoalition)
+-- used function from ... DCSGW_FNC_Spawn_Group(Name, nb_Units, Position, units, Country, GroupCoalition)
   local WrapperGroup  = Params[1]  ---@return Wrapper#GROUP initiator
   local GroupName     = Params[2]  ---@return "string" => Name of group initiator
   local Module_Type   = Params[3]  ---@return "string" => Module type ("Logistic", "Tactic", ...)
@@ -92,7 +92,7 @@ function DCSGW_FNC_Request_Ammo_Truck ( Params )
   Main_Airbase = DSWGW_CONFIG["MAIN_AIRBASE_RED"]
   Country = 81 -- RED
  elseif Coalition == 2 then -- BLUE
-  Type = "Tigr_233036"
+  Type = "Hummer"
   Main_Airbase = DSWGW_CONFIG["MAIN_AIRBASE_BLUE"]
   Country = 80 -- BLUE
  end
@@ -103,7 +103,7 @@ function DCSGW_FNC_Request_Ammo_Truck ( Params )
  
  DSWGW_CONFIG["ID"]["ID_Ground"] = DSWGW_CONFIG["ID"]["ID_Ground"] + 1
  
- DCSGW_FNC_Spawn_Group(Type, 1, Name, Position, units, Country, Coalition)
+ DCSGW_FNC_Spawn_Group(Name, 1, Position, units, Country, Coalition)
 
  MESSAGE:New("New HQ: "..Name.." created at "..Main_Airbase ,3,"HQ "..CoalitionName,true):ToGroup(WrapperGroup)
 
@@ -460,7 +460,7 @@ end
     local WrapperGroup  =   GROUP:FindByName( unitGroup )
     local unitType = WrapperGroup:GetUnit(unitNumber):GetTypeName()
   
-    MESSAGE:New("Bye bye "..unitPlayer..", vous quittez votre '"..unitType.."'\n Le mode CA 'OFF' ! ",10,"DCSGW Info "):ToGroup( WrapperGroup )  
+    MESSAGE:New("Bye bye , vous quittez votre '"..unitType.."'\n Le mode CA 'OFF' ! ",10,"DCSGW Info "):ToGroup( WrapperGroup )  
     
     --end
   end

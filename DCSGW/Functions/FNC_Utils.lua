@@ -37,16 +37,18 @@ function FNC_SecondsToClock( seconds )
   end
 end
 
-function DCSGW_FNC_Spawn_Group(Type, nb_Units, Name, Position, units, Country, GroupCoalition)
+--- @function 
+--  NameGroup | Nb_Units | Group Position | Table#Units | Country ID | Coalition ID  
+function DCSGW_FNC_Spawn_Group(Name, Nb_Units, Position, units, Country, GroupCoalition)
 
   local GroupParam_Name       = Name
   local GroupParam_Position   = Position  -- Position Vec2 required
   local GroupParam_Country    = Country
   local GroupParam_Coalition  = GroupCoalition
 
-  -- Units params :       Type | Name | Position Vec2 | Heading | skill
+  -- Units params : Type | Name | Position Vec2 | Heading | skill
   local GroupParam_units      = units
-  local GroupParam_nbunits    = nb_Units
+  local GroupParam_nbunits    = Nb_Units
   
   local groupData = {
               ["visible"] = false,
@@ -89,22 +91,19 @@ function DCSGW_FNC_Spawn_Group(Type, nb_Units, Name, Position, units, Country, G
       groupData["units"][i]["heading"] = GroupParam_units.Heading
       groupData["units"][i]["playerCanDrive"] = true 
       Ecart = Ecart + 10
-      ID_Spawn_Unit = ID_Spawn_Unit +1
+      ID_Spawn_Unit = ID_Spawn_Unit + 1
       
   end
-  
+  -- On incrémente l'ID Units et save de la table config
   DSWGW_CONFIG["ID"]["ID_Ground_Units"]  = ID_Spawn_Unit
   DCSGW_Config_Save()
    
    -- Creation du Group (SPAWN)
    --------------------------------------------------------------------------------------------------------
-   -- example : coalition.addGroup(country.id.USA, Group.Category.GROUND, groupData)  
-    coalition.addGroup(GroupParam_Country, Group.Category.GROUND, groupData)   
-    -- Empty groupData for others
-    groupData = {}
-    
-    
-
+   -- Example : coalition.addGroup(country.id.USA, Group.Category.GROUND, groupData)  
+   coalition.addGroup(GroupParam_Country, Group.Category.GROUND, groupData)   
+   -- Empty groupData for others
+   groupData = {}
 end
 
 function DCSGW_FNC_Spawn_From_Marker(text, coord)
@@ -114,7 +113,7 @@ function DCSGW_FNC_Spawn_From_Marker(text, coord)
   local GroupCoalition  = nil 
   local UnitName        = nil
   local ID_Spawn        = nil
-  local nb_Units        = nil
+  local Nb_Units        = nil
   
   local Position        = coord:GetVec2() -- Position Vec2
   
@@ -129,24 +128,24 @@ function DCSGW_FNC_Spawn_From_Marker(text, coord)
   
   ID_Spawn = DSWGW_CONFIG["ID"]["ID_Ground"]
 
-  for k,v in pairs(CSVReturn) do 
-    if CSVReturn[k][7] == 1 then             
-      GroupParam_Coalition  = CSVReturn[k][7]  
-    elseif CSVReturn[k][7] == 2 then     
-      GroupParam_Coalition  = CSVReturn[k][7] 
+  for k,v in pairs(CSV_Prices_Units_db) do 
+    if CSV_Prices_Units_db[k][7] == 1 then             
+      GroupParam_Coalition  = CSV_Prices_Units_db[k][7]  
+    elseif CSV_Prices_Units_db[k][7] == 2 then     
+      GroupParam_Coalition  = CSV_Prices_Units_db[k][7] 
     end
 
-    if CSVReturn[k][1] == Params[2] then
-        Name      = Params[2].."|"..CSVReturn[k][3].."|"..ID_Spawn
-        Type = CSVReturn[k][1]
+    if CSV_Prices_Units_db[k][1] == Params[2] then
+        Name      = Params[2].."|"..CSV_Prices_Units_db[k][3].."|"..ID_Spawn
+        Type = CSV_Prices_Units_db[k][1]
 --          env.info("Creation d'un ground - Type = "..Params[2])
-        Country   = CSVReturn[k][9]
+        Country   = CSV_Prices_Units_db[k][9]
 --          env.info("Creation d'un ground - Country = "..Country)
-        GroupCoalition = CSVReturn[k][7]
+        GroupCoalition = CSV_Prices_Units_db[k][7]
 --          env.info("Creation d'un ground - Coalition = "..GroupCoalition)
           env.info("Creation d'un ground - Name = "..Name)
-       UnitName = Params[2].."|"..CSVReturn[k][3].."|unitID_"
-       nb_Units = Params[3]
+       UnitName = Params[2].."|"..CSV_Prices_Units_db[k][3].."|unitID_"
+       Nb_Units = Params[3]
     end
   end
   
@@ -155,7 +154,20 @@ function DCSGW_FNC_Spawn_From_Marker(text, coord)
   units= { ["Type"] = Type, ["Name"] = UnitName, ["x"] =Position.x, ["y"] =Position.y, ["Heading"] = 0, ["skill"] ="Average"}
 
   -- Launch Spawn FNC
-  DCSGW_FNC_Spawn_Group (Type, nb_Units, Name, Position, units, Country, GroupCoalition)
+  DCSGW_FNC_Spawn_Group (Type, Nb_Units, Name, Position, units, Country, GroupCoalition)
 end
+
+function DCSGW_FNC_Costing ( units )
+--- @list require units = {}
+--  Type | Name | Position Vec2 | Heading | skill
+  local UnitType = units[1]
+  for k,v in pairs( CSV_Prices_Units_db ) do
+    if CSV_Prices_Units_db[k][1] == UnitType then
+    
+    end
+  end
+      
+end
+
 
 env.info("DCSGW - INFO : FNC_Utils.lua ==> LOADED")
