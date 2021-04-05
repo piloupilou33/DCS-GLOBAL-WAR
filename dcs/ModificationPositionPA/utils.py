@@ -4,6 +4,7 @@ import csv
 import configparser
 import os
 import zipfile
+import re
 from pathlib import Path
 from slpp import slpp as lua
 from zipfile import ZipFile 
@@ -47,7 +48,8 @@ class Utils:
         return lua.decode(code)
 
     def parse_json_to_lua(self, data):
-        return lua.encode(data)
+        lua_str = lua.encode(data)
+        return re.sub("\[\"(\d+)\"]", r'[\1]', lua_str)
     
     def to_file(self,data,format="json"):
         if format=="json":
