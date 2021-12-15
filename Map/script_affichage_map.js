@@ -22,21 +22,49 @@ function init() {
     ///// Enregistrement des icones perso
 
    
-    var ic_base = L.icon({ //icone des bases aériennes
+    var ic_base_neut = L.icon({ //icone des bases aériennes neutre
         iconSize: [15,15],
         popupAnchor : [0,-15],
-        iconUrl: 'Map/Icones/base.png'
+        iconUrl: 'Map/Icones/base_neutral.png'
     })
 
-    ///// Récupération des données géo des bases à partir du fichier geoJSON
-    var calqueGeoJson = L.geoJSON(aeroport2, {
-        onEachFeature: function (feature, item) {
-            item.setIcon(ic_base); //on ajoute l'icone personnalisé 
-            item.bindPopup('<pre>'+JSON.stringify(feature.properties,null,' ').replace(/[\{\}"]/g,'')+'</pre>'); // génération des popup avec les infos du fichier json
+    var ic_base_red = L.icon({ //icone des bases aériennes red
+        iconSize: [15,15],
+        popupAnchor : [0,-15],
+        iconUrl: 'Map/Icones/base_red.png'
+    })
 
+
+    var ic_base_blue = L.icon({ //icone des bases aériennes blue
+        iconSize: [15,15],
+        popupAnchor : [0,-15],
+        iconUrl: 'Map/Icones/base_blue.png'
+    })
+
+        // Affichage des aeroport avec un filtre sur la coalition et assignation d'un marker en fonction
+    var calqueGeoJson = L.geoJSON(aeroport, {
+    onEachFeature: function (feature, item) {
+        var lat = feature.geometry.coordinates[1];
+        var lon = feature.geometry.coordinates[0];
+        var popupContent;
+        var marker;
+        switch(feature.properties.Coalition){
+            case "Neutral":
+                marker = L.marker([lat,lon], {icon: ic_base_neut}).addTo(map);
+                popupContent = '<pre>'+JSON.stringify(feature.properties,null,' ').replace(/[\{\}",]/g,'')+'</pre>'
+                break;
+            case "Red" :
+                marker = L.marker([lat,lon], {icon: ic_base_red}).addTo(map);
+                popupContent = '<pre>'+JSON.stringify(feature.properties,null,' ').replace(/[\{\}",]/g,'')+'</pre>'
+                break; 
+            case "Blue" :
+            marker = L.marker([lat,lon], {icon: ic_base_blue}).addTo(map);
+            popupContent = '<pre>'+JSON.stringify(feature.properties,null,' ').replace(/[\{\}",]/g,'')+'</pre>'
+                break;           
         }
-       }).addTo(map);
-    
+    marker.bindPopup(popupContent);
+    }
+    });   
 
 
     //// Affichage de l'ensemble des calques et gestion de l'affichage
