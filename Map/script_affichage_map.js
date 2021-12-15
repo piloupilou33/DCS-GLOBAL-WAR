@@ -3,7 +3,7 @@ console.log('script_affichage_map.js');
 function init() {
 
 
-    // Afficahge de la map de base
+    // Affichage de la map de base
 
     const CentreMap = {
         latitude: 33.89157,
@@ -22,29 +22,37 @@ function init() {
     ///// Enregistrement des icones perso
 
    
-    var ic_base = L.icon({ //icone des bases aériennes
-        iconSize: [20,20],
-        popupAnchor : [0,-20],
+    var ic_base_neut = L.icon({ //icone des bases aériennes neutre
+        iconSize: [15,15],
+        popupAnchor : [0,-15],
         iconUrl: 'Map/Icones/base.png'
-
-
     })
 
-    ///// Récupération des données géo des bases à partir du fichier geoJSON
-    var layer = L.geoJSON(aeroport, {
-        onEachFeature: function (feature, latlng) {
-            latlng.setIcon(ic_base);
-            latlng.bindPopup('<pre>'+JSON.stringify(feature.properties,null,' ').replace(/[\{\}"]/g,'')+'</pre>');
+    var ic_base_red = L.icon({ //icone des bases aériennes red
+        iconSize: [15,15],
+        popupAnchor : [0,-15],
+        iconUrl: 'Map/Icones/base_red.png'
+    })
 
-        }
-       }).addTo(map);
-    
 
+    var ic_base_blue = L.icon({ //icone des bases aériennes blue
+        iconSize: [15,15],
+        popupAnchor : [0,-15],
+        iconUrl: 'Map/Icones/base_blue.png'
+    })
+
+        // Affichage des aeroport avec un filtre sur la coalition et assignation d'un marker en fonction
+    var calqueAirportNeutral = L.geoJSON(aeroport, {
+    onEachFeature: function (feature, item) {
+        item.setIcon(ic_base_neut);
+        item.bindPopup('<pre>'+JSON.stringify(feature.properties,null,' ').replace(/[\{\}",]/g,'')+'</pre>')
+    }
+    }).addTo(map);   
 
     //// Affichage de l'ensemble des calques et gestion de l'affichage
 
     var overlayMaps = {
-        "Airport": layer
+        "Neutral Airport": calqueAirportNeutral
         
     };
 
