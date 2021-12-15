@@ -3,7 +3,7 @@ console.log('script_affichage_map.js');
 function init() {
 
 
-    // Afficahge de la map de base
+    // Affichage de la map de base
 
     const CentreMap = {
         latitude: 33.89157,
@@ -23,18 +23,16 @@ function init() {
 
    
     var ic_base = L.icon({ //icone des bases aériennes
-        iconSize: [20,20],
-        popupAnchor : [0,-20],
+        iconSize: [15,15],
+        popupAnchor : [0,-15],
         iconUrl: 'Map/Icones/base.png'
-
-
     })
 
     ///// Récupération des données géo des bases à partir du fichier geoJSON
-    var layer = L.geoJSON(aeroport, {
-        onEachFeature: function (feature, latlng) {
-            latlng.setIcon(ic_base);
-            latlng.bindPopup('<pre>'+JSON.stringify(feature.properties,null,' ').replace(/[\{\}"]/g,'')+'</pre>');
+    var calqueGeoJson = L.geoJSON(aeroport2, {
+        onEachFeature: function (feature, item) {
+            item.setIcon(ic_base); //on ajoute l'icone personnalisé 
+            item.bindPopup('<pre>'+JSON.stringify(feature.properties,null,' ').replace(/[\{\}"]/g,'')+'</pre>'); // génération des popup avec les infos du fichier json
 
         }
        }).addTo(map);
@@ -44,7 +42,7 @@ function init() {
     //// Affichage de l'ensemble des calques et gestion de l'affichage
 
     var overlayMaps = {
-        "Airport": layer
+        "Airport": calqueGeoJson
         
     };
 
