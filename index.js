@@ -31,4 +31,4 @@ Client.on("messageCreate", message => {
     }
 });
 
-Client.login("OTIxMTMzNDk4ODg1MTAzNjc3.Ybueaw.JVojDKP1-vwMbfc7oyCSE1JtKqE")
+Client.login("OTIxMTMzNDk4ODg1MTAzNjc3.Ybueaw.gdJbLm8Lc30yxQFAPMJmWIaztDw");

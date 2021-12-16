@@ -134,7 +134,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 Pipfile.lock
-dcs/ModificationPositionPA/output_lua
-dcs/ModificationPositionPA/mission.zip
-dcs/ModificationPositionPA/test/mission.zip
-dcs/ModificationPositionPA/test/mission
+
+# Pyre type checker
+index.js
