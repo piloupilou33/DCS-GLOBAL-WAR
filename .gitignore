@@ -135,5 +135,5 @@ dmypy.json
 .pyre/
 Pipfile.lock
 
-# Pyre type checker
+# 
 index.js
