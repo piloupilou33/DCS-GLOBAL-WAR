@@ -1,7 +1,4 @@
 var aeroport = {
-"type": "FeatureCollection",
-"name": "Save_Syria_Airbases_Data",
-"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
 "features": [
 { "type": "Feature", "properties": { "Name": "Kuweires", "ID": "31", "Lat": 36.189374426080001, "Long": 37.570439309206002, "Category": "Airport", "Nb parking": "39", "Nb Runway": "1", "Runway 1 Lenght": "2030", "Runway 1 Heading": "281 | 101", "Runway 2 Lenght": "0", "Runway 2 Heading": "0 | 0", "Runway 3 Lenght": "0", "Runway 3 Heading": "0 | 0", "Runway 4 Lenght": "0", "Runway 4 Heading": "0 | 0" }, "geometry": { "type": "Point", "coordinates": [ 37.570439309206002, 36.189374426080001 ] } },
 { "type": "Feature", "properties": { "Name": "Marj Ruhayyil", "ID": "23", "Lat": 33.279510126867002, "Long": 36.446981195040998, "Category": "Airport", "Nb parking": "37", "Nb Runway": "2", "Runway 1 Lenght": "2309", "Runway 1 Heading": "63 | 243", "Runway 2 Lenght": "2214", "Runway 2 Heading": "244 | 64", "Runway 3 Lenght": "0", "Runway 3 Heading": "0 | 0", "Runway 4 Lenght": "0", "Runway 4 Heading": "0 | 0" }, "geometry": { "type": "Point", "coordinates": [ 36.446981195040998, 33.279510126867002 ] } },

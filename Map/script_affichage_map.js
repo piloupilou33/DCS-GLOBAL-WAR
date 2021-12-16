@@ -25,34 +25,50 @@ function init() {
     var ic_base_neut = L.icon({ //icone des bases aériennes neutre
         iconSize: [15,15],
         popupAnchor : [0,-15],
-        iconUrl: 'Map/Icones/base.png'
+        iconUrl: 'Map/Icones/baseNeutral.png'
     })
 
     var ic_base_red = L.icon({ //icone des bases aériennes red
         iconSize: [15,15],
         popupAnchor : [0,-15],
-        iconUrl: 'Map/Icones/base_red.png'
+        iconUrl: 'Map/Icones/baseRed.png'
     })
 
 
     var ic_base_blue = L.icon({ //icone des bases aériennes blue
         iconSize: [15,15],
         popupAnchor : [0,-15],
-        iconUrl: 'Map/Icones/base_blue.png'
+        iconUrl: 'Map/Icones/baseBlue.png'
     })
 
-        // Affichage des aeroport avec un filtre sur la coalition et assignation d'un marker en fonction
-    var calqueAirportNeutral = L.geoJSON(aeroport, {
+        // Affichage des aeroport sur la coalition et assignation d'un marker en fonction
+    var calqueAirportNeutral = L.geoJSON(aeroportNeutral, {
     onEachFeature: function (feature, item) {
         item.setIcon(ic_base_neut);
         item.bindPopup('<pre>'+JSON.stringify(feature.properties,null,' ').replace(/[\{\}",]/g,'')+'</pre>')
     }
     }).addTo(map);   
 
+    var calqueAirportBlue = L.geoJSON(aeroportBlue, {
+        onEachFeature: function (feature, item) {
+            item.setIcon(ic_base_blue);
+            item.bindPopup('<pre>'+JSON.stringify(feature.properties,null,' ').replace(/[\{\}",]/g,'')+'</pre>')
+        }
+        }).addTo(map);   
+
+    var calqueAirportRed = L.geoJSON(aeroportRed, {
+        onEachFeature: function (feature, item) {
+            item.setIcon(ic_base_red);
+            item.bindPopup('<pre>'+JSON.stringify(feature.properties,null,' ').replace(/[\{\}",]/g,'')+'</pre>')
+        }
+        }).addTo(map);   
+
     //// Affichage de l'ensemble des calques et gestion de l'affichage
 
     var overlayMaps = {
-        "Neutral Airport": calqueAirportNeutral
+        "Neutral Airport": calqueAirportNeutral,
+        "Blue Airport": calqueAirportBlue,
+        "Red Airport": calqueAirportRed
         
     };
 

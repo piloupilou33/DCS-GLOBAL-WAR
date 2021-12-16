@@ -1,0 +1,5 @@
+var aeroportBlue = { 
+"features": [ 
+{ "type": "Feature", "properties": { "Name":"Ramat David","Coalition":"Blue","Lat":"32.666055265719","Long":"35.165455922777","Nb parking":"48","Piste":"290 | 268","Length":"2058 m","Piste":"326 | 110","Length":"2040 m","Piste":"146 | 88","Length":"2040 m"},"geometry": { "type": "Point", "coordinates": [ 35.165455922777,32.666055265719 ] } }, 
+] 
+};
