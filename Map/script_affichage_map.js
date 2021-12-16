@@ -20,8 +20,7 @@ function init() {
     });
 
     ///// Enregistrement des icones perso
-
-   
+  
     var ic_base_neut = L.icon({ //icone des bases aériennes neutre
         iconSize: [15,15],
         popupAnchor : [0,-15],
