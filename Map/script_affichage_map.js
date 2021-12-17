@@ -15,8 +15,16 @@ function init() {
 
     var map = L.map('map').setView([CentreMap.latitude,CentreMap.longitude], ZoomLevel);
 
-    var calquePrincipal = L.tileLayer('https://api.maptiler.com/maps/topo/{z}/{x}/{y}.png?key=ONO9gSCTjyyqeDhRldrV', {
+    var calqueTopo = L.tileLayer('https://api.maptiler.com/maps/topo/{z}/{x}/{y}.png?key=ONO9gSCTjyyqeDhRldrV', {
     attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a> <a href="https://www.maptiler.com/copyright/ ">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright ">&copy; OpenStreetMap contributors</a>',
+    });
+
+    var calqueSatellite = L.tileLayer('https://api.maptiler.com/maps/hybrid/{z}/{x}/{y}.jpg?key=ONO9gSCTjyyqeDhRldrV', {
+        attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a> <a href="https://www.maptiler.com/copyright/ ">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright ">&copy; OpenStreetMap contributors</a>',
+    });
+
+    var calqueSimple = L.tileLayer('https://api.maptiler.com/maps/pastel/{z}/{x}/{y}.png?key=ONO9gSCTjyyqeDhRldrV', {
+        attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a> <a href="https://www.maptiler.com/copyright/ ">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright ">&copy; OpenStreetMap contributors</a>',
     });
 
     ///// Enregistrement des icones perso
@@ -72,9 +80,13 @@ function init() {
     };
 
     var baseMaps = {
-        "Base Map": calquePrincipal.addTo(map)
+        "Base Map": calqueTopo.addTo(map),
+        "Vue satellite": calqueSatellite.addTo(map),
+        "Vue simple": calqueSimple.addTo(map)
     }
-    L.control.layers(baseMaps, overlayMaps).addTo(map);
+    L.control.layers(baseMaps,'').addTo(map);
+    L.control.layers('',overlayMaps).addTo(map);
+    
 
 
 }
