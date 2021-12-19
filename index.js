@@ -267,55 +267,63 @@ client.on("guildMemberUpdate", (oldMember, newMember) => {
     if (oldMember.roles.cache.size > newMember.roles.cache.size) {
         oldMember.roles.cache.forEach(role => {
             if (!newMember.roles.cache.has(role.id)) {
-                var newMember_nick = oldMember.nickname.slice(7,newMember.nickname.length);
+                var old_grade = oldMember.nickname.substring(
+                    oldMember.nickname.indexOf("[")+1, 
+                    oldMember.nickname.lastIndexOf("]")
+                    );
+                var newMember_nick = oldMember.nickname.slice(oldMember.nickname.lastIndexOf("]")+1,newMember.nickname.length);
                 client.channels.cache.get("922115179091726406").send("**" + newMember_nick+ "**" + " a perdu le grade de : **" + role.name +"**");
-                newMember.setNickname("[     ]" + newMember_nick);
+                newMember.setNickname("[]" + newMember_nick);
             }
         });
     } else if (oldMember.roles.cache.size < newMember.roles.cache.size) {
         // Looping through the role and checking which role was added.
         newMember.roles.cache.forEach(role => {
             if (!oldMember.roles.cache.has(role.id)) {
-                var newMember_nick = oldMember.nickname.slice(7,newMember.nickname.length);
+                var old_grade = oldMember.nickname.substring(
+                    oldMember.nickname.indexOf("["), 
+                    oldMember.nickname.lastIndexOf("]")
+                );
+                var newMember_nick = oldMember.nickname.slice(newMember.nickname.lastIndexOf("]")+1,newMember.nickname.length);
                 if (role.id== role_id_bleu || role.id== role_id_red || role.id== role_id_bleu){
                     console.log("Role non automatique")
                     return;
                 } else {
                     if (role.id==role_id_recrue) {
-                        newMember.setNickname("[  -  ]" + newMember_nick);
+                        newMember.setNickname("[-]" + newMember_nick);
                     }
                     if (role.id==role_id_1st_class) {
-                        newMember.setNickname("[  ❭  ]" + newMember_nick);
+                        newMember.setNickname("[❭]" + newMember_nick);
                     }
                     if (role.id==role_id_caporal_chef) {
-                        newMember.setNickname("[❱ ❭ ❭]" + newMember_nick);
+                        newMember.setNickname("[❱❭❭]" + newMember_nick);
                     }
                     if (role.id==role_id_sergent) {
-                        newMember.setNickname("[ ❱ ❱ ]" + newMember_nick);
+                        newMember.setNickname("[❱❱]" + newMember_nick);
                     }
                     if (role.id==role_id_sergent_chef) {
-                        newMember.setNickname("[❱ ❱ ❱]" + newMember_nick);
+                        newMember.setNickname("[❱❱❱]" + newMember_nick);
                     }
                     if (role.id==role_id_major) {
-                        newMember.setNickname("[  ◻  ]" + newMember_nick);
+                        newMember.setNickname("[◻]" + newMember_nick);
                     }
                     if (role.id==role_id_lieutenant) {
-                        newMember.setNickname("[ ◼ ◼ ]" + newMember_nick);
+                        newMember.setNickname("[◼ ◼]" + newMember_nick);
                     }
                     if (role.id==role_id_capitaine) {
                         newMember.setNickname("[◼ ◼ ◼]" + newMember_nick);
                     }
                     if (role.id==role_id_commandant) {
-                        newMember.setNickname("[  ✧  ]" + newMember_nick);
+                        newMember.setNickname("[✧]" + newMember_nick);
                     }
                     if (role.id==role_id_colonel) {
-                        newMember.setNickname("[ ✧ ✧ ]" + newMember_nick);
+                        newMember.setNickname("[✧✧]" + newMember_nick);
                     }
                     if (role.id==role_id_general_div) {
-                        newMember.setNickname("[ ✦ ✦ ]" + newMember_nick);
+                        newMember.setNickname("[✦✦]" + newMember_nick);
                     }
                     if (role.id==role_id_general) {
-                        newMember.setNickname("[✦ ✦ ✦]" + newMember_nick);
+                        newMember.setNickname("[✦✦✦]" + newMember_nick);
                     }
                     client.channels.cache.get("922115179091726406").send("Felicitations ! **" + newMember_nick + "**, tu as obtenu le grade de : **" + role.name+"**");
                 }
