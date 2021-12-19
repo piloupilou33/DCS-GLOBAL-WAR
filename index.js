@@ -69,7 +69,7 @@ const role_id_caporal_chef ="921428364059901952";
 const role_id_1st_class ="921428354920484954";
 const role_id_recrue ="921427596816822443";
 
-var role_auto = [role_id_recrue,role_id_1st_class,role_id_caporal_chef,role_id_sergent,role_id_sergent_chef,role_id_major]
+var role_auto = [role_id_recrue,role_id_1st_class,role_id_caporal_chef,role_id_sergent,role_id_sergent_chef]
 
 //definition des objet channel discord - seront complet lors de la connexion du bot au serveur
 //********ROUGE******/
