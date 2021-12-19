@@ -4,7 +4,7 @@
 const { readLastLines, readLastLinesEnc } = require("read-last-lines-ts")
 const Papa = require("papaparse");
 const fs = require('fs');
-
+const discord = require('discord.js');
 const { Client, Intents } = require('discord.js');
 
 const myIntents = new Intents();
@@ -262,6 +262,67 @@ client.on("messageCreate", msg => {
     }
 });
 
+client.on("guildMemberUpdate", (oldMember, newMember) => {
+    // Old roles Collection is higher in size than the new one. A role has been removed.
+    if (oldMember.roles.cache.size > newMember.roles.cache.size) {
+        oldMember.roles.cache.forEach(role => {
+            if (!newMember.roles.cache.has(role.id)) {
+                var newMember_nick = oldMember.nickname.slice(7,newMember.nickname.length);
+                client.channels.cache.get("922115179091726406").send("**" + newMember_nick+ "**" + " a perdu le grade de : **" + role.name +"**");
+                newMember.setNickname("[     ]" + newMember_nick);
+            }
+        });
+    } else if (oldMember.roles.cache.size < newMember.roles.cache.size) {
+        // Looping through the role and checking which role was added.
+        newMember.roles.cache.forEach(role => {
+            if (!oldMember.roles.cache.has(role.id)) {
+                var newMember_nick = oldMember.nickname.slice(7,newMember.nickname.length);
+                if (role.id== role_id_bleu || role.id== role_id_red || role.id== role_id_bleu){
+                    console.log("Role non automatique")
+                    return;
+                } else {
+                    if (role.id==role_id_recrue) {
+                        newMember.setNickname("[  -  ]" + newMember_nick);
+                    }
+                    if (role.id==role_id_1st_class) {
+                        newMember.setNickname("[  ❭  ]" + newMember_nick);
+                    }
+                    if (role.id==role_id_caporal_chef) {
+                        newMember.setNickname("[❱ ❭ ❭]" + newMember_nick);
+                    }
+                    if (role.id==role_id_sergent) {
+                        newMember.setNickname("[ ❱ ❱ ]" + newMember_nick);
+                    }
+                    if (role.id==role_id_sergent_chef) {
+                        newMember.setNickname("[❱ ❱ ❱]" + newMember_nick);
+                    }
+                    if (role.id==role_id_major) {
+                        newMember.setNickname("[  ◻  ]" + newMember_nick);
+                    }
+                    if (role.id==role_id_lieutenant) {
+                        newMember.setNickname("[ ◼ ◼ ]" + newMember_nick);
+                    }
+                    if (role.id==role_id_capitaine) {
+                        newMember.setNickname("[◼ ◼ ◼]" + newMember_nick);
+                    }
+                    if (role.id==role_id_commandant) {
+                        newMember.setNickname("[  ✧  ]" + newMember_nick);
+                    }
+                    if (role.id==role_id_colonel) {
+                        newMember.setNickname("[ ✧ ✧ ]" + newMember_nick);
+                    }
+                    if (role.id==role_id_general_div) {
+                        newMember.setNickname("[ ✦ ✦ ]" + newMember_nick);
+                    }
+                    if (role.id==role_id_general) {
+                        newMember.setNickname("[✦ ✦ ✦]" + newMember_nick);
+                    }
+                    client.channels.cache.get("922115179091726406").send("Felicitations ! **" + newMember_nick + "**, tu as obtenu le grade de : **" + role.name+"**");
+                }
+            }
+        });
+    }
+});
 
 // Réponds la liste des tasks si !taskred est demandé dans un message
 // client.on("messageCreate", message => {
