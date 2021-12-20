@@ -265,14 +265,18 @@ client.on("guildMemberUpdate", (oldMember, newMember) => {
     // Old roles Collection is higher in size than the new one. A role has been removed.
     if (oldMember.roles.cache.size > newMember.roles.cache.size) {
         oldMember.roles.cache.forEach(role => {
-            if (!newMember.roles.cache.has(role.id)) {
-                var old_grade = oldMember.nickname.substring(
-                    oldMember.nickname.indexOf("[")+1, 
-                    oldMember.nickname.lastIndexOf("]")
-                    );
-                var newMember_nick = oldMember.nickname.slice(oldMember.nickname.lastIndexOf("]")+1,newMember.nickname.length);
-                client.channels.cache.get("922115179091726406").send("**" + newMember_nick+ "**" + " a perdu le grade de : **" + role.name +"**");
-                newMember.setNickname("[]" + newMember_nick);
+            if (role.id== role_id_bleu || role.id== role_id_red){
+                    return;
+            }else{
+                if (!newMember.roles.cache.has(role.id)) {
+                    var old_grade = oldMember.nickname.substring(
+                        oldMember.nickname.indexOf("[")+1, 
+                        oldMember.nickname.lastIndexOf("]")
+                        );
+                    var newMember_nick = oldMember.nickname.slice(oldMember.nickname.lastIndexOf("]")+1,newMember.nickname.length);
+                    client.channels.cache.get("922115179091726406").send("**" + newMember_nick+ "**" + " a perdu le grade de : **" + role.name +"**");
+                    newMember.setNickname("[]" + newMember_nick);
+                }
             }
         });
     } else if (oldMember.roles.cache.size < newMember.roles.cache.size) {
@@ -284,8 +288,7 @@ client.on("guildMemberUpdate", (oldMember, newMember) => {
                     oldMember.nickname.lastIndexOf("]")
                 );
                 var newMember_nick = oldMember.nickname.slice(newMember.nickname.lastIndexOf("]")+1,newMember.nickname.length);
-                if (role.id== role_id_bleu || role.id== role_id_red || role.id== role_id_bleu){
-                    console.log("Role non automatique")
+                if (role.id== role_id_bleu || role.id== role_id_red){
                     return;
                 } else {
                     if (role.id==role_id_recrue) {
