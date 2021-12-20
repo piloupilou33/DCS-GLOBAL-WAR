@@ -8,15 +8,13 @@ const discord = require('discord.js');
 const { Client, Intents } = require('discord.js');
 
 const myIntents = new Intents();
-myIntents.add(Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MEMBERS,Intents.FLAGS.GUILDS,Intents.FLAGS.GUILD_MESSAGES);
+myIntents.add(Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MEMBERS,Intents.FLAGS.GUILDS,Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS);
 
 //création du client discord
-const client = new Client({ intents: myIntents });
-
+const client = new discord.Client({ intents: myIntents });
 
 //fichier de conf du bot
 const Config = require ("./config.json");
-
 
 //définition du temps du bot
 var time_bot = 5;
@@ -40,8 +38,10 @@ const file_grades_players= "./data/grade_players.txt";
 //ID du DISCORD
 const discord_id="814100048665247804";
 //*************************************************//
-//definition des ID des channels txt pour l'envoi des task dans discord
+//definition des ID des channels txt
 //*************************************************//
+//*******Généraal */
+const chid_bienvenue= '921144417585360927';
 //********ROUGE******//
 const chid_aa_task_red = '921185502890197012';
 const chid_ag_task_red = '921205276340809788';
@@ -98,9 +98,7 @@ client.login(Config.token);
 
 // Code qui s'active quand le bot est connecté au serveur
 client.on("ready", () => {
-    console.log("SGW Overwatch is on Air");
-
-
+    const reaction_role_message = client.channels.cache.get(chid_bienvenue).messages.fetch();
     channel_aa_task_red=client.channels.cache.get(chid_aa_task_red);
     channel_ag_task_red=client.channels.cache.get(chid_ag_task_red);
     channel_csar_task_red=client.channels.cache.get(chid_csar_task_red);
@@ -253,6 +251,7 @@ client.on("ready", () => {
             // }
           });
     }, time_bot * 1000);
+    console.log("SGW Overwatch is on Air");
 });
 
 // Fonction !clearchat qui permet de clear 99 messages d'un channel Discord
@@ -305,19 +304,19 @@ client.on("guildMemberUpdate", (oldMember, newMember) => {
                         newMember.setNickname("[❱❱❱]" + newMember_nick);
                     }
                     if (role.id==role_id_major) {
-                        newMember.setNickname("[◻]" + newMember_nick);
+                        newMember.setNickname("[＝]" + newMember_nick);
                     }
                     if (role.id==role_id_lieutenant) {
-                        newMember.setNickname("[◼ ◼]" + newMember_nick);
+                        newMember.setNickname("[≚]" + newMember_nick);
                     }
                     if (role.id==role_id_capitaine) {
-                        newMember.setNickname("[◼ ◼ ◼]" + newMember_nick);
+                        newMember.setNickname("[≙]" + newMember_nick);
                     }
                     if (role.id==role_id_commandant) {
-                        newMember.setNickname("[✧]" + newMember_nick);
+                        newMember.setNickname("[≗]" + newMember_nick);
                     }
                     if (role.id==role_id_colonel) {
-                        newMember.setNickname("[✧✧]" + newMember_nick);
+                        newMember.setNickname("[≛]" + newMember_nick);
                     }
                     if (role.id==role_id_general_div) {
                         newMember.setNickname("[✦✦]" + newMember_nick);
@@ -332,6 +331,23 @@ client.on("guildMemberUpdate", (oldMember, newMember) => {
     }
 });
 
+client.on('messageReactionAdd', (reaction, user) => {
+    let message = reaction.message, emoji = reaction.emoji;
+    if (emoji.name == '✅') {
+        message.guild.members.fetch(user.id).then(member => {
+            member.roles.add(role_id_recrue);
+        });
+    }
+});
+
+client.on('messageReactionRemove', (reaction, user) => {
+    let message = reaction.message, emoji = reaction.emoji;
+    if (emoji.name == '✅') {
+        message.guild.members.fetch(user.id).then(member => {
+            member.roles.remove(member.roles.cache);
+        });
+    }
+});
 // Réponds la liste des tasks si !taskred est demandé dans un message
 // client.on("messageCreate", message => {
 //     if(message.author.bot) return;
@@ -350,3 +366,17 @@ client.on("guildMemberUpdate", (oldMember, newMember) => {
 
 
 
+
+// bot.on('messageReactionRemove', async (reaction, user)=>{
+//     if(reaction.message.partial) await reaction.message.fetch();
+//     if(reaction.partial) await reaction.fetch();
+
+//     if(user.bot) return;
+//     if(!reaction.message.guild) return;
+
+//     if(reaction.message.channel.id === "channel_id"){
+//         if(reaction.emoji.id === "emoji_id"){
+//             await reaction.message.guild.members.cache.get(user.id).roles.remove("role_id")
+//         }
+//     }
+// })
