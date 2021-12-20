@@ -42,6 +42,9 @@ const discord_id="814100048665247804";
 //*************************************************//
 //*******Généraal */
 const chid_bienvenue= '921144417585360927';
+const chid_infos_grade= '922115179091726406';
+const chid_infos_red ="921438094442524682";
+const chid_infos_blue ="921438051350237246"
 //********ROUGE******//
 const chid_aa_task_red = '921185502890197012';
 const chid_ag_task_red = '921205276340809788';
@@ -266,7 +269,14 @@ client.on("guildMemberUpdate", (oldMember, newMember) => {
     if (oldMember.roles.cache.size > newMember.roles.cache.size) {
         oldMember.roles.cache.forEach(role => {
             if (role.id== role_id_bleu || role.id== role_id_red){
-                    return;
+                // if (role.id==role_id_bleu){
+                //     client.channels.cache.get(chid_infos_blue).send("**" + newMember_nick + "**, a quitté les **BLUE** !");
+                //     return;
+                // }
+                // if (role.id==role_id_red){
+                //     client.channels.cache.get(chid_infos_red).send("**" + newMember_nick + "**, a quitté les **RED** !");
+                //     return;
+                // }
             }else{
                 if (!newMember.roles.cache.has(role.id)) {
                     var old_grade = oldMember.nickname.substring(
@@ -274,8 +284,69 @@ client.on("guildMemberUpdate", (oldMember, newMember) => {
                         oldMember.nickname.lastIndexOf("]")
                         );
                     var newMember_nick = oldMember.nickname.slice(oldMember.nickname.lastIndexOf("]")+1,newMember.nickname.length);
-                    client.channels.cache.get("922115179091726406").send("**" + newMember_nick+ "**" + " a perdu le grade de : **" + role.name +"**");
-                    newMember.setNickname("[]" + newMember_nick);
+                    client.channels.cache.get(chid_infos_grade).send("**" + newMember_nick+ "**" + " a perdu le grade de : **" + role.name +"**");
+                    newMember.roles.cache.forEach(role => {
+                        if (role.id==role_id_general) {
+                            newMember.setNickname("[✦✦✦]" + newMember_nick);
+                            client.channels.cache.get(chid_infos_grade).send("**" + newMember_nick+ "**" + " a récupéré le grade de : **" + role.name +"**");
+                            return;
+                        }
+                        if (role.id==role_id_general_div) {
+                            newMember.setNickname("[✦✦]" + newMember_nick);
+                            client.channels.cache.get(chid_infos_grade).send("**" + newMember_nick+ "**" + " a récupéré le grade de : **" + role.name +"**");
+                            return;
+                        }
+                        if (role.id==role_id_colonel) {
+                            newMember.setNickname("[≛]" + newMember_nick);
+                            client.channels.cache.get(chid_infos_grade).send("**" + newMember_nick+ "**" + " a récupéré le grade de : **" + role.name +"**");
+                            return;
+                        }
+                        if (role.id==role_id_commandant) {
+                            newMember.setNickname("[≗]" + newMember_nick);
+                            client.channels.cache.get(chid_infos_grade).send("**" + newMember_nick+ "**" + " a récupéré le grade de : **" + role.name +"**");
+                            return;
+                        }
+                        if (role.id==role_id_capitaine) {
+                            newMember.setNickname("[≙]" + newMember_nick);
+                            client.channels.cache.get(chid_infos_grade).send("**" + newMember_nick+ "**" + " a récupéré le grade de : **" + role.name +"**");
+                            return;
+                        }
+                        if (role.id==role_id_lieutenant) {
+                            newMember.setNickname("[≚]" + newMember_nick);
+                            client.channels.cache.get(chid_infos_grade).send("**" + newMember_nick+ "**" + " a récupéré le grade de : **" + role.name +"**");
+                            return;
+                        }
+                        if (role.id==role_id_major) {
+                            newMember.setNickname("[＝]" + newMember_nick);
+                            client.channels.cache.get(chid_infos_grade).send("**" + newMember_nick+ "**" + " a récupéré le grade de : **" + role.name +"**");
+                            return;
+                        }
+                        if (role.id==role_id_sergent_chef) {
+                            newMember.setNickname("[❱❱❱]" + newMember_nick);
+                            client.channels.cache.get(chid_infos_grade).send("**" + newMember_nick+ "**" + " a récupéré le grade de : **" + role.name +"**");
+                            return;
+                        }
+                        if (role.id==role_id_sergent) {
+                            newMember.setNickname("[❱❱]" + newMember_nick);
+                            client.channels.cache.get(chid_infos_grade).send("**" + newMember_nick+ "**" + " a récupéré le grade de : **" + role.name +"**");
+                            return;
+                        }
+                        if (role.id==role_id_caporal_chef) {
+                            newMember.setNickname("[❱❭❭]" + newMember_nick);
+                            client.channels.cache.get(chid_infos_grade).send("**" + newMember_nick+ "**" + " a récupéré le grade de : **" + role.name +"**");
+                            return;
+                        }
+                        if (role.id==role_id_1st_class) {
+                            newMember.setNickname("[❭]" + newMember_nick);
+                            client.channels.cache.get(chid_infos_grade).send("**" + newMember_nick+ "**" + " a récupéré le grade de : **" + role.name +"**");
+                            return;
+                        }
+                        if (role.id==role_id_recrue) {
+                            newMember.setNickname("[-]" + newMember_nick);
+                            client.channels.cache.get(chid_infos_grade).send("**" + newMember_nick+ "**" + " a récupéré le grade de : **" + role.name +"**");
+                            return;
+                        }
+                    })
                 }
             }
         });
@@ -288,8 +359,15 @@ client.on("guildMemberUpdate", (oldMember, newMember) => {
                     oldMember.nickname.lastIndexOf("]")
                 );
                 var newMember_nick = oldMember.nickname.slice(newMember.nickname.lastIndexOf("]")+1,newMember.nickname.length);
-                if (role.id== role_id_bleu || role.id== role_id_red){
-                    return;
+                if (role.id== role_id_bleu || role.id == role_id_red){
+                    // if (role.id==role_id_bleu){
+                    //     client.channels.cache.get(chid_infos_blue).send("**" + newMember_nick + "**, a rejoins les **BLUE**\n Merci de lui faire un accueil chaleureux !");
+                    //     return;
+                    // }
+                    // if (role.id==role_id_red){
+                    //     client.channels.cache.get(chid_infos_red).send("**" + newMember_nick + "**, a rejoins les **RED**\n Merci de lui faire un accueil chaleureux !");
+                    //     return;
+                    // }
                 } else {
                     if (role.id==role_id_recrue) {
                         newMember.setNickname("[-]" + newMember_nick);
@@ -327,7 +405,7 @@ client.on("guildMemberUpdate", (oldMember, newMember) => {
                     if (role.id==role_id_general) {
                         newMember.setNickname("[✦✦✦]" + newMember_nick);
                     }
-                    client.channels.cache.get("922115179091726406").send("Felicitations ! **" + newMember_nick + "**, tu as obtenu le grade de : **" + role.name+"**");
+                    client.channels.cache.get(chid_infos_grade).send("Felicitations ! **" + newMember_nick + "**, tu as obtenu le grade de : **" + role.name+"**");
                 }
             }
         });
