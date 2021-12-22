@@ -15,3 +15,14 @@ color: brown;
 
 }
 
+.gndUnitBlue{
+	background-color: rgba(25, 0, 255, 0.7);
+    /* background-image: url("./Icones/gnd_unit_blue.png"); */
+    background-size: 200%;
+    font-size: 16px;
+    font-style: italic;
+	}
+
+.gndUnitRed{
+    background-color: rgba(255, 0, 0, 0.6);
+    }
