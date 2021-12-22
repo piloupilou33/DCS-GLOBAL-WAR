@@ -48,6 +48,18 @@ function init() {
         iconUrl: 'Map/Icones/baseBlue.png'
     })
 
+    var ic_gnd_unit_blue = L.icon({ //icone des ground unit blue
+        iconSize: [15,15],
+        popupAnchor : [0,-15],
+        iconUrl: 'Map/Icones/gnd_unit_blue.png'
+    })
+
+    var ic_gnd_unit_red = L.icon({ //icone des ground unit red
+        iconSize: [15,15],
+        popupAnchor : [0,-15],
+        iconUrl: 'Map/Icones/gnd_unit_red.png'
+    })
+
         // Affichage des aeroport sur la coalition et assignation d'un marker en fonction
     var calqueAirportNeutral = L.geoJSON(aeroportNeutral, {
     onEachFeature: function (feature, item) {
@@ -68,14 +80,32 @@ function init() {
             item.setIcon(ic_base_red);
             item.bindPopup('<pre>'+JSON.stringify(feature.properties,null,' ').replace(/[\{\}",]/g,'')+'</pre>')
         }
-        }).addTo(map);   
+        }).addTo(map);
+        
+        
+        // Affichage des ground unit et assignation d'un marker en fonction
+    var calqueUnitBlue = L.geoJSON(unitsBlue, {
+        onEachFeature: function (feature, item) {
+            item.setIcon(ic_gnd_unit_blue);
+            item.bindPopup('<pre>'+JSON.stringify(feature.properties,null,' ').replace(/[\{\}",]/g,'')+'</pre>')
+        }
+        }).addTo(map);  
+
+    var calqueUnitRed = L.geoJSON(unitsRed, {
+        onEachFeature: function (feature, item) {
+            item.setIcon(ic_gnd_unit_red);
+            item.bindPopup('<pre>'+JSON.stringify(feature.properties,null,' ').replace(/[\{\}",]/g,'')+'</pre>')
+        }
+        }).addTo(map);  
 
     //// Affichage de l'ensemble des calques et gestion de l'affichage
 
     var overlayMaps = {
         "Neutral Airport": calqueAirportNeutral,
         "Blue Airport": calqueAirportBlue,
-        "Red Airport": calqueAirportRed
+        "Red Airport": calqueAirportRed,
+        "Ground Unit Red":calqueUnitRed,
+        "Ground Unit Blue":calqueUnitBlue
         
     };
 
@@ -84,6 +114,7 @@ function init() {
         "Vue satellite": calqueSatellite.addTo(map),
         "Vue simple": calqueSimple.addTo(map)
     }
+    
     L.control.layers(baseMaps,'').addTo(map);
     L.control.layers('',overlayMaps).addTo(map);
     
